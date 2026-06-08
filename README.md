@@ -5,8 +5,7 @@
 Huize County, Yunnan Province, China
 
 ## Project Structure
-
- ## Setup
+## Setup
 ```bash
 python3 -m venv venv
 source venv/bin/activate
