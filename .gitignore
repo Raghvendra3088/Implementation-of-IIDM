@@ -1,0 +1,10 @@
+# Large data files — GitHub pe nahi jayenge
+data/
+*.tif
+*.zip
+*.h5
+*.tar.gz
+venv/
+__pycache__/
+*.pyc
+.DS_Store
