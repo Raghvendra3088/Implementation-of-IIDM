@@ -12,3 +12,4 @@ __pycache__/
 *.h5
 *.tar.gz
 .DS_Store
+data/
