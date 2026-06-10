@@ -1,0 +1,6 @@
+{
+    "dataset_name": "GEDI L4B Gridded Biomass",
+    "status": "Hosted externally (File size > 100MB)",
+    "download_link": "https://drive.google.com/drive/u/0/folders/1GnQEd7t3wmm14maGxy393z19STfdJH_N?lfhs=2",
+    "note": "Download the raw data and place it in this directory before running preprocessing."
+}
