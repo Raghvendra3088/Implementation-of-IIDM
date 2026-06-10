@@ -1,10 +1,14 @@
-# Large data files — GitHub pe nahi jayenge
 data/
-*.tif
-*.zip
-*.h5
-*.tar.gz
+sentinel2/raw/
+alos_dem/
+eth_canopy/
+gedi_l4a/
 venv/
 __pycache__/
 *.pyc
+*.tif
+*.tiff
+*.zip
+*.h5
+*.tar.gz
 .DS_Store
