@@ -55,6 +55,8 @@ def train_iidm():
 
     kd_criterion = KDVGGLoss().to(device)
     optimizer = optim.AdamW(list(student_vgg.parameters()) + list(unet.parameters()), lr=wandb.config.learning_rate)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=3) # T_max should equal epochs
+
 
     print("\n🔥 Starting Training Loop...")
     for epoch in range(1, wandb.config.epochs + 1):
@@ -82,6 +84,9 @@ def train_iidm():
             optimizer.step()
             
             total_epoch_loss += total_loss.item()
+
+        scheduler.step()
+
             total_kd_loss += loss_kd.item()
             total_diff_loss += loss_diff.item()
 
