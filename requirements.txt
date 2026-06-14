@@ -1,0 +1,9 @@
+torch>=2.0.0
+torchvision
+rasterio
+numpy
+scikit-image
+wandb
+tqdm
+matplotlib
+pandas
