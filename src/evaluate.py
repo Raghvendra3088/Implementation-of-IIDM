@@ -2,7 +2,9 @@ import os
 import sys
 import torch
 import json
+import numpy as np
 from pathlib import Path
+from tqdm import tqdm
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -22,8 +24,8 @@ class LocalDevDataset(Dataset):
         }
 
 def run_evaluation():
-    device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
-    print(f"⚙️ Running Actual IIDM Evaluation on: {device}")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"⚙️ Running True IIDM Evaluation on: {device}")
 
     try:
         dataset = IIDMDataset(patch_dir=Path('data/patches'))
@@ -32,43 +34,54 @@ def run_evaluation():
         print("⚠️ Real dataset missing/incomplete. Auto-switching to LocalDevDataset for testing...")
         dataset = LocalDevDataset()
 
+    # Batch size 1 is standard for detailed evaluation to avoid padding issues
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
+    # Initialize Full Model
     model = IIDM(in_channels=6, T=1000).to(device)
     
-    checkpoint_path = "checkpoints/actual_iidm_epoch_100.pth"
+    # Checkpoint Loading logic
+    checkpoint_path = 'checkpoints/true_iidm_epoch_100.pth'
     if os.path.exists(checkpoint_path):
         model.load_state_dict(torch.load(checkpoint_path, map_location=device))
-        print("✅ Loaded trained weights from checkpoint.")
+        print("✅ Loaded trained weights successfully!")
     else:
-        print("⚠️ Checkpoint missing. Running evaluation architecture test with initialized weights.")
-        
+        print("⚠️ Warning: No trained weights found. Running evaluation with untrained initialized model.")
+    
     model.eval()
     all_metrics = []
     os.makedirs("results/figures", exist_ok=True)
 
+    print("📊 Starting Latent DDIM Inference & INR Decoding...")
     with torch.no_grad():
-        for i, batch in enumerate(dataloader):
+        for i, batch in enumerate(tqdm(dataloader, desc="Evaluating Patches")):
             optical = batch['optical'].to(device)
             gt = batch['carbon'].to(device)
 
-            s_feats, _ = model.student(optical)
-            latents = s_feats[0]
-            pred = model.inr(latents, optical.shape[2], optical.shape[3])
+            # Phase 4 Inference: DDIM (50 steps) + INR Decoding
+            pred = model.inference(optical, steps=50)
             
+            # Calculate metrics
             metrics = calculate_metrics(pred, gt)
             all_metrics.append(metrics)
             
+            # Save visual outputs for the first patch
             if i == 0:
                 save_plots(pred, gt, "results/figures")
                 print("🖼️ Visualizations saved to results/figures/comparison.png")
-            break 
+            
+            # For local dev test, just run one batch
+            if isinstance(dataset, LocalDevDataset):
+                break
 
+    # Aggregate metrics
+    avg_metrics = {k: np.mean([m[k] for m in all_metrics]) for k in all_metrics[0].keys()}
+    
     with open("results/metrics.json", "w") as f:
-        json.dump(all_metrics, f, indent=4)
+        json.dump(avg_metrics, f, indent=4)
 
-    print("✅ Evaluation Phase Complete!")
-    print(f"Final Metrics: {all_metrics[0]}")
+    print("\n✅ Evaluation Complete!")
+    print(f"Final Averaged Metrics: {avg_metrics}")
 
 if __name__ == "__main__":
     run_evaluation()
