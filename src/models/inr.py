@@ -1,54 +1,65 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+import math
 
-class SIRENLayer(nn.Module):
-    """SIREN: Sinusoidal representation networks."""
-    def __init__(self, in_f, out_f, is_first=False, omega=30.0):
+class PositionalEncoding(nn.Module):
+    """Applies Sinusoidal Positional Encoding with L frequencies (Paper default L=10)."""
+    def __init__(self, L=10):
         super().__init__()
-        self.linear = nn.Linear(in_f, out_f)
-        self.omega = omega
-        self.is_first = is_first
-        self.init_weights()
+        self.L = L
 
-    def init_weights(self):
-        with torch.no_grad():
-            if self.is_first:
-                self.linear.weight.uniform_(-1 / self.linear.in_features, 1 / self.linear.in_features)
-            else:
-                bound = (6 / self.linear.in_features) ** 0.5 / self.omega
-                self.linear.weight.uniform_(-bound, bound)
-
-    def forward(self, x):
-        return torch.sin(self.omega * self.linear(x))
+    def forward(self, coords):
+        # coords: (B, N, 2) where values are in [-1, 1]
+        device = coords.device
+        freq_bands = (2 ** torch.arange(self.L, dtype=torch.float32, device=device)) * math.pi
+        
+        # output shape will be (B, N, 2 * 2 * L) -> (B, N, 40)
+        encoded = []
+        for freq in freq_bands:
+            encoded.append(torch.sin(coords * freq))
+            encoded.append(torch.cos(coords * freq))
+        
+        return torch.cat(encoded, dim=-1)
 
 class ImplicitNeuralRepr(nn.Module):
-    def __init__(self, latent_dim=8, hidden=128, layers=4):
+    """Maps PE(coords) + Latent Features -> Carbon Value."""
+    def __init__(self, latent_dim=32, L=10, hidden_dim=256):
         super().__init__()
-        self.net = nn.Sequential(
-            SIRENLayer(2 + latent_dim, hidden, is_first=True),
-            *[SIRENLayer(hidden, hidden) for _ in range(layers-2)],
-            nn.Linear(hidden, 1)
+        self.pe = PositionalEncoding(L=L)
+        
+        # PE output is 40 dims (2 coords * 2 (sin/cos) * 10). Total input = 40 + latent_dim
+        in_features = (2 * 2 * L) + latent_dim
+        
+        # 5-Layer MLP as per paper
+        self.mlp = nn.Sequential(
+            nn.Linear(in_features, hidden_dim), nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, hidden_dim), nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, hidden_dim), nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, hidden_dim), nn.ReLU(inplace=True),
+            nn.Linear(hidden_dim, 1)
         )
 
     def get_coords(self, H, W, device):
+        # Normalized coordinates [-1, 1]
         ys = torch.linspace(-1, 1, H, device=device)
         xs = torch.linspace(-1, 1, W, device=device)
-        grid = torch.stack(torch.meshgrid(ys, xs, indexing='ij'), dim=-1)
-        return grid.reshape(-1, 2)
+        grid = torch.stack(torch.meshgrid(ys, xs, indexing='ij'), dim=-1) # (H, W, 2)
+        return grid.reshape(-1, 2) # (H*W, 2)
 
-    def forward(self, features, H, W):
-        B = features.shape[0]
+    def forward(self, latents, H, W):
+        # latents: (B, C, H, W) - VGG features
+        B, C, _, _ = latents.shape
+        device = latents.device
         
-        # Fix: Dynamically interpolate features to match high-res target coordinates (H, W)
-        if features.shape[-2:] != (H, W):
-            features = F.interpolate(features, size=(H, W), mode='bilinear', align_corners=False)
-            
-        coords = self.get_coords(H, W, features.device)
-        coords = coords.unsqueeze(0).expand(B, -1, -1)
-
-        feats_flat = features.flatten(2).transpose(1, 2)
+        coords = self.get_coords(H, W, device).unsqueeze(0).expand(B, -1, -1) # (B, H*W, 2)
+        encoded_coords = self.pe(coords) # (B, H*W, 40)
         
-        inp = torch.cat([coords, feats_flat], dim=-1)
-        out = self.net(inp)
-        return out.transpose(1, 2).reshape(B, 1, H, W)
+        # Upsample latents to match target map resolution and flatten
+        latents_up = F.interpolate(latents, size=(H, W), mode='bilinear', align_corners=False)
+        latents_flat = latents_up.flatten(2).transpose(1, 2) # (B, H*W, C)
+        
+        # Concat PE and features
+        mlp_in = torch.cat([encoded_coords, latents_flat], dim=-1) # (B, H*W, 40+C)
+        
+        carbon_pred = self.mlp(mlp_in) # (B, H*W, 1)
+        return carbon_pred.transpose(1, 2).reshape(B, 1, H, W)
