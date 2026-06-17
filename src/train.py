@@ -1,5 +1,6 @@
 import torch
 import torch.optim as optim
+import torch.nn.utils as nn_utils
 import os
 import sys
 from pathlib import Path
@@ -19,86 +20,80 @@ class LocalDevDataset(Dataset):
             'carbon': torch.randn(1, 256, 256)
         }
 
-def train_actual_iidm():
+def train_iidm_paper():
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
-    print(f"🚀 Actual IIDM (INR + KD) Training pipeline initialized on: {device}")
+    print(f"🚀 Paper Architecture (Latent Diff + INR) Training on: {device}")
 
-    # Initialize WandB
     wandb.init(
         project="IIDM-Carbon-Estimation",
-        name="actual-iidm-inr-run",
+        name="true-paper-architecture-run",
         config={"epochs": 100, "batch_size": 4, "learning_rate": 1e-4}
     )
 
     try:
         dataset = CarbonDataset(patch_dir=Path('data/patches'))
         if len(dataset) == 0: raise ValueError("Empty directory")
-        print("✅ Loaded real Preprocessed Dataset")
-    except Exception as e:
-        print("⚠️ Real dataset missing. Auto-switching to LocalDevDataset for architecture testing...")
+    except Exception:
+        print("⚠️ Real dataset missing. Auto-switching to LocalDevDataset...")
         dataset = LocalDevDataset()
 
     dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
 
-    # Initialize the Full Unified IIDM Model
-    # in_channels=6 matches our Sentinel-2 stacked optical input
+    # Initialize Model
     model = IIDM(in_channels=6, T=1000).to(device)
 
-    # Optimizer only trains the Student, UNet, and INR. (Teacher is frozen)
-    optimizer = optim.AdamW([
+    # Optimizer: Exclude frozen teacher
+    trainable_params = [
         {'params': model.student.parameters()},
         {'params': model.unet.parameters()},
         {'params': model.inr.parameters()}
-    ], lr=1e-4)
-    
-    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100)
+    ]
+    optimizer = optim.AdamW(trainable_params, lr=1e-4)
 
-    print("\n🔥 Starting INR-based Training Loop...")
+    print("\n🔥 Starting Phase 4 Training Loop...")
     for epoch in range(1, 101):
         model.train()
         total_epoch_loss = 0
-        epoch_metrics = {'diff': 0, 'kd': 0, 'recon': 0}
+        metrics_sum = {'diff': 0, 'kd': 0, 'recon': 0}
         
         for batch in dataloader:
-            optical = batch['optical'].to(device)
+            # We strictly use the 6-channel optical input for the VGG encoder
+            optical = batch['optical'].to(device) 
             carbon = batch['carbon'].to(device)
-            # Note: Structural features can be concatenated to optical in future upgrades, 
-            # for now base paper relies heavily on optical for INR.
 
             optimizer.zero_grad()
-
-            # The forward pass now handles the entire pipeline and returns aggregated loss
             L_total, loss_dict = model(optical, carbon)
-            
             L_total.backward()
+
+            # Gradient Clipping
+            nn_utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+            
             optimizer.step()
             
             total_epoch_loss += L_total.item()
-            for k in epoch_metrics:
-                epoch_metrics[k] += loss_dict[k]
+            for k in metrics_sum:
+                metrics_sum[k] += loss_dict[k]
 
-        scheduler.step()
         num_batches = len(dataloader)
         avg_loss = total_epoch_loss / num_batches
         
-        print(f"Epoch [{epoch}/100] | Total Loss: {avg_loss:.4f} | Recon: {epoch_metrics['recon']/num_batches:.4f} | Diff: {epoch_metrics['diff']/num_batches:.4f}")
+        print(f"Epoch [{epoch}/100] | Total Loss: {avg_loss:.4f} | Recon (MAE): {metrics_sum['recon']/num_batches:.4f} | Diff: {metrics_sum['diff']/num_batches:.4f} | KD: {metrics_sum['kd']/num_batches:.4f}")
         
-        # Log all individual components to WandB
         wandb.log({
             "epoch": epoch, 
             "total_loss": avg_loss, 
-            "diffusion_loss": epoch_metrics['diff'] / num_batches,
-            "kd_loss": epoch_metrics['kd'] / num_batches,
-            "inr_recon_loss": epoch_metrics['recon'] / num_batches,
-            "learning_rate": scheduler.get_last_lr()[0]
+            "diffusion_loss": metrics_sum['diff'] / num_batches,
+            "kd_loss": metrics_sum['kd'] / num_batches,
+            "inr_recon_loss": metrics_sum['recon'] / num_batches
         })
         
         if epoch % 10 == 0:
             os.makedirs("checkpoints", exist_ok=True)
-            torch.save(model.state_dict(), f"checkpoints/actual_iidm_epoch_{epoch}.pth")
+            torch.save(model.state_dict(), f"checkpoints/true_iidm_epoch_{epoch}.pth")
+            print(f"💾 Checkpoint saved for Epoch {epoch}")
         
-    print("\n✅ Actual IIDM Pipeline Completed!")
+    print("\n✅ True IIDM Pipeline Completed!")
     wandb.finish()
 
 if __name__ == "__main__":
-    train_actual_iidm()
+    train_iidm_paper()
