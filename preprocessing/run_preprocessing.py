@@ -4,7 +4,7 @@ IIDM Preprocessing — Run All Steps
 Runs all 4 preprocessing steps in sequence.
 
 Usage:
-    python src/preprocessing/run_preprocessing.py
+    python preprocessing/run_preprocessing.py
 
 Steps:
     1. Carbon stock calculation      → data/processed/carbon_stock.csv
@@ -20,7 +20,7 @@ from pathlib import Path
 
 # Add project root to path
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "src" / "preprocessing"))
+sys.path.insert(0, str(ROOT / "Implementation-of-IIDM" / "preprocessing"))
 
 def run_step(module_path: str, step_name: str) -> bool:
     print(f"\n{'#'*60}")
@@ -50,7 +50,7 @@ def main():
     print("  IIDM PREPROCESSING PIPELINE")
     print("=" * 60)
 
-    preproc_dir = ROOT / "src" / "preprocessing"
+    preproc_dir = ROOT / "Implementation-of-IIDM" / "preprocessing"
 
     steps = [
         (str(preproc_dir / "step1_carbon_stock.py"),
