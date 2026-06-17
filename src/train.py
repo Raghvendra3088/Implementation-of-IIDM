@@ -2,8 +2,8 @@ import torch
 import torch.optim as optim
 import os
 import sys
-import wandb
 from pathlib import Path
+import wandb
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from preprocessing.dataset import IIDMDataset as CarbonDataset
@@ -22,53 +22,46 @@ class LocalDevDataset(Dataset):
         }
 
 def train_iidm():
-    # Initialize WandB for logging
-    wandb.init(
-        project="IIDM-Carbon-Estimation",
-        name="baseline-kd-diffusion",
-        config={
-            "learning_rate": 1e-4,
-            "epochs": 3,
-            "batch_size": 4,
-            "architecture": "KD-VGG + KD-UNet + Diffusion",
-            "timesteps": 1000
-        }
-    )
-
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
     print(f"🚀 Training pipeline initialized on: {device}")
+
+    wandb.init(
+        project="IIDM-Carbon-Estimation",
+        name="base-model-run",
+        config={"epochs": 100, "batch_size": 4, "learning_rate": 1e-4}
+    )
 
     try:
         dataset = CarbonDataset(patch_dir=Path('data/patches'))
         if len(dataset) == 0: raise ValueError("Empty directory")
         print("✅ Loaded real Preprocessed Dataset")
     except Exception as e:
-        print("⚠️ Auto-switching to LocalDevDataset for architecture testing...")
+        print("⚠️ Real dataset missing. Auto-switching to LocalDevDataset...")
         dataset = LocalDevDataset()
 
-    dataloader = DataLoader(dataset, batch_size=wandb.config.batch_size, shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
 
     teacher_vgg = TeacherVGG().to(device)
     student_vgg = StudentVGG().to(device)
     unet = KDUnet(in_channels=3, out_channels=1).to(device)
-    diffusion = IIDM_Diffusion(denoise_model=unet, timesteps=wandb.config.timesteps).to(device)
+    diffusion = IIDM_Diffusion(denoise_model=unet, timesteps=1000).to(device)
 
     kd_criterion = KDVGGLoss().to(device)
-    optimizer = optim.AdamW(list(student_vgg.parameters()) + list(unet.parameters()), lr=wandb.config.learning_rate)
-    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=3) # T_max should equal epochs
-
+    optimizer = optim.AdamW(list(student_vgg.parameters()) + list(unet.parameters()), lr=1e-4)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100)
 
     print("\n🔥 Starting Training Loop...")
-    for epoch in range(1, wandb.config.epochs + 1):
+    for epoch in range(1, 101):
         student_vgg.train()
         unet.train()
         total_epoch_loss = 0
-        total_kd_loss = 0
-        total_diff_loss = 0
         
         for batch in dataloader:
-            optical, structural, carbon = batch['optical'].to(device), batch['structural'].to(device), batch['carbon'].to(device)
-            timesteps = torch.randint(0, wandb.config.timesteps, (optical.shape[0],)).to(device)
+            optical = batch['optical'].to(device)
+            structural = batch['structural'].to(device)
+            carbon = batch['carbon'].to(device)
+            
+            timesteps = torch.randint(0, 1000, (optical.shape[0],)).to(device)
 
             optimizer.zero_grad()
 
@@ -86,25 +79,22 @@ def train_iidm():
             total_epoch_loss += total_loss.item()
 
         scheduler.step()
-
-            total_kd_loss += loss_kd.item()
-            total_diff_loss += loss_diff.item()
-
-        avg_loss = total_epoch_loss / len(dataloader)
-        avg_kd = total_kd_loss / len(dataloader)
-        avg_diff = total_diff_loss / len(dataloader)
-
-        print(f"Epoch [{epoch}/{wandb.config.epochs}] | KD: {avg_kd:.4f} | Diff: {avg_diff:.4f} | Total: {avg_loss:.4f}")
+        avg_loss = total_epoch_loss/len(dataloader)
+        print(f"Epoch [{epoch}/100] | Average Loss: {avg_loss:.4f}")
         
-        # Send metrics to WandB Dashboard
         wandb.log({
-            "epoch": epoch,
-            "total_loss": avg_loss,
-            "kd_loss": avg_kd,
-            "diffusion_loss": avg_diff
+            "epoch": epoch, 
+            "total_loss": avg_loss, 
+            "kd_loss": loss_kd.item(), 
+            "diffusion_loss": loss_diff.item(),
+            "learning_rate": scheduler.get_last_lr()[0]
         })
         
-    print("\n✅ Run successful! Check your WandB dashboard for the graphs.")
+        if epoch % 10 == 0:
+            os.makedirs("checkpoints", exist_ok=True)
+            torch.save(unet.state_dict(), f"checkpoints/unet_epoch_{epoch}.pth")
+        
+    print("\n✅ Training Pipeline Completed!")
     wandb.finish()
 
 if __name__ == "__main__":
