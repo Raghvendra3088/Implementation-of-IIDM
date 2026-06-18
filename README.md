@@ -24,6 +24,40 @@ Unlike standard pixel-space diffusion models, this implementation strictly adher
    * Treats the carbon map as a continuous function $F(x, y, features) \rightarrow carbon\_value$.
    * Utilizes a high-frequency Positional Encoding ($L=10$, yielding a 40-dimensional coordinate tensor) coupled with a Sine-activated MLP (SIREN) to decode latent features into high-resolution carbon maps.
 
+### Optimization Objective
+The model is trained end-to-end optimizing a joint loss function:
+$L_{total} = L_{diff} + 0.1 L_{kd} + 1.0 L_{recon}$
+
+---
+
+## 📂 Repository Structure
+
+```text
+Implementation-of-IIDM/
+├── data/
+│   ├── README.md               # Data structure documentation
+│   ├── raw/                    # Raw Sentinel-2, ALOS DEM, ETH Canopy .tif files
+│   ├── processed/              # Interim normalized files and inventory statistics
+│   └── patches/                # 256x256 tensor patches for model ingestion
+├── notebooks/
+│   └── True_IIDM_FullRun.ipynb # Google Colab deployment and execution notebook
+├── src/
+│   ├── models/
+│   │   ├── kd_vgg.py           # VGG19 Teacher and Lightweight Student VGG
+│   │   ├── kd_unet.py          # Cross-Attention UNet Denoiser
+│   │   ├── inr.py              # Positional Encoding & SIREN MLP
+│   │   ├── diffusion.py        # Latent Space Forward/Reverse Process
+│   │   └── iidm.py             # Unified Architecture Wrapper
+│   ├── utils/
+│   │   ├── metrics.py          # RMSE, MAE, SSIM, and R² calculators
+│   │   └── visualization.py    # Matplotlib error heatmaps
+│   ├── train.py                # Main training loop with WandB integration
+│   ├── evaluate.py             # DDIM Inference and metric evaluation
+│   └── inference.py            # Sliding-window full map reconstruction
+├── preprocessing/
+│   ├── dataset.py              # PyTorch Dataset and Dataloader
+│   └── run_preprocessing.py    # GDAL/Rasterio pipeline for tile generation
+└── requirements.txt            # Project dependencies
 
 ## Setup
 ```bash
@@ -31,8 +65,13 @@ python3 -m venv venv
 source venv/bin/activate
 pip install rasterio geopandas numpy scipy shapely
 ```
+#### Install all required dependencies -
+pip install -r requirements.txt
 
-## Run Preprocessing
+#### Authenticate Weights & Biases (for training visualization) -
+wandb login
+
+### Run Preprocessing
 ```bash
 python3 preprocessing/preprocess_all.py
 ```
