@@ -1,33 +1,9 @@
 """
 IIDM — Improved Implicit Diffusion Model (Full Pipeline)
 =========================================================
-Paper: All sections combined
-
-Combines:
-    1. TeacherVGG  — frozen, provides distillation target + UNet condition
-    2. StudentVGG  — trainable, produces latent x0 for diffusion
-    3. DiffusionScheduler — forward/reverse in latent space
-    4. KDUNet      — denoiser in latent space, conditioned on teacher
-    5. SIRENINR    — decodes denoised latent → carbon map
-
-Training forward:
-    x (B,6,H,W) → TeacherVGG → t_feats [f1..f4]  (frozen)
-               → StudentVGG  → s_feats [s1..s4]  (trainable)
-    t ~ Uniform(0, T)
-    x_t, eps = scheduler.q_sample(s_feats[3], t)   # noise latent block4
-    eps_theta = KDUNet(x_t, t, t_feats)             # predict noise
-    carbon    = SIRENINR(s_feats, coords)            # decode carbon map
-
-    L_diff  = MSE(eps_theta, eps)
-    L_kd    = (1/4) Σ MSE(s_i, t_i.detach())
-    L_recon = MAE(carbon, carbon_gt)
-    L_total = L_diff + 0.1*L_kd + 1.0*L_recon
-
-Inference:
-    s_feats = StudentVGG(x)
-    x_T     = randn_like(s_feats[3])
-    x_0     = DDIM_sample(KDUNet, x_T, condition=t_feats, steps=50)
-    carbon  = SIRENINR(with x_0 as block4, coords)
+Fixed to match existing kd_unet.py interface:
+    kd_unet.forward(xt, t, cond)
+    cond = tensor (B, 480, H', W')  — teacher feats pooled + concat
 """
 
 import torch
@@ -46,24 +22,17 @@ from src.models.kd_unet   import KDUNet
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# LOSS FUNCTIONS
+# LOSS
 # ══════════════════════════════════════════════════════════════════════════════
 
 class IIDMLoss(nn.Module):
     """
-    Total IIDM loss — Paper Eq. (5)
-
-    L_total = L_diff + lambda_kd * L_kd + lambda_recon * L_recon
-
-    L_diff  = MSE(eps_theta, eps)          diffusion noise prediction
-    L_kd    = (1/4) Σ MSE(s_i, t_i)       knowledge distillation
-    L_recon = MAE(carbon_pred, carbon_gt)  reconstruction (L1 for robustness)
-
-    Paper values: lambda_kd=0.1, lambda_recon=1.0
+    L_total = L_diff + 0.1*L_kd + 1.0*L_recon
+    L_diff  = MSE(eps_theta, eps)
+    L_kd    = (1/4) sum MSE(s_i, t_i.detach())
+    L_recon = MAE(carbon_pred, carbon_gt)
     """
-
-    def __init__(self, lambda_kd: float = 0.1,
-                       lambda_recon: float = 1.0):
+    def __init__(self, lambda_kd=0.1, lambda_recon=1.0):
         super().__init__()
         self.lambda_kd    = lambda_kd
         self.lambda_recon = lambda_recon
@@ -71,192 +40,165 @@ class IIDMLoss(nn.Module):
         self.mse          = nn.MSELoss()
         self.mae          = nn.L1Loss()
 
-    def forward(self,
-                eps_theta:    torch.Tensor,
-                eps_target:   torch.Tensor,
-                student_feats: List[torch.Tensor],
-                teacher_feats: List[torch.Tensor],
-                carbon_pred:  torch.Tensor,
-                carbon_gt:    torch.Tensor
-                ) -> Tuple[torch.Tensor, Dict[str, float]]:
-        """
-        Returns:
-            total_loss : scalar
-            components : dict with individual loss values for logging
-        """
+    def forward(self, eps_theta, eps_target,
+                student_feats, teacher_feats,
+                carbon_pred, carbon_gt):
         L_diff  = self.mse(eps_theta, eps_target)
         L_kd    = self.kd_loss_fn(student_feats, teacher_feats)
         L_recon = self.mae(carbon_pred, carbon_gt)
-
-        L_total = (L_diff
-                   + self.lambda_kd    * L_kd
-                   + self.lambda_recon * L_recon)
-
-        components = {
-            "L_total" : L_total.item(),
-            "L_diff"  : L_diff.item(),
-            "L_kd"    : L_kd.item(),
-            "L_recon" : L_recon.item(),
+        L_total = L_diff + self.lambda_kd * L_kd + self.lambda_recon * L_recon
+        return L_total, {
+            "L_total": L_total.item(),
+            "L_diff" : L_diff.item(),
+            "L_kd"   : L_kd.item(),
+            "L_recon": L_recon.item(),
         }
-        return L_total, components
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# FULL IIDM MODEL
+# TEACHER FEATURE → CONDITION TENSOR
+# ══════════════════════════════════════════════════════════════════════════════
+
+class TeacherCondenser(nn.Module):
+    """
+    Condense 4 teacher feature maps into single tensor
+    matching kd_unet.py cond shape: (B, 480, H', W')
+
+    Teacher channels: [64, 128, 256, 512] → project each to 120 → concat = 480
+    Resize all to latent spatial size H'xW'
+    """
+    TEACHER_CHS = [64, 128, 256, 512]
+    OUT_CH_EACH = 120   # 120 × 4 = 480 = student latent channels
+
+    def __init__(self):
+        super().__init__()
+        self.projs = nn.ModuleList([
+            nn.Sequential(
+                nn.Conv2d(t_ch, self.OUT_CH_EACH, 1, bias=False),
+                nn.GroupNorm(8, self.OUT_CH_EACH),
+                nn.SiLU(),
+            )
+            for t_ch in self.TEACHER_CHS
+        ])
+
+    def forward(self, teacher_feats: List[torch.Tensor],
+                target_hw: tuple) -> torch.Tensor:
+        """
+        Args:
+            teacher_feats : list of 4 teacher tensors
+            target_hw     : (H', W') — latent spatial size
+        Returns:
+            cond : (B, 480, H', W')
+        """
+        projected = []
+        for feat, proj in zip(teacher_feats, self.projs):
+            p = proj(feat)
+            if p.shape[-2:] != target_hw:
+                p = F.adaptive_avg_pool2d(p, target_hw)
+            projected.append(p)
+        return torch.cat(projected, dim=1)   # (B, 480, H', W')
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# FULL IIDM
 # ══════════════════════════════════════════════════════════════════════════════
 
 class IIDM(nn.Module):
-    """
-    Full Improved Implicit Diffusion Model.
-    Paper: all sections.
-
-    Components:
-        teacher_vgg : TeacherVGG (frozen)
-        student_vgg : StudentVGG (trainable)
-        unet        : KDUNet    (trainable)
-        inr         : SIRENINR  (trainable)
-        scheduler   : DiffusionScheduler (no params)
-        loss_fn     : IIDMLoss
-    """
-
-    def __init__(self,
-                 in_channels:   int   = 6,
-                 T:             int   = 1000,
-                 lambda_kd:     float = 0.1,
-                 lambda_recon:  float = 1.0,
-                 device: torch.device = torch.device("cpu")):
+    def __init__(self, in_channels=6, T=1000,
+                 lambda_kd=0.1, lambda_recon=1.0,
+                 device=torch.device("cpu")):
         super().__init__()
-
         self.T      = T
         self.device = device
 
-        # ── Components ────────────────────────────────────────────────────────
-        self.teacher_vgg = TeacherVGG(in_channels=in_channels)
-        self.student_vgg = StudentVGG(in_channels=in_channels)
-        self.unet        = KDUNet(time_dim=512)
-        self.inr         = SIRENINR(student_chs=[32, 64, 128, 256])
-        self.scheduler   = DiffusionScheduler(T=T, device=device)
-        self.loss_fn     = IIDMLoss(lambda_kd, lambda_recon)
+        self.teacher_vgg   = TeacherVGG(in_channels=in_channels)
+        self.student_vgg   = StudentVGG(in_channels=in_channels)
+        self.teacher_cond  = TeacherCondenser()
+        self.unet          = KDUNet()
+        self.inr           = SIRENINR(student_chs=[32, 64, 128, 256])
+        self.scheduler     = DiffusionScheduler(T=T, device=device)
+        self.loss_fn       = IIDMLoss(lambda_kd, lambda_recon)
 
         # Teacher always frozen
         for p in self.teacher_vgg.parameters():
             p.requires_grad = False
 
     def trainable_parameters(self):
-        """Return only trainable parameters (exclude teacher)."""
-        return (list(self.student_vgg.parameters()) +
-                list(self.unet.parameters())        +
-                list(self.inr.parameters())         +
+        return (list(self.student_vgg.parameters())      +
+                list(self.teacher_cond.parameters())     +
+                list(self.unet.parameters())             +
+                list(self.inr.parameters())              +
                 list(self.loss_fn.kd_loss_fn.parameters()))
 
-    # ── TRAINING FORWARD ──────────────────────────────────────────────────────
-
-    def forward(self,
-                x:          torch.Tensor,
-                carbon_gt:  torch.Tensor
-                ) -> Tuple[torch.Tensor, Dict[str, float]]:
-        """
-        Full training forward pass.
-
-        Args:
-            x         : (B, 6, H, W)  input satellite stack, range [-1,1]
-            carbon_gt : (B, 1, H, W)  ground truth carbon map, range [-1,1]
-
-        Returns:
-            loss       : scalar total loss
-            components : dict of individual loss values
-        """
+    def forward(self, x, carbon_gt):
         B, _, H, W = x.shape
 
-        # ── 1. Extract features ───────────────────────────────────────────────
+        # 1. Features
         with torch.no_grad():
-            teacher_feats = self.teacher_vgg(x)        # frozen
+            teacher_feats = self.teacher_vgg(x)
+        student_feats = self.student_vgg(x)
 
-        student_feats = self.student_vgg(x)             # trainable
+        # 2. Latent = student block4 (B, 256, H/16, W/16)
+        latent = student_feats[3]
+        lat_hw = latent.shape[-2:]
 
-        # ── 2. Diffusion in latent space (student block4) ─────────────────────
-        latent = student_feats[3]                       # (B, 256, H/16, W/16)
+        # 3. Diffusion forward
+        t          = torch.randint(0, self.T, (B,), device=x.device, dtype=torch.long)
+        x_t, eps   = self.scheduler.q_sample(latent, t)
 
-        t      = torch.randint(0, self.T, (B,),
-                               device=x.device, dtype=torch.long)
+        # 4. Teacher condition tensor (B, 480, H/16, W/16)
+        # kd_unet expects 480ch cond — pad latent (256) with zeros to match
+        # OR use teacher condenser → 480ch
+        cond = self.teacher_cond(teacher_feats, lat_hw)   # (B, 480, H', W')
 
-        x_t, eps = self.scheduler.q_sample(latent, t)  # add noise
+        # kd_unet concat(xt, cond) internally → needs xt also 480ch
+        # Pad x_t from 256 → 480 with zeros
+        pad   = torch.zeros(B, 480 - 256, *lat_hw, device=x.device)
+        x_t_480 = torch.cat([x_t, pad], dim=1)            # (B, 480, H', W')
 
-        # ── 3. Predict noise with KD-UNet ─────────────────────────────────────
-        eps_theta = self.unet(x_t, t, teacher_feats)   # (B, 256, H/16, W/16)
+        eps_theta_480 = self.unet(x_t_480, t, cond)       # (B, 480, H', W')
+        eps_theta     = eps_theta_480[:, :256]             # take first 256ch
 
-        # ── 4. Decode carbon map with INR ─────────────────────────────────────
-        carbon_pred = self.inr(student_feats, H=H, W=W)  # (B, 1, H, W)
+        # 5. INR decode
+        carbon_pred = self.inr(student_feats, H=H, W=W)
 
-        # ── 5. Compute total loss ─────────────────────────────────────────────
+        # 6. Loss
         loss, components = self.loss_fn(
-            eps_theta    = eps_theta,
-            eps_target   = eps,
-            student_feats = student_feats,
-            teacher_feats = teacher_feats,
-            carbon_pred  = carbon_pred,
-            carbon_gt    = carbon_gt,
+            eps_theta, eps,
+            student_feats, teacher_feats,
+            carbon_pred, carbon_gt,
         )
-
         return loss, components
 
-    # ── INFERENCE ─────────────────────────────────────────────────────────────
-
     @torch.no_grad()
-    def predict(self,
-                x:      torch.Tensor,
-                steps:  int = 50) -> torch.Tensor:
-        """
-        Full inference pipeline.
-
-        Args:
-            x     : (B, 6, H, W)  input satellite stack, range [-1,1]
-            steps : DDIM steps (paper default: 50)
-
-        Returns:
-            carbon_map : (B, 1, H, W) predicted carbon, range [-1,1]
-        """
+    def predict(self, x, steps=50):
         B, _, H, W = x.shape
         self.eval()
 
-        # ── 1. Extract features ───────────────────────────────────────────────
         teacher_feats = self.teacher_vgg(x)
         student_feats = self.student_vgg(x)
+        latent        = student_feats[3]
+        lat_hw        = latent.shape[-2:]
+        cond          = self.teacher_cond(teacher_feats, lat_hw)
 
-        latent_shape  = student_feats[3].shape    # (B, 256, H/16, W/16)
-
-        # ── 2. DDIM reverse diffusion in latent space ─────────────────────────
+        # DDIM: start from 480ch noise, unet outputs 480ch
         def unet_fn(x_t, t_batch, condition):
             return self.unet(x_t, t_batch, condition)
 
-        x_0 = self.scheduler.ddim_sample(
-            unet_fn   = unet_fn,
-            shape     = latent_shape,
-            condition = teacher_feats,
-            steps     = steps,
-        )                                         # (B, 256, H/16, W/16) denoised
+        x_0_480 = self.scheduler.ddim_sample(
+            unet_fn,
+            shape=(B, 480, *lat_hw),
+            condition=cond,
+            steps=steps,
+        )
+        x_0 = x_0_480[:, :256]   # take meaningful 256ch
 
-        # ── 3. Replace student block4 with denoised latent ────────────────────
-        # Use denoised x_0 as the refined block4 for INR decoding
-        refined_feats      = list(student_feats)
-        refined_feats[3]   = x_0
-
-        # ── 4. INR decode → carbon map ────────────────────────────────────────
-        carbon_map = self.inr(refined_feats, H=H, W=W)  # (B, 1, H, W)
-
-        return carbon_map
-
-    # ── DENORMALIZE ───────────────────────────────────────────────────────────
+        refined        = list(student_feats)
+        refined[3]     = x_0
+        return self.inr(refined, H=H, W=W)
 
     @staticmethod
-    def denormalize(carbon_norm: torch.Tensor,
-                    vmin: float, vmax: float) -> torch.Tensor:
-        """
-        Convert normalized [-1,1] carbon back to Mg C/ha.
-
-        norm = (raw - vmin) / (vmax - vmin) * 2 - 1
-        raw  = (norm + 1) / 2 * (vmax - vmin) + vmin
-        """
+    def denormalize(carbon_norm, vmin, vmax):
         return (carbon_norm + 1.0) / 2.0 * (vmax - vmin) + vmin
 
 
@@ -272,18 +214,15 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"  Device : {device}")
 
-    B, H, W = 2, 256, 256
-    x          = torch.randn(B, 6, H, W, device=device)
-    carbon_gt  = torch.randn(B, 1, H, W, device=device).clamp(-1, 1)
+    B, H, W   = 2, 256, 256
+    x         = torch.randn(B, 6, H, W, device=device)
+    carbon_gt = torch.randn(B, 1, H, W, device=device).clamp(-1, 1)
 
-    # Init model
     model = IIDM(in_channels=6, T=1000, device=device).to(device)
 
-    # ── Training forward ──────────────────────────────────────────────────────
     print("\n  [1/3] Training forward pass ...")
     model.train()
     loss, components = model(x, carbon_gt)
-
     print(f"  L_total : {components['L_total']:.4f}")
     print(f"  L_diff  : {components['L_diff']:.4f}")
     print(f"  L_kd    : {components['L_kd']:.4f}")
@@ -291,32 +230,20 @@ if __name__ == "__main__":
     print(f"  NaN     : {torch.isnan(loss).item()}")
     print(f"  Inf     : {torch.isinf(loss).item()}")
 
-    # ── Backward ──────────────────────────────────────────────────────────────
     print("\n  [2/3] Backward pass ...")
     loss.backward()
     print(f"  Gradients OK ✓")
 
-    # ── Inference ─────────────────────────────────────────────────────────────
     print("\n  [3/3] Inference (DDIM 10 steps) ...")
-    with torch.no_grad():
-        carbon_pred = model.predict(x, steps=10)
-
+    carbon_pred = model.predict(x, steps=10)
     print(f"  Prediction shape : {tuple(carbon_pred.shape)}")
     print(f"  Prediction range : [{carbon_pred.min():.4f}, {carbon_pred.max():.4f}]")
     print(f"  NaN              : {torch.isnan(carbon_pred).any().item()}")
 
-    # Denormalize
-    carbon_mgcha = IIDM.denormalize(carbon_pred, vmin=0.04, vmax=207.97)
-    print(f"  Denorm range (Mg C/ha): [{carbon_mgcha.min():.2f}, {carbon_mgcha.max():.2f}]")
+    carbon_real = IIDM.denormalize(carbon_pred, vmin=0.04, vmax=207.97)
+    print(f"  Denorm (Mg C/ha) : [{carbon_real.min():.2f}, {carbon_real.max():.2f}]")
 
-    # ── Parameter summary ─────────────────────────────────────────────────────
     print("\n  Parameter Summary:")
-    def count(m): return sum(p.numel() for p in m.parameters() if p.requires_grad) / 1e6
-    print(f"    Teacher VGG (frozen) : {sum(p.numel() for p in model.teacher_vgg.parameters())/1e6:.2f}M")
-    print(f"    Student VGG          : {count(model.student_vgg):.2f}M")
-    print(f"    KD-UNet              : {count(model.unet):.2f}M")
-    print(f"    SIREN INR            : {count(model.inr):.2f}M")
-    total_trainable = count(model.student_vgg) + count(model.unet) + count(model.inr)
-    print(f"    Total trainable      : {total_trainable:.2f}M")
-
+    t_params = sum(p.numel() for p in model.trainable_parameters()) / 1e6
+    print(f"  Total trainable  : {t_params:.2f}M")
     print(f"\n  ✓ IIDM Full Pipeline ready!")
