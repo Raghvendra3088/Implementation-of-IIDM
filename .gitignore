@@ -18,3 +18,16 @@ wandb/
 data/raw/
 data/processed/final/
 data/processed/patches_final/
+# Data directories — never push raw/processed rasters
+data/raw/
+data/processed/final/
+data/processed/patches/
+data/processed/patches_final/
+*.tif
+*.tiff
+*.h5
+*.nc
+venv/
+__pycache__/
+*.pyc
+.DS_Store
