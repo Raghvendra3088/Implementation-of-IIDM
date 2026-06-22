@@ -88,3 +88,9 @@ python3 preprocessing/preprocess_all.py
 - DEM elevation range: 905m – 3821m ✅
 - Forest coverage: 44.1% of AOI ✅
 - Output resolution: 16m (matches GF-1 WFV paper)
+
+## Model Checkpoints
+| Checkpoint | Epochs | RMSE | Val Loss | Link |
+|---|---|---|---|---|
+| best_model.pth | 2 | - | 1.5739 | [Drive Link](#) |
+| epoch_100.pth | 100 | 55.35 | - | [Drive Link](#) |
