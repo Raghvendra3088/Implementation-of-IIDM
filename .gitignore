@@ -38,3 +38,5 @@ iidm_env/
 data/
 *.tif
 *.npy
+.ipynb_checkpoints/
+preprocessing/.ipynb_checkpoints/

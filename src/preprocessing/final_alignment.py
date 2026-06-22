@@ -30,7 +30,7 @@ import geopandas as gpd
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 REPO    = Path(__file__).resolve().parents[2]
-SRC     = Path("/Users/raghvendra/iidm_project")
+SRC = Path("/DATA/raghvendra3088/Implementation-of-IIDM/data/raw")
 
 OUT     = REPO / "data" / "processed" / "final"
 MASKS   = REPO / "data" / "masks"
@@ -195,7 +195,7 @@ def step3_canopy():
 def step4_gedi_l4a(ref_transform, ref_shape, ref_crs):
     log("STEP 4 — GEDI L4A Extract → Rasterize")
 
-    gedi_dir  = SRC / "GEDI_L4A_AGB_Density_V2"
+    gedi_dir = Path("/DATA/raghvendra3088/Implementation-of-IIDM/data/raw/gedi")
     h5_files  = sorted(gedi_dir.glob("*.h5"))
     print(f"  GEDI L4A files: {len(h5_files)}")
 
