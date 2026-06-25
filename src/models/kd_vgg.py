@@ -212,32 +212,21 @@ class KDLoss(nn.Module):
         ])
 
     def forward(self,
-                student_feats: List[torch.Tensor],
-                teacher_feats: List[torch.Tensor]) -> torch.Tensor:
-        """
-        Args:
-            student_feats : list of 4 tensors from StudentVGG
-            teacher_feats : list of 4 tensors from TeacherVGG (detached inside)
-        Returns:
-            scalar KD loss
-        """
+                student_feats,
+                teacher_feats):
+        import torch.nn as nn
         assert len(student_feats) == len(teacher_feats) == 4
-
         total = 0.0
-        for i, (s_feat, t_feat) in enumerate(
-                zip(student_feats, teacher_feats)):
-
-            t_feat = t_feat.detach()          # no gradient to teacher
-
-            # Adapt student channels → teacher channels
+        for i, (s_feat, t_feat) in enumerate(zip(student_feats, teacher_feats)):
+            t = t_feat.detach()
             s_adapted = self.adapters[i](s_feat)
+            if s_adapted.shape[-2:] != t.shape[-2:]:
+                s_adapted = nn.functional.adaptive_avg_pool2d(s_adapted, t.shape[-2:])
+            s_norm = (s_adapted - s_adapted.mean()) / (s_adapted.std() + 1e-6)
+            t_norm = (t - t.mean()) / (t.std() + 1e-6)
+            total = total + self.mse(s_norm, t_norm)
+        return total / 4.0
 
-            # Align spatial size if different
-            if s_adapted.shape[-2:] != t_feat.shape[-2:]:
-                s_adapted = nn.functional.adaptive_avg_pool2d(
-                    s_adapted, t_feat.shape[-2:])
-
-            total = total + self.mse(s_adapted, t_feat)
 
         return total / 4.0
 

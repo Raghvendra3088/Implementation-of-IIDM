@@ -153,21 +153,22 @@ def train(args):
     print(f"  Trainable params : {n_train:.2f}M")
 
     # ── Optimizer + Scheduler ─────────────────────────────────────────────────
-    optimizer = torch.optim.AdamW(
-        model.trainable_parameters(),
-        lr=args.lr, weight_decay=1e-5
-    )
+    optimizer = torch.optim.AdamW([
+        {"params": model.unet.parameters(),        "lr": args.lr * 0.5},
+        {"params": model.inr.parameters(),         "lr": args.lr * 0.1},
+        {"params": model.student_vgg.parameters(), "lr": args.lr},
+    ], weight_decay=args.weight_decay)
     lr_sched = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, T_max=args.epochs, eta_min=1e-6
     )
 
     # AMP scaler (CUDA only)
-    use_amp = (device.type == "cuda")
-    scaler  = GradScaler(enabled=use_amp)
+    use_amp = False  # AMP causes NaN — scale drops 65536->8192
+    scaler  = torch.amp.GradScaler("cuda", enabled=use_amp)
 
     # ── Resume from checkpoint ────────────────────────────────────────────────
     start_epoch = 1
-    best_val    = float("inf")
+    best_val    = float("inf")  # now tracks val_rmse
     log         = []
 
     if args.resume and Path(args.resume).exists():
@@ -175,15 +176,18 @@ def train(args):
         model.student_vgg.load_state_dict(ckpt["student_vgg"])
         model.unet.load_state_dict(ckpt["unet"])
         model.inr.load_state_dict(ckpt["inr"])
-        optimizer.load_state_dict(ckpt["optimizer"])
+        if not args.reset_optimizer:
+            optimizer.load_state_dict(ckpt["optimizer"])
         start_epoch = ckpt["epoch"] + 1
         best_val    = ckpt.get("best_val", float("inf"))
-        print(f"  Resumed from epoch {ckpt['epoch']}")
+        print(f"  Resumed from epoch {ckpt['epoch']}"
+              f"{' (optimizer reset)' if args.reset_optimizer else ''}")
 
     # ══════════════════════════════════════════════════════════════════════════
     # EPOCH LOOP
     # ══════════════════════════════════════════════════════════════════════════
 
+    no_improve = 0
     print(f"\n  Starting training from epoch {start_epoch} ...\n")
 
     for epoch in range(start_epoch, args.epochs + 1):
@@ -199,15 +203,19 @@ def train(args):
 
             optimizer.zero_grad(set_to_none=True)
 
-            with autocast(enabled=use_amp):
-                loss, comps = model(inp, tgt)
+            with torch.amp.autocast("cuda", enabled=use_amp):
+                loss, comps = model(inp, tgt, lambda_diff=args.lambda_diff)
 
+            if torch.isnan(loss) or torch.isinf(loss):
+                print(f"  [SKIP] NaN/Inf loss at step {step}, skipping batch")
+                optimizer.zero_grad(set_to_none=True)
+                continue
             scaler.scale(loss).backward()
 
             # Gradient clipping
             scaler.unscale_(optimizer)
             torch.nn.utils.clip_grad_norm_(
-                model.trainable_parameters(), max_norm=1.0)
+                model.trainable_parameters(), max_norm=0.5)
 
             scaler.step(optimizer)
             scaler.update()
@@ -235,8 +243,8 @@ def train(args):
             for inp, tgt in val_loader:
                 inp, tgt = inp.to(device), tgt.to(device)
 
-                with autocast(enabled=use_amp):
-                    loss, comps = model(inp, tgt)
+                with torch.amp.autocast("cuda", enabled=use_amp):
+                    loss, comps = model(inp, tgt, lambda_diff=args.lambda_diff)
 
                 for k in val: val[k] += comps[k]
 
@@ -289,10 +297,17 @@ def train(args):
             }, path)
             if tag: print(f"  [{tag}] Checkpoint saved → {path}")
 
-        # Best model
-        if val["L_total"] < best_val:
-            best_val = val["L_total"]
+        # Best model + early stopping counter
+        if val_rmse < best_val:
+            best_val      = val_rmse
+            no_improve    = 0
             save_ckpt(ckpt_dir / "best_model.pth", "BEST")
+        else:
+            no_improve += 1
+            if no_improve >= args.early_stop:
+                print(f"  Early stopping at epoch {epoch} "
+                      f"(no improvement for {args.early_stop} epochs)")
+                break
 
         # Periodic checkpoint
         if epoch % args.save_every == 0:
@@ -324,11 +339,17 @@ def parse_args():
     p.add_argument("--T",            type=int,   default=1000)
     p.add_argument("--lambda_kd",    type=float, default=0.1)
     p.add_argument("--lambda_recon", type=float, default=1.0)
+    p.add_argument("--lambda_diff",  type=float, default=1.0)
     p.add_argument("--save_every",   type=int,   default=10)
     p.add_argument("--workers",      type=int,   default=0)
     p.add_argument("--resume",       type=str,   default="")
+    p.add_argument("--reset_optimizer", action="store_true", default=False)
     p.add_argument("--patch_dir",    type=str,
                    default="data/processed/patches_final")
+    p.add_argument("--early_stop",   type=int,   default=30,
+                   help="Stop if val loss not improved for N epochs")
+    p.add_argument("--weight_decay", type=float, default=1e-4,
+                   help="L2 regularization (default 1e-4)")
     return p.parse_args()
 
 

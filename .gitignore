@@ -1,42 +1,24 @@
-*.pth
-*.pt
-
-
-data/raw/
-data/processed/
-data/patches/
-*.tif
-*.tiff
-*.png
-*.jpg
-
-
-venv/
-__pycache__/
-wandb/
-.DS_Store
-data/raw/
-data/processed/final/
-data/processed/patches_final/
-# Data directories — never push raw/processed rasters
-data/raw/
-data/processed/final/
-data/processed/patches/
-data/processed/patches_final/
-*.tif
-*.tiff
+# Data — never push
+data/
 *.h5
 *.nc
-venv/
-__pycache__/
-*.pyc
-.DS_Store
+*.npy
+
+# Large model checkpoints
 checkpoints/
 *.pth
 *.pt
-iidm_env/
-data/
+
+# Raw rasters
 *.tif
-*.npy
+*.tiff
+
+# Python
+__pycache__/
+*.pyc
+.DS_Store
+venv/
+iidm_env/
+ml_env/
 .ipynb_checkpoints/
-preprocessing/.ipynb_checkpoints/
+wandb/
