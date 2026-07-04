@@ -1,0 +1,751 @@
+
+=======================================================
+  IIDM Training
+=======================================================
+  Device     : cuda
+  Epochs     : 15
+  Batch size : 2
+  LR         : 0.0002
+
+  Loading datasets ...
+  [train] 7475 patches
+  [val] 1601 patches
+  Train batches : 3737
+  Val   batches : 801
+
+  Initializing IIDM model ...
+  Trainable params : 78.56M
+
+  Starting training from epoch 1 ...
+
+  Ep 001 | step 0000/3737 | loss=2.7348 | diff=1.1223 | kd=1.9744 | recon=0.8062 | t=1s
+  Ep 001 | step 0050/3737 | loss=1.6566 | diff=1.0049 | kd=1.9968 | recon=0.3258 | t=10s
+  Ep 001 | step 0100/3737 | loss=1.3629 | diff=0.9998 | kd=2.0019 | recon=0.1815 | t=19s
+  Ep 001 | step 0150/3737 | loss=1.4636 | diff=0.9957 | kd=1.9759 | recon=0.2340 | t=28s
+  Ep 001 | step 0200/3737 | loss=1.4551 | diff=1.0047 | kd=2.0018 | recon=0.2252 | t=37s
+  Ep 001 | step 0250/3737 | loss=1.5122 | diff=1.0033 | kd=2.0175 | recon=0.2545 | t=46s
+  Ep 001 | step 0300/3737 | loss=1.5621 | diff=0.9898 | kd=2.0020 | recon=0.2861 | t=56s
+  Ep 001 | step 0350/3737 | loss=1.5604 | diff=0.9815 | kd=1.9916 | recon=0.2894 | t=65s
+  Ep 001 | step 0400/3737 | loss=1.3381 | diff=0.9822 | kd=1.9900 | recon=0.1779 | t=74s
+  Ep 001 | step 0450/3737 | loss=1.2986 | diff=0.9678 | kd=1.9918 | recon=0.1654 | t=83s
+  Ep 001 | step 0500/3737 | loss=1.3431 | diff=0.9651 | kd=1.9939 | recon=0.1890 | t=92s
+  Ep 001 | step 0550/3737 | loss=1.5396 | diff=0.9529 | kd=2.0139 | recon=0.2933 | t=101s
+  Ep 001 | step 0600/3737 | loss=1.3182 | diff=0.9556 | kd=1.9949 | recon=0.1813 | t=111s
+  Ep 001 | step 0650/3737 | loss=1.2456 | diff=0.9347 | kd=2.0137 | recon=0.1555 | t=120s
+  Ep 001 | step 0700/3737 | loss=1.6244 | diff=0.9280 | kd=2.0042 | recon=0.3482 | t=129s
+  Ep 001 | step 0750/3737 | loss=1.1360 | diff=0.9261 | kd=2.0069 | recon=0.1050 | t=138s
+  Ep 001 | step 0800/3737 | loss=1.1738 | diff=0.9126 | kd=1.9894 | recon=0.1306 | t=148s
+  Ep 001 | step 0850/3737 | loss=1.1540 | diff=0.9094 | kd=1.9951 | recon=0.1223 | t=157s
+  Ep 001 | step 0900/3737 | loss=1.2030 | diff=0.9049 | kd=1.9945 | recon=0.1491 | t=166s
+  Ep 001 | step 0950/3737 | loss=1.2836 | diff=0.9038 | kd=2.0123 | recon=0.1899 | t=175s
+  Ep 001 | step 1000/3737 | loss=1.3651 | diff=0.9424 | kd=1.9978 | recon=0.2113 | t=185s
+  Ep 001 | step 1050/3737 | loss=1.1403 | diff=0.9013 | kd=1.9948 | recon=0.1195 | t=194s
+  Ep 001 | step 1100/3737 | loss=1.1842 | diff=0.9331 | kd=2.0028 | recon=0.1255 | t=203s
+  Ep 001 | step 1150/3737 | loss=1.1506 | diff=0.9066 | kd=2.0069 | recon=0.1220 | t=212s
+  Ep 001 | step 1200/3737 | loss=1.2637 | diff=0.9511 | kd=1.9985 | recon=0.1563 | t=222s
+  Ep 001 | step 1250/3737 | loss=1.6631 | diff=0.8793 | kd=1.9922 | recon=0.3919 | t=231s
+  Ep 001 | step 1300/3737 | loss=1.1451 | diff=0.9056 | kd=1.9972 | recon=0.1197 | t=240s
+  Ep 001 | step 1350/3737 | loss=1.1193 | diff=0.8839 | kd=1.9972 | recon=0.1177 | t=249s
+  Ep 001 | step 1400/3737 | loss=1.4543 | diff=0.9195 | kd=1.9946 | recon=0.2674 | t=259s
+  Ep 001 | step 1450/3737 | loss=1.1021 | diff=0.8615 | kd=2.0065 | recon=0.1203 | t=268s
+  Ep 001 | step 1500/3737 | loss=1.0674 | diff=0.8630 | kd=1.9885 | recon=0.1022 | t=277s
+  Ep 001 | step 1550/3737 | loss=1.0543 | diff=0.8600 | kd=1.9861 | recon=0.0971 | t=287s
+  Ep 001 | step 1600/3737 | loss=1.2332 | diff=0.8616 | kd=1.9992 | recon=0.1858 | t=296s
+  Ep 001 | step 1650/3737 | loss=1.0254 | diff=0.8499 | kd=1.9851 | recon=0.0877 | t=305s
+  Ep 001 | step 1700/3737 | loss=1.2883 | diff=0.8490 | kd=1.9881 | recon=0.2197 | t=313s
+  Ep 001 | step 1750/3737 | loss=1.5148 | diff=0.8862 | kd=1.9939 | recon=0.3143 | t=321s
+  Ep 001 | step 1800/3737 | loss=1.0354 | diff=0.8433 | kd=2.0022 | recon=0.0960 | t=330s
+  Ep 001 | step 1850/3737 | loss=1.0263 | diff=0.8421 | kd=1.9707 | recon=0.0921 | t=339s
+  Ep 001 | step 1900/3737 | loss=1.0317 | diff=0.8396 | kd=1.9955 | recon=0.0960 | t=348s
+  Ep 001 | step 1950/3737 | loss=1.0927 | diff=0.8406 | kd=2.0046 | recon=0.1260 | t=358s
+  Ep 001 | step 2000/3737 | loss=1.1233 | diff=0.9109 | kd=2.0039 | recon=0.1062 | t=367s
+  Ep 001 | step 2050/3737 | loss=1.0687 | diff=0.8521 | kd=1.9963 | recon=0.1083 | t=376s
+  Ep 001 | step 2100/3737 | loss=1.2399 | diff=0.8369 | kd=1.9712 | recon=0.2015 | t=386s
+  Ep 001 | step 2150/3737 | loss=1.2017 | diff=0.8243 | kd=1.9952 | recon=0.1887 | t=395s
+  Ep 001 | step 2200/3737 | loss=1.0501 | diff=0.8839 | kd=2.0019 | recon=0.0831 | t=404s
+  Ep 001 | step 2250/3737 | loss=1.0620 | diff=0.8529 | kd=1.9926 | recon=0.1045 | t=413s
+  Ep 001 | step 2300/3737 | loss=0.9891 | diff=0.8225 | kd=1.9910 | recon=0.0833 | t=423s
+  Ep 001 | step 2350/3737 | loss=1.0916 | diff=0.8429 | kd=1.9945 | recon=0.1243 | t=432s
+  Ep 001 | step 2400/3737 | loss=1.0419 | diff=0.8944 | kd=1.9843 | recon=0.0737 | t=441s
+  Ep 001 | step 2450/3737 | loss=1.0364 | diff=0.8169 | kd=1.9820 | recon=0.1097 | t=450s
+  Ep 001 | step 2500/3737 | loss=1.0292 | diff=0.8196 | kd=1.9930 | recon=0.1048 | t=460s
+  Ep 001 | step 2550/3737 | loss=1.0861 | diff=0.9170 | kd=1.9888 | recon=0.0845 | t=469s
+  Ep 001 | step 2600/3737 | loss=1.0557 | diff=0.8089 | kd=1.9999 | recon=0.1234 | t=478s
+  Ep 001 | step 2650/3737 | loss=0.9942 | diff=0.8173 | kd=2.0063 | recon=0.0885 | t=487s
+  Ep 001 | step 2700/3737 | loss=1.0280 | diff=0.8889 | kd=1.9926 | recon=0.0695 | t=497s
+  Ep 001 | step 2750/3737 | loss=1.0906 | diff=0.8138 | kd=1.9928 | recon=0.1384 | t=506s
+  Ep 001 | step 2800/3737 | loss=1.0373 | diff=0.8343 | kd=1.9862 | recon=0.1015 | t=515s
+  Ep 001 | step 2850/3737 | loss=1.3760 | diff=0.8103 | kd=1.9918 | recon=0.2828 | t=524s
+  Ep 001 | step 2900/3737 | loss=1.0543 | diff=0.8149 | kd=1.9845 | recon=0.1197 | t=534s
+  Ep 001 | step 2950/3737 | loss=0.9531 | diff=0.8089 | kd=1.9954 | recon=0.0721 | t=543s
+  Ep 001 | step 3000/3737 | loss=1.1161 | diff=0.8270 | kd=1.9870 | recon=0.1446 | t=552s
+  Ep 001 | step 3050/3737 | loss=0.9661 | diff=0.8014 | kd=2.0133 | recon=0.0823 | t=561s
+  Ep 001 | step 3100/3737 | loss=1.0988 | diff=0.8039 | kd=1.9916 | recon=0.1475 | t=571s
+  Ep 001 | step 3150/3737 | loss=0.9760 | diff=0.8041 | kd=1.9987 | recon=0.0860 | t=580s
+  Ep 001 | step 3200/3737 | loss=0.9915 | diff=0.7990 | kd=1.9794 | recon=0.0963 | t=589s
+  Ep 001 | step 3250/3737 | loss=1.1042 | diff=0.9077 | kd=1.9870 | recon=0.0982 | t=599s
+  Ep 001 | step 3300/3737 | loss=1.4281 | diff=0.8014 | kd=1.9921 | recon=0.3133 | t=608s
+  Ep 001 | step 3350/3737 | loss=1.0042 | diff=0.8330 | kd=1.9849 | recon=0.0856 | t=617s
+  Ep 001 | step 3400/3737 | loss=0.9610 | diff=0.7870 | kd=2.0102 | recon=0.0870 | t=626s
+  Ep 001 | step 3450/3737 | loss=0.9248 | diff=0.7959 | kd=1.9947 | recon=0.0644 | t=636s
+  Ep 001 | step 3500/3737 | loss=0.9706 | diff=0.7876 | kd=1.9829 | recon=0.0915 | t=645s
+  Ep 001 | step 3550/3737 | loss=1.1408 | diff=0.7882 | kd=1.9913 | recon=0.1763 | t=655s
+  Ep 001 | step 3600/3737 | loss=1.2217 | diff=0.7869 | kd=2.0021 | recon=0.2174 | t=664s
+  Ep 001 | step 3650/3737 | loss=0.9240 | diff=0.7872 | kd=1.9911 | recon=0.0684 | t=673s
+  Ep 001 | step 3700/3737 | loss=0.9859 | diff=0.7944 | kd=2.0062 | recon=0.0958 | t=681s
+
+  ── Epoch 001/15 (778s) ──────────────────────
+  Train  loss=1.1843  diff=0.8726  kd=1.9948  recon=0.1559
+  Val    loss=1.0654  RMSE=0.1581  MAE=0.1161  lr=9.89e-05
+  [BEST] Checkpoint saved → checkpoints/best_model.pth
+
+  Ep 002 | step 0000/3737 | loss=1.0877 | diff=0.9101 | kd=1.9820 | recon=0.0888 | t=0s
+  Ep 002 | step 0050/3737 | loss=0.9827 | diff=0.8252 | kd=1.9878 | recon=0.0787 | t=10s
+  Ep 002 | step 0100/3737 | loss=1.0073 | diff=0.7900 | kd=1.9989 | recon=0.1086 | t=19s
+  Ep 002 | step 0150/3737 | loss=1.0115 | diff=0.8731 | kd=1.9803 | recon=0.0692 | t=28s
+  Ep 002 | step 0200/3737 | loss=0.9330 | diff=0.7778 | kd=1.9879 | recon=0.0776 | t=37s
+  Ep 002 | step 0250/3737 | loss=1.0619 | diff=0.8130 | kd=1.9867 | recon=0.1244 | t=46s
+  Ep 002 | step 0300/3737 | loss=0.9519 | diff=0.7774 | kd=1.9915 | recon=0.0873 | t=56s
+  Ep 002 | step 0350/3737 | loss=0.9525 | diff=0.7903 | kd=2.0032 | recon=0.0811 | t=65s
+  Ep 002 | step 0400/3737 | loss=1.2986 | diff=0.8125 | kd=1.9949 | recon=0.2430 | t=74s
+  Ep 002 | step 0450/3737 | loss=1.0370 | diff=0.8894 | kd=1.9904 | recon=0.0738 | t=84s
+  Ep 002 | step 0500/3737 | loss=0.9144 | diff=0.7780 | kd=1.9837 | recon=0.0682 | t=93s
+  Ep 002 | step 0550/3737 | loss=1.1720 | diff=0.7701 | kd=2.0034 | recon=0.2010 | t=102s
+  Ep 002 | step 0600/3737 | loss=0.9666 | diff=0.7721 | kd=1.9841 | recon=0.0972 | t=111s
+  Ep 002 | step 0650/3737 | loss=0.9865 | diff=0.8283 | kd=1.9877 | recon=0.0791 | t=121s
+  Ep 002 | step 0700/3737 | loss=1.0697 | diff=0.9044 | kd=1.9930 | recon=0.0827 | t=130s
+  Ep 002 | step 0750/3737 | loss=0.9541 | diff=0.7733 | kd=2.0063 | recon=0.0904 | t=139s
+  Ep 002 | step 0800/3737 | loss=0.9018 | diff=0.7762 | kd=1.9825 | recon=0.0628 | t=149s
+  Ep 002 | step 0850/3737 | loss=0.9931 | diff=0.7670 | kd=2.0007 | recon=0.1130 | t=158s
+  Ep 002 | step 0900/3737 | loss=0.9705 | diff=0.7927 | kd=1.9893 | recon=0.0889 | t=167s
+  Ep 002 | step 0950/3737 | loss=0.9547 | diff=0.7971 | kd=1.9994 | recon=0.0788 | t=176s
+  Ep 002 | step 1000/3737 | loss=0.9350 | diff=0.7817 | kd=1.9866 | recon=0.0767 | t=186s
+  Ep 002 | step 1050/3737 | loss=0.9634 | diff=0.7651 | kd=1.9879 | recon=0.0991 | t=195s
+  Ep 002 | step 1100/3737 | loss=1.1303 | diff=0.7611 | kd=1.9840 | recon=0.1846 | t=204s
+  Ep 002 | step 1150/3737 | loss=1.0076 | diff=0.8271 | kd=1.9727 | recon=0.0903 | t=214s
+  Ep 002 | step 1200/3737 | loss=1.0502 | diff=0.7665 | kd=1.9809 | recon=0.1419 | t=223s
+  Ep 002 | step 1250/3737 | loss=0.9349 | diff=0.7971 | kd=1.9867 | recon=0.0689 | t=233s
+  Ep 002 | step 1300/3737 | loss=1.0659 | diff=0.8832 | kd=1.9896 | recon=0.0914 | t=242s
+  Ep 002 | step 1350/3737 | loss=1.0747 | diff=0.9101 | kd=1.9975 | recon=0.0823 | t=252s
+  Ep 002 | step 1400/3737 | loss=0.9750 | diff=0.7579 | kd=1.9968 | recon=0.1085 | t=261s
+  Ep 002 | step 1450/3737 | loss=0.9168 | diff=0.7594 | kd=1.9908 | recon=0.0787 | t=269s
+  Ep 002 | step 1500/3737 | loss=0.8701 | diff=0.7582 | kd=1.9870 | recon=0.0559 | t=277s
+  Ep 002 | step 1550/3737 | loss=1.0317 | diff=0.7839 | kd=1.9774 | recon=0.1239 | t=285s
+  Ep 002 | step 1600/3737 | loss=1.0279 | diff=0.7527 | kd=1.9803 | recon=0.1376 | t=293s
+  Ep 002 | step 1650/3737 | loss=0.9058 | diff=0.7640 | kd=1.9912 | recon=0.0709 | t=302s
+  Ep 002 | step 1700/3737 | loss=0.8918 | diff=0.7631 | kd=1.9925 | recon=0.0644 | t=311s
+  Ep 002 | step 1750/3737 | loss=0.8876 | diff=0.7748 | kd=1.9881 | recon=0.0564 | t=320s
+  Ep 002 | step 1800/3737 | loss=0.8822 | diff=0.7777 | kd=1.9805 | recon=0.0522 | t=330s
+  Ep 002 | step 1850/3737 | loss=0.9022 | diff=0.7541 | kd=1.9861 | recon=0.0741 | t=339s
+  Ep 002 | step 1900/3737 | loss=0.9099 | diff=0.7487 | kd=2.0026 | recon=0.0806 | t=348s
+  Ep 002 | step 1950/3737 | loss=0.9143 | diff=0.7610 | kd=1.9798 | recon=0.0766 | t=358s
+  Ep 002 | step 2000/3737 | loss=0.9088 | diff=0.7488 | kd=1.9827 | recon=0.0800 | t=367s
+  Ep 002 | step 2050/3737 | loss=1.1641 | diff=0.8721 | kd=1.9915 | recon=0.1460 | t=376s
+  Ep 002 | step 2100/3737 | loss=0.9416 | diff=0.7575 | kd=1.9883 | recon=0.0921 | t=386s
+  Ep 002 | step 2150/3737 | loss=0.8870 | diff=0.7601 | kd=1.9765 | recon=0.0635 | t=395s
+  Ep 002 | step 2200/3737 | loss=0.8781 | diff=0.7411 | kd=1.9843 | recon=0.0685 | t=404s
+  Ep 002 | step 2250/3737 | loss=0.8929 | diff=0.7568 | kd=1.9919 | recon=0.0680 | t=414s
+  Ep 002 | step 2300/3737 | loss=0.9359 | diff=0.7515 | kd=1.9939 | recon=0.0922 | t=423s
+  Ep 002 | step 2350/3737 | loss=0.9334 | diff=0.7439 | kd=2.0079 | recon=0.0947 | t=432s
+  Ep 002 | step 2400/3737 | loss=0.9749 | diff=0.7488 | kd=1.9801 | recon=0.1131 | t=442s
+  Ep 002 | step 2450/3737 | loss=0.8815 | diff=0.7400 | kd=1.9989 | recon=0.0708 | t=451s
+  Ep 002 | step 2500/3737 | loss=0.9051 | diff=0.7545 | kd=1.9931 | recon=0.0753 | t=460s
+  Ep 002 | step 2550/3737 | loss=1.0361 | diff=0.7404 | kd=1.9882 | recon=0.1479 | t=469s
+  Ep 002 | step 2600/3737 | loss=0.9933 | diff=0.8544 | kd=1.9940 | recon=0.0695 | t=479s
+  Ep 002 | step 2650/3737 | loss=0.9911 | diff=0.8627 | kd=1.9940 | recon=0.0642 | t=488s
+  Ep 002 | step 2700/3737 | loss=0.8934 | diff=0.7406 | kd=1.9900 | recon=0.0764 | t=497s
+  Ep 002 | step 2750/3737 | loss=0.8740 | diff=0.7478 | kd=1.9886 | recon=0.0631 | t=507s
+  Ep 002 | step 2800/3737 | loss=0.8375 | diff=0.7300 | kd=1.9906 | recon=0.0538 | t=516s
+  Ep 002 | step 2850/3737 | loss=0.9174 | diff=0.7446 | kd=1.9902 | recon=0.0864 | t=525s
+  Ep 002 | step 2900/3737 | loss=0.8670 | diff=0.7452 | kd=1.9956 | recon=0.0609 | t=535s
+  Ep 002 | step 2950/3737 | loss=0.9101 | diff=0.7646 | kd=1.9977 | recon=0.0728 | t=544s
+  Ep 002 | step 3000/3737 | loss=1.0654 | diff=0.8596 | kd=1.9832 | recon=0.1029 | t=553s
+  Ep 002 | step 3050/3737 | loss=0.9015 | diff=0.7428 | kd=1.9809 | recon=0.0793 | t=563s
+  Ep 002 | step 3100/3737 | loss=0.9251 | diff=0.7402 | kd=1.9957 | recon=0.0925 | t=572s
+  Ep 002 | step 3150/3737 | loss=0.9450 | diff=0.7354 | kd=1.9998 | recon=0.1048 | t=581s
+  Ep 002 | step 3200/3737 | loss=0.8627 | diff=0.7296 | kd=1.9970 | recon=0.0665 | t=590s
+  Ep 002 | step 3250/3737 | loss=0.9812 | diff=0.7255 | kd=2.0046 | recon=0.1278 | t=600s
+  Ep 002 | step 3300/3737 | loss=0.8311 | diff=0.7348 | kd=1.9924 | recon=0.0481 | t=609s
+  Ep 002 | step 3350/3737 | loss=0.8148 | diff=0.7236 | kd=1.9919 | recon=0.0456 | t=618s
+  Ep 002 | step 3400/3737 | loss=0.8699 | diff=0.7409 | kd=1.9750 | recon=0.0645 | t=628s
+  Ep 002 | step 3450/3737 | loss=1.1189 | diff=0.8491 | kd=1.9848 | recon=0.1349 | t=637s
+  Ep 002 | step 3500/3737 | loss=0.8573 | diff=0.7393 | kd=1.9999 | recon=0.0590 | t=645s
+  Ep 002 | step 3550/3737 | loss=0.9714 | diff=0.7307 | kd=1.9728 | recon=0.1204 | t=653s
+  Ep 002 | step 3600/3737 | loss=0.9805 | diff=0.7442 | kd=1.9968 | recon=0.1182 | t=661s
+  Ep 002 | step 3650/3737 | loss=0.9970 | diff=0.7815 | kd=1.9939 | recon=0.1078 | t=671s
+  Ep 002 | step 3700/3737 | loss=0.9540 | diff=0.7337 | kd=2.0078 | recon=0.1101 | t=680s
+
+  ── Epoch 002/15 (779s) ──────────────────────
+  Train  loss=0.9667  diff=0.7672  kd=1.9907  recon=0.0997
+  Val    loss=0.9561  RMSE=0.1402  MAE=0.1075  lr=9.57e-05
+  [BEST] Checkpoint saved → checkpoints/best_model.pth
+
+  Ep 003 | step 0000/3737 | loss=0.9146 | diff=0.7274 | kd=2.0068 | recon=0.0936 | t=0s
+  Ep 003 | step 0050/3737 | loss=0.8894 | diff=0.7420 | kd=1.9853 | recon=0.0737 | t=10s
+  Ep 003 | step 0100/3737 | loss=1.1362 | diff=0.7351 | kd=1.9789 | recon=0.2005 | t=19s
+  Ep 003 | step 0150/3737 | loss=0.8914 | diff=0.7283 | kd=1.9905 | recon=0.0815 | t=28s
+  Ep 003 | step 0200/3737 | loss=0.8782 | diff=0.7372 | kd=1.9908 | recon=0.0705 | t=37s
+  Ep 003 | step 0250/3737 | loss=0.9074 | diff=0.7291 | kd=2.0053 | recon=0.0892 | t=47s
+  Ep 003 | step 0300/3737 | loss=1.0965 | diff=0.7325 | kd=1.9855 | recon=0.1820 | t=56s
+  Ep 003 | step 0350/3737 | loss=0.9925 | diff=0.7221 | kd=1.9907 | recon=0.1352 | t=65s
+  Ep 003 | step 0400/3737 | loss=1.0131 | diff=0.8672 | kd=1.9895 | recon=0.0730 | t=74s
+  Ep 003 | step 0450/3737 | loss=0.8792 | diff=0.7141 | kd=1.9914 | recon=0.0826 | t=84s
+  Ep 003 | step 0500/3737 | loss=0.8318 | diff=0.7223 | kd=1.9833 | recon=0.0548 | t=93s
+  Ep 003 | step 0550/3737 | loss=0.9568 | diff=0.7285 | kd=1.9947 | recon=0.1141 | t=102s
+  Ep 003 | step 0600/3737 | loss=0.8220 | diff=0.7338 | kd=1.9801 | recon=0.0441 | t=112s
+  Ep 003 | step 0650/3737 | loss=0.9664 | diff=0.7764 | kd=1.9850 | recon=0.0950 | t=121s
+  Ep 003 | step 0700/3737 | loss=0.8816 | diff=0.7182 | kd=1.9923 | recon=0.0817 | t=130s
+  Ep 003 | step 0750/3737 | loss=0.8411 | diff=0.7170 | kd=1.9886 | recon=0.0621 | t=139s
+  Ep 003 | step 0800/3737 | loss=0.9747 | diff=0.7355 | kd=1.9872 | recon=0.1196 | t=149s
+  Ep 003 | step 0850/3737 | loss=0.8434 | diff=0.7172 | kd=1.9924 | recon=0.0631 | t=158s
+  Ep 003 | step 0900/3737 | loss=0.8417 | diff=0.7199 | kd=1.9863 | recon=0.0609 | t=167s
+  Ep 003 | step 0950/3737 | loss=0.9024 | diff=0.7359 | kd=1.9957 | recon=0.0832 | t=177s
+  Ep 003 | step 1000/3737 | loss=1.0098 | diff=0.7184 | kd=1.9922 | recon=0.1457 | t=186s
+  Ep 003 | step 1050/3737 | loss=1.0331 | diff=0.7259 | kd=1.9859 | recon=0.1536 | t=195s
+  Ep 003 | step 1100/3737 | loss=1.1506 | diff=0.7173 | kd=1.9868 | recon=0.2166 | t=205s
+  Ep 003 | step 1150/3737 | loss=0.8116 | diff=0.7111 | kd=1.9896 | recon=0.0503 | t=214s
+  Ep 003 | step 1200/3737 | loss=0.9178 | diff=0.7236 | kd=1.9858 | recon=0.0971 | t=222s
+  Ep 003 | step 1250/3737 | loss=0.8427 | diff=0.7123 | kd=1.9854 | recon=0.0652 | t=230s
+  Ep 003 | step 1300/3737 | loss=0.9417 | diff=0.7125 | kd=1.9930 | recon=0.1146 | t=238s
+  Ep 003 | step 1350/3737 | loss=0.8541 | diff=0.7222 | kd=1.9888 | recon=0.0659 | t=248s
+  Ep 003 | step 1400/3737 | loss=0.9761 | diff=0.7134 | kd=1.9902 | recon=0.1313 | t=257s
+  Ep 003 | step 1450/3737 | loss=0.8656 | diff=0.7335 | kd=1.9962 | recon=0.0661 | t=266s
+  Ep 003 | step 1500/3737 | loss=0.8967 | diff=0.7139 | kd=1.9855 | recon=0.0914 | t=275s
+  Ep 003 | step 1550/3737 | loss=1.0421 | diff=0.7153 | kd=1.9887 | recon=0.1634 | t=285s
+  Ep 003 | step 1600/3737 | loss=0.7970 | diff=0.7178 | kd=1.9870 | recon=0.0396 | t=294s
+  Ep 003 | step 1650/3737 | loss=0.8283 | diff=0.7113 | kd=1.9921 | recon=0.0585 | t=303s
+  Ep 003 | step 1700/3737 | loss=0.8715 | diff=0.7433 | kd=2.0065 | recon=0.0641 | t=313s
+  Ep 003 | step 1750/3737 | loss=0.8813 | diff=0.7149 | kd=2.0012 | recon=0.0832 | t=322s
+  Ep 003 | step 1800/3737 | loss=0.9266 | diff=0.7065 | kd=1.9897 | recon=0.1101 | t=331s
+  Ep 003 | step 1850/3737 | loss=0.8695 | diff=0.7349 | kd=2.0035 | recon=0.0673 | t=340s
+  Ep 003 | step 1900/3737 | loss=1.0114 | diff=0.8248 | kd=2.0025 | recon=0.0933 | t=350s
+  Ep 003 | step 1950/3737 | loss=0.8923 | diff=0.7191 | kd=1.9890 | recon=0.0866 | t=359s
+  Ep 003 | step 2000/3737 | loss=0.8147 | diff=0.7149 | kd=1.9827 | recon=0.0499 | t=368s
+  Ep 003 | step 2050/3737 | loss=0.8164 | diff=0.7125 | kd=1.9939 | recon=0.0520 | t=378s
+  Ep 003 | step 2100/3737 | loss=0.8017 | diff=0.7088 | kd=1.9775 | recon=0.0464 | t=387s
+  Ep 003 | step 2150/3737 | loss=0.9300 | diff=0.7074 | kd=1.9924 | recon=0.1113 | t=396s
+  Ep 003 | step 2200/3737 | loss=1.0686 | diff=0.8483 | kd=1.9918 | recon=0.1101 | t=405s
+  Ep 003 | step 2250/3737 | loss=0.8634 | diff=0.7693 | kd=1.9748 | recon=0.0471 | t=415s
+  Ep 003 | step 2300/3737 | loss=0.8004 | diff=0.7061 | kd=1.9816 | recon=0.0472 | t=424s
+  Ep 003 | step 2350/3737 | loss=0.8811 | diff=0.7069 | kd=1.9808 | recon=0.0871 | t=433s
+  Ep 003 | step 2400/3737 | loss=0.8888 | diff=0.7011 | kd=1.9997 | recon=0.0939 | t=443s
+  Ep 003 | step 2450/3737 | loss=0.8498 | diff=0.7298 | kd=1.9788 | recon=0.0600 | t=452s
+  Ep 003 | step 2500/3737 | loss=0.9591 | diff=0.7091 | kd=1.9983 | recon=0.1250 | t=461s
+  Ep 003 | step 2550/3737 | loss=0.9527 | diff=0.7886 | kd=1.9782 | recon=0.0820 | t=470s
+  Ep 003 | step 2600/3737 | loss=0.9835 | diff=0.8097 | kd=2.0024 | recon=0.0869 | t=480s
+  Ep 003 | step 2650/3737 | loss=0.8160 | diff=0.7080 | kd=1.9923 | recon=0.0540 | t=489s
+  Ep 003 | step 2700/3737 | loss=0.8606 | diff=0.7037 | kd=2.0008 | recon=0.0785 | t=498s
+  Ep 003 | step 2750/3737 | loss=0.8629 | diff=0.7089 | kd=1.9901 | recon=0.0770 | t=508s
+  Ep 003 | step 2800/3737 | loss=1.0166 | diff=0.6994 | kd=1.9941 | recon=0.1586 | t=517s
+  Ep 003 | step 2850/3737 | loss=0.9053 | diff=0.7063 | kd=1.9850 | recon=0.0995 | t=526s
+  Ep 003 | step 2900/3737 | loss=0.8898 | diff=0.7088 | kd=1.9871 | recon=0.0905 | t=535s
+  Ep 003 | step 2950/3737 | loss=0.8266 | diff=0.7078 | kd=2.0039 | recon=0.0594 | t=545s
+  Ep 003 | step 3000/3737 | loss=0.8885 | diff=0.7023 | kd=1.9808 | recon=0.0931 | t=554s
+  Ep 003 | step 3050/3737 | loss=0.8519 | diff=0.7029 | kd=1.9771 | recon=0.0745 | t=563s
+  Ep 003 | step 3100/3737 | loss=0.8382 | diff=0.7163 | kd=1.9769 | recon=0.0609 | t=573s
+  Ep 003 | step 3150/3737 | loss=0.8143 | diff=0.6953 | kd=1.9799 | recon=0.0595 | t=582s
+  Ep 003 | step 3200/3737 | loss=0.8256 | diff=0.7021 | kd=1.9943 | recon=0.0617 | t=590s
+  Ep 003 | step 3250/3737 | loss=0.8046 | diff=0.7059 | kd=1.9843 | recon=0.0494 | t=597s
+  Ep 003 | step 3300/3737 | loss=0.8024 | diff=0.6975 | kd=1.9764 | recon=0.0524 | t=606s
+  Ep 003 | step 3350/3737 | loss=0.8160 | diff=0.6987 | kd=1.9929 | recon=0.0587 | t=616s
+  Ep 003 | step 3400/3737 | loss=0.8334 | diff=0.7046 | kd=1.9873 | recon=0.0644 | t=625s
+  Ep 003 | step 3450/3737 | loss=0.8118 | diff=0.6961 | kd=1.9954 | recon=0.0578 | t=634s
+  Ep 003 | step 3500/3737 | loss=0.9590 | diff=0.7164 | kd=1.9926 | recon=0.1213 | t=644s
+  Ep 003 | step 3550/3737 | loss=0.8577 | diff=0.7037 | kd=1.9914 | recon=0.0770 | t=653s
+  Ep 003 | step 3600/3737 | loss=0.8810 | diff=0.8046 | kd=1.9752 | recon=0.0382 | t=662s
+  Ep 003 | step 3650/3737 | loss=0.8101 | diff=0.6943 | kd=1.9852 | recon=0.0579 | t=671s
+  Ep 003 | step 3700/3737 | loss=0.8099 | diff=0.6990 | kd=2.0063 | recon=0.0555 | t=681s
+
+  ── Epoch 003/15 (780s) ──────────────────────
+  Train  loss=0.8901  diff=0.7242  kd=1.9907  recon=0.0829
+  Val    loss=0.9176  RMSE=0.1203  MAE=0.0885  lr=9.05e-05
+  [BEST] Checkpoint saved → checkpoints/best_model.pth
+
+  Ep 004 | step 0000/3737 | loss=0.7947 | diff=0.6907 | kd=1.9836 | recon=0.0520 | t=0s
+  Ep 004 | step 0050/3737 | loss=0.9125 | diff=0.6959 | kd=1.9912 | recon=0.1083 | t=10s
+  Ep 004 | step 0100/3737 | loss=0.8011 | diff=0.6932 | kd=1.9965 | recon=0.0539 | t=19s
+  Ep 004 | step 0150/3737 | loss=1.0000 | diff=0.6981 | kd=2.0170 | recon=0.1510 | t=28s
+  Ep 004 | step 0200/3737 | loss=0.8969 | diff=0.6938 | kd=1.9782 | recon=0.1015 | t=37s
+  Ep 004 | step 0250/3737 | loss=0.8817 | diff=0.7016 | kd=2.0063 | recon=0.0900 | t=46s
+  Ep 004 | step 0300/3737 | loss=0.8196 | diff=0.6946 | kd=1.9733 | recon=0.0625 | t=56s
+  Ep 004 | step 0350/3737 | loss=0.8596 | diff=0.7043 | kd=1.9889 | recon=0.0776 | t=65s
+  Ep 004 | step 0400/3737 | loss=0.8049 | diff=0.6965 | kd=1.9895 | recon=0.0542 | t=74s
+  Ep 004 | step 0450/3737 | loss=0.8008 | diff=0.7139 | kd=1.9770 | recon=0.0434 | t=83s
+  Ep 004 | step 0500/3737 | loss=0.8106 | diff=0.6990 | kd=1.9760 | recon=0.0558 | t=93s
+  Ep 004 | step 0550/3737 | loss=0.8851 | diff=0.6946 | kd=1.9970 | recon=0.0953 | t=102s
+  Ep 004 | step 0600/3737 | loss=1.0662 | diff=0.6976 | kd=1.9887 | recon=0.1843 | t=111s
+  Ep 004 | step 0650/3737 | loss=0.8232 | diff=0.7037 | kd=1.9957 | recon=0.0598 | t=120s
+  Ep 004 | step 0700/3737 | loss=0.7848 | diff=0.6913 | kd=1.9903 | recon=0.0467 | t=130s
+  Ep 004 | step 0750/3737 | loss=0.8198 | diff=0.6906 | kd=2.0036 | recon=0.0646 | t=139s
+  Ep 004 | step 0800/3737 | loss=0.9845 | diff=0.6994 | kd=2.0158 | recon=0.1426 | t=149s
+  Ep 004 | step 0850/3737 | loss=0.8249 | diff=0.7172 | kd=1.9963 | recon=0.0538 | t=158s
+  Ep 004 | step 0900/3737 | loss=1.0670 | diff=0.7298 | kd=1.9968 | recon=0.1686 | t=167s
+  Ep 004 | step 0950/3737 | loss=0.7824 | diff=0.6877 | kd=2.0003 | recon=0.0473 | t=175s
+  Ep 004 | step 1000/3737 | loss=0.8574 | diff=0.7397 | kd=1.9914 | recon=0.0589 | t=183s
+  Ep 004 | step 1050/3737 | loss=0.8092 | diff=0.6953 | kd=1.9854 | recon=0.0569 | t=192s
+  Ep 004 | step 1100/3737 | loss=0.7982 | diff=0.6942 | kd=1.9845 | recon=0.0520 | t=201s
+  Ep 004 | step 1150/3737 | loss=0.9157 | diff=0.6824 | kd=1.9999 | recon=0.1166 | t=210s
+  Ep 004 | step 1200/3737 | loss=0.8862 | diff=0.6934 | kd=2.0005 | recon=0.0964 | t=220s
+  Ep 004 | step 1250/3737 | loss=0.7891 | diff=0.6904 | kd=1.9824 | recon=0.0493 | t=229s
+  Ep 004 | step 1300/3737 | loss=0.8584 | diff=0.6889 | kd=2.0138 | recon=0.0847 | t=238s
+  Ep 004 | step 1350/3737 | loss=0.8180 | diff=0.6933 | kd=2.0023 | recon=0.0624 | t=247s
+  Ep 004 | step 1400/3737 | loss=0.8017 | diff=0.6872 | kd=1.9893 | recon=0.0572 | t=257s
+  Ep 004 | step 1450/3737 | loss=0.7966 | diff=0.7119 | kd=1.9793 | recon=0.0423 | t=266s
+  Ep 004 | step 1500/3737 | loss=0.8083 | diff=0.6874 | kd=1.9899 | recon=0.0604 | t=275s
+  Ep 004 | step 1550/3737 | loss=0.7914 | diff=0.6993 | kd=1.9873 | recon=0.0460 | t=285s
+  Ep 004 | step 1600/3737 | loss=0.7748 | diff=0.6931 | kd=1.9926 | recon=0.0408 | t=294s
+  Ep 004 | step 1650/3737 | loss=0.7938 | diff=0.6933 | kd=1.9762 | recon=0.0502 | t=303s
+  Ep 004 | step 1700/3737 | loss=0.7782 | diff=0.6838 | kd=1.9866 | recon=0.0472 | t=312s
+  Ep 004 | step 1750/3737 | loss=0.9068 | diff=0.6887 | kd=1.9875 | recon=0.1091 | t=322s
+  Ep 004 | step 1800/3737 | loss=0.8217 | diff=0.6881 | kd=1.9845 | recon=0.0668 | t=331s
+  Ep 004 | step 1850/3737 | loss=0.7782 | diff=0.6842 | kd=1.9838 | recon=0.0470 | t=340s
+  Ep 004 | step 1900/3737 | loss=0.8645 | diff=0.6835 | kd=1.9980 | recon=0.0905 | t=350s
+  Ep 004 | step 1950/3737 | loss=0.8042 | diff=0.6867 | kd=1.9775 | recon=0.0588 | t=359s
+  Ep 004 | step 2000/3737 | loss=0.9933 | diff=0.6913 | kd=1.9993 | recon=0.1510 | t=368s
+  Ep 004 | step 2050/3737 | loss=0.7609 | diff=0.6808 | kd=1.9852 | recon=0.0401 | t=377s
+  Ep 004 | step 2100/3737 | loss=0.9654 | diff=0.8493 | kd=1.9829 | recon=0.0581 | t=387s
+  Ep 004 | step 2150/3737 | loss=0.8394 | diff=0.6859 | kd=1.9911 | recon=0.0768 | t=396s
+  Ep 004 | step 2200/3737 | loss=0.7875 | diff=0.6895 | kd=2.0068 | recon=0.0490 | t=405s
+  Ep 004 | step 2250/3737 | loss=0.9894 | diff=0.7060 | kd=1.9899 | recon=0.1417 | t=415s
+  Ep 004 | step 2300/3737 | loss=0.7963 | diff=0.6939 | kd=2.0077 | recon=0.0512 | t=424s
+  Ep 004 | step 2350/3737 | loss=0.8716 | diff=0.6832 | kd=1.9993 | recon=0.0942 | t=433s
+  Ep 004 | step 2400/3737 | loss=0.9095 | diff=0.6888 | kd=1.9879 | recon=0.1104 | t=443s
+  Ep 004 | step 2450/3737 | loss=0.9662 | diff=0.8420 | kd=1.9806 | recon=0.0621 | t=452s
+  Ep 004 | step 2500/3737 | loss=0.9809 | diff=0.6858 | kd=1.9876 | recon=0.1476 | t=461s
+  Ep 004 | step 2550/3737 | loss=0.8370 | diff=0.6836 | kd=1.9835 | recon=0.0767 | t=471s
+  Ep 004 | step 2600/3737 | loss=0.7978 | diff=0.6982 | kd=1.9818 | recon=0.0498 | t=480s
+  Ep 004 | step 2650/3737 | loss=0.8040 | diff=0.6815 | kd=1.9770 | recon=0.0612 | t=489s
+  Ep 004 | step 2700/3737 | loss=0.7675 | diff=0.6840 | kd=1.9950 | recon=0.0418 | t=499s
+  Ep 004 | step 2750/3737 | loss=1.0848 | diff=0.6876 | kd=1.9836 | recon=0.1986 | t=508s
+  Ep 004 | step 2800/3737 | loss=0.9871 | diff=0.6864 | kd=1.9977 | recon=0.1503 | t=518s
+  Ep 004 | step 2850/3737 | loss=0.8588 | diff=0.6834 | kd=1.9791 | recon=0.0877 | t=527s
+  Ep 004 | step 2900/3737 | loss=0.7895 | diff=0.6852 | kd=1.9851 | recon=0.0521 | t=535s
+  Ep 004 | step 2950/3737 | loss=0.7913 | diff=0.6811 | kd=2.0017 | recon=0.0551 | t=543s
+  Ep 004 | step 3000/3737 | loss=0.7977 | diff=0.6968 | kd=1.9903 | recon=0.0505 | t=551s
+  Ep 004 | step 3050/3737 | loss=0.7920 | diff=0.6972 | kd=1.9933 | recon=0.0474 | t=561s
+  Ep 004 | step 3100/3737 | loss=0.7484 | diff=0.6811 | kd=1.9980 | recon=0.0337 | t=570s
+  Ep 004 | step 3150/3737 | loss=0.8205 | diff=0.6883 | kd=1.9924 | recon=0.0661 | t=579s
+  Ep 004 | step 3200/3737 | loss=0.8322 | diff=0.6978 | kd=1.9834 | recon=0.0672 | t=588s
+  Ep 004 | step 3250/3737 | loss=0.8988 | diff=0.6870 | kd=2.0065 | recon=0.1059 | t=598s
+  Ep 004 | step 3300/3737 | loss=0.9104 | diff=0.7386 | kd=1.9866 | recon=0.0859 | t=607s
+  Ep 004 | step 3350/3737 | loss=0.8038 | diff=0.7544 | kd=1.9855 | recon=0.0247 | t=616s
+  Ep 004 | step 3400/3737 | loss=0.8851 | diff=0.6802 | kd=2.0030 | recon=0.1025 | t=626s
+  Ep 004 | step 3450/3737 | loss=0.8019 | diff=0.6900 | kd=1.9916 | recon=0.0560 | t=635s
+  Ep 004 | step 3500/3737 | loss=0.7606 | diff=0.6765 | kd=2.0015 | recon=0.0420 | t=644s
+  Ep 004 | step 3550/3737 | loss=0.7988 | diff=0.6804 | kd=2.0037 | recon=0.0592 | t=653s
+  Ep 004 | step 3600/3737 | loss=0.7750 | diff=0.6716 | kd=1.9936 | recon=0.0517 | t=663s
+  Ep 004 | step 3650/3737 | loss=0.7916 | diff=0.6786 | kd=1.9786 | recon=0.0565 | t=672s
+  Ep 004 | step 3700/3737 | loss=0.8303 | diff=0.6763 | kd=1.9877 | recon=0.0770 | t=681s
+
+  ── Epoch 004/15 (781s) ──────────────────────
+  Train  loss=0.8475  diff=0.7009  kd=1.9905  recon=0.0733
+  Val    loss=0.8783  RMSE=0.1137  MAE=0.0817  lr=8.36e-05
+  [BEST] Checkpoint saved → checkpoints/best_model.pth
+
+  Ep 005 | step 0000/3737 | loss=0.8326 | diff=0.6886 | kd=1.9999 | recon=0.0720 | t=0s
+  Ep 005 | step 0050/3737 | loss=0.7870 | diff=0.6779 | kd=1.9989 | recon=0.0546 | t=10s
+  Ep 005 | step 0100/3737 | loss=0.8488 | diff=0.6875 | kd=1.9898 | recon=0.0807 | t=19s
+  Ep 005 | step 0150/3737 | loss=0.7653 | diff=0.6809 | kd=2.0026 | recon=0.0422 | t=28s
+  Ep 005 | step 0200/3737 | loss=0.7634 | diff=0.6749 | kd=1.9962 | recon=0.0443 | t=37s
+  Ep 005 | step 0250/3737 | loss=0.7839 | diff=0.6815 | kd=1.9845 | recon=0.0512 | t=47s
+  Ep 005 | step 0300/3737 | loss=0.9168 | diff=0.6745 | kd=1.9980 | recon=0.1212 | t=56s
+  Ep 005 | step 0350/3737 | loss=0.8162 | diff=0.6968 | kd=2.0021 | recon=0.0597 | t=65s
+  Ep 005 | step 0400/3737 | loss=0.7779 | diff=0.6809 | kd=1.9875 | recon=0.0485 | t=75s
+  Ep 005 | step 0450/3737 | loss=0.8319 | diff=0.7499 | kd=1.9820 | recon=0.0410 | t=84s
+  Ep 005 | step 0500/3737 | loss=0.7978 | diff=0.6823 | kd=1.9904 | recon=0.0577 | t=94s
+  Ep 005 | step 0550/3737 | loss=0.8253 | diff=0.7116 | kd=1.9763 | recon=0.0569 | t=103s
+  Ep 005 | step 0600/3737 | loss=0.7854 | diff=0.6776 | kd=1.9977 | recon=0.0539 | t=111s
+  Ep 005 | step 0650/3737 | loss=0.7741 | diff=0.6815 | kd=1.9964 | recon=0.0463 | t=119s
+  Ep 005 | step 0700/3737 | loss=0.8122 | diff=0.6733 | kd=1.9883 | recon=0.0694 | t=127s
+  Ep 005 | step 0750/3737 | loss=0.7839 | diff=0.6724 | kd=1.9996 | recon=0.0557 | t=135s
+  Ep 005 | step 0800/3737 | loss=0.9267 | diff=0.8198 | kd=1.9824 | recon=0.0535 | t=144s
+  Ep 005 | step 0850/3737 | loss=0.8355 | diff=0.6771 | kd=1.9943 | recon=0.0792 | t=153s
+  Ep 005 | step 0900/3737 | loss=0.7662 | diff=0.6689 | kd=1.9765 | recon=0.0487 | t=162s
+  Ep 005 | step 0950/3737 | loss=0.8485 | diff=0.6866 | kd=1.9854 | recon=0.0809 | t=172s
+  Ep 005 | step 1000/3737 | loss=0.8288 | diff=0.6827 | kd=1.9818 | recon=0.0730 | t=181s
+  Ep 005 | step 1050/3737 | loss=0.8673 | diff=0.7491 | kd=1.9746 | recon=0.0591 | t=190s
+  Ep 005 | step 1100/3737 | loss=0.8390 | diff=0.6735 | kd=1.9893 | recon=0.0828 | t=199s
+  Ep 005 | step 1150/3737 | loss=0.8515 | diff=0.6874 | kd=1.9835 | recon=0.0820 | t=209s
+  Ep 005 | step 1200/3737 | loss=0.7703 | diff=0.6798 | kd=1.9893 | recon=0.0452 | t=218s
+  Ep 005 | step 1250/3737 | loss=0.7828 | diff=0.6773 | kd=1.9921 | recon=0.0527 | t=227s
+  Ep 005 | step 1300/3737 | loss=0.7828 | diff=0.6744 | kd=2.0027 | recon=0.0542 | t=237s
+  Ep 005 | step 1350/3737 | loss=0.8128 | diff=0.6758 | kd=2.0009 | recon=0.0685 | t=246s
+  Ep 005 | step 1400/3737 | loss=0.9583 | diff=0.7958 | kd=1.9886 | recon=0.0813 | t=255s
+  Ep 005 | step 1450/3737 | loss=0.8502 | diff=0.6685 | kd=2.0122 | recon=0.0908 | t=264s
+  Ep 005 | step 1500/3737 | loss=0.7521 | diff=0.6698 | kd=1.9840 | recon=0.0412 | t=274s
+  Ep 005 | step 1550/3737 | loss=0.7967 | diff=0.6751 | kd=1.9909 | recon=0.0608 | t=283s
+  Ep 005 | step 1600/3737 | loss=0.7689 | diff=0.6860 | kd=1.9801 | recon=0.0415 | t=292s
+  Ep 005 | step 1650/3737 | loss=0.8480 | diff=0.6763 | kd=2.0029 | recon=0.0859 | t=302s
+  Ep 005 | step 1700/3737 | loss=0.8076 | diff=0.6965 | kd=1.9903 | recon=0.0555 | t=311s
+  Ep 005 | step 1750/3737 | loss=0.8537 | diff=0.6771 | kd=1.9889 | recon=0.0883 | t=320s
+  Ep 005 | step 1800/3737 | loss=0.8172 | diff=0.6770 | kd=1.9784 | recon=0.0701 | t=329s
+  Ep 005 | step 1850/3737 | loss=0.8319 | diff=0.6700 | kd=1.9884 | recon=0.0810 | t=339s
+  Ep 005 | step 1900/3737 | loss=0.8970 | diff=0.7012 | kd=1.9897 | recon=0.0979 | t=348s
+  Ep 005 | step 1950/3737 | loss=0.7945 | diff=0.6900 | kd=1.9734 | recon=0.0522 | t=357s
+  Ep 005 | step 2000/3737 | loss=0.7890 | diff=0.6828 | kd=1.9882 | recon=0.0531 | t=366s
+  Ep 005 | step 2050/3737 | loss=0.8105 | diff=0.6716 | kd=1.9865 | recon=0.0695 | t=376s
+  Ep 005 | step 2100/3737 | loss=0.9039 | diff=0.6720 | kd=1.9834 | recon=0.1160 | t=385s
+  Ep 005 | step 2150/3737 | loss=0.7807 | diff=0.6771 | kd=1.9867 | recon=0.0518 | t=394s
+  Ep 005 | step 2200/3737 | loss=0.8008 | diff=0.6675 | kd=1.9959 | recon=0.0666 | t=403s
+  Ep 005 | step 2250/3737 | loss=0.7847 | diff=0.6908 | kd=1.9854 | recon=0.0470 | t=413s
+  Ep 005 | step 2300/3737 | loss=0.7488 | diff=0.6746 | kd=2.0026 | recon=0.0371 | t=422s
+  Ep 005 | step 2350/3737 | loss=0.7945 | diff=0.6746 | kd=1.9907 | recon=0.0600 | t=431s
+  Ep 005 | step 2400/3737 | loss=0.9376 | diff=0.6708 | kd=2.0023 | recon=0.1334 | t=440s
+  Ep 005 | step 2450/3737 | loss=1.0068 | diff=0.6812 | kd=2.0002 | recon=0.1628 | t=450s
+  Ep 005 | step 2500/3737 | loss=0.7816 | diff=0.6719 | kd=2.0168 | recon=0.0548 | t=459s
+  Ep 005 | step 2550/3737 | loss=0.7842 | diff=0.6944 | kd=1.9873 | recon=0.0449 | t=469s
+  Ep 005 | step 2600/3737 | loss=0.7878 | diff=0.6781 | kd=1.9729 | recon=0.0549 | t=478s
+  Ep 005 | step 2650/3737 | loss=0.7409 | diff=0.6745 | kd=1.9839 | recon=0.0332 | t=487s
+  Ep 005 | step 2700/3737 | loss=0.8873 | diff=0.7019 | kd=1.9893 | recon=0.0927 | t=495s
+  Ep 005 | step 2750/3737 | loss=0.7683 | diff=0.6616 | kd=1.9831 | recon=0.0534 | t=503s
+  Ep 005 | step 2800/3737 | loss=0.7800 | diff=0.6743 | kd=1.9830 | recon=0.0528 | t=512s
+  Ep 005 | step 2850/3737 | loss=0.9658 | diff=0.6798 | kd=1.9876 | recon=0.1430 | t=521s
+  Ep 005 | step 2900/3737 | loss=0.8067 | diff=0.6729 | kd=1.9790 | recon=0.0669 | t=530s
+  Ep 005 | step 2950/3737 | loss=0.9229 | diff=0.7739 | kd=1.9882 | recon=0.0745 | t=539s
+  Ep 005 | step 3000/3737 | loss=0.8929 | diff=0.7004 | kd=1.9876 | recon=0.0962 | t=549s
+  Ep 005 | step 3050/3737 | loss=1.1712 | diff=0.6672 | kd=1.9825 | recon=0.2520 | t=558s
+  Ep 005 | step 3100/3737 | loss=0.7628 | diff=0.6680 | kd=2.0033 | recon=0.0474 | t=567s
+  Ep 005 | step 3150/3737 | loss=0.8228 | diff=0.6734 | kd=1.9943 | recon=0.0747 | t=577s
+  Ep 005 | step 3200/3737 | loss=0.7396 | diff=0.6724 | kd=1.9984 | recon=0.0336 | t=586s
+  Ep 005 | step 3250/3737 | loss=0.8441 | diff=0.6664 | kd=1.9969 | recon=0.0889 | t=595s
+  Ep 005 | step 3300/3737 | loss=0.7398 | diff=0.6691 | kd=1.9807 | recon=0.0353 | t=605s
+  Ep 005 | step 3350/3737 | loss=0.8023 | diff=0.6727 | kd=1.9971 | recon=0.0648 | t=614s
+  Ep 005 | step 3400/3737 | loss=0.7826 | diff=0.6666 | kd=1.9848 | recon=0.0580 | t=623s
+  Ep 005 | step 3450/3737 | loss=0.8530 | diff=0.6690 | kd=1.9930 | recon=0.0920 | t=632s
+  Ep 005 | step 3500/3737 | loss=1.1259 | diff=0.7602 | kd=1.9821 | recon=0.1829 | t=642s
+  Ep 005 | step 3550/3737 | loss=0.7600 | diff=0.6707 | kd=1.9968 | recon=0.0447 | t=651s
+  Ep 005 | step 3600/3737 | loss=0.7842 | diff=0.6867 | kd=1.9790 | recon=0.0488 | t=660s
+  Ep 005 | step 3650/3737 | loss=0.7563 | diff=0.6735 | kd=1.9955 | recon=0.0414 | t=670s
+  Ep 005 | step 3700/3737 | loss=0.8763 | diff=0.6724 | kd=1.9762 | recon=0.1019 | t=679s
+
+  ── Epoch 005/15 (778s) ──────────────────────
+  Train  loss=0.8180  diff=0.6860  kd=1.9906  recon=0.0660
+  Val    loss=1.0308  RMSE=0.2303  MAE=0.1728  lr=7.52e-05
+  [EP5] Checkpoint saved → checkpoints/epoch_005.pth
+
+  Ep 006 | step 0000/3737 | loss=0.8763 | diff=0.6665 | kd=1.9853 | recon=0.1049 | t=0s
+  Ep 006 | step 0050/3737 | loss=0.8072 | diff=0.6724 | kd=1.9805 | recon=0.0674 | t=10s
+  Ep 006 | step 0100/3737 | loss=0.7533 | diff=0.6632 | kd=1.9939 | recon=0.0451 | t=19s
+  Ep 006 | step 0150/3737 | loss=0.7916 | diff=0.6791 | kd=1.9974 | recon=0.0563 | t=28s
+  Ep 006 | step 0200/3737 | loss=0.7589 | diff=0.6784 | kd=1.9792 | recon=0.0403 | t=37s
+  Ep 006 | step 0250/3737 | loss=0.7988 | diff=0.6727 | kd=1.9913 | recon=0.0631 | t=47s
+  Ep 006 | step 0300/3737 | loss=0.7622 | diff=0.6761 | kd=1.9857 | recon=0.0430 | t=56s
+  Ep 006 | step 0350/3737 | loss=0.8439 | diff=0.6664 | kd=1.9925 | recon=0.0888 | t=65s
+  Ep 006 | step 0400/3737 | loss=0.7147 | diff=0.6649 | kd=1.9924 | recon=0.0249 | t=73s
+  Ep 006 | step 0450/3737 | loss=0.7765 | diff=0.6731 | kd=2.0003 | recon=0.0517 | t=81s
+  Ep 006 | step 0500/3737 | loss=0.8254 | diff=0.6658 | kd=2.0076 | recon=0.0798 | t=90s
+  Ep 006 | step 0550/3737 | loss=0.9736 | diff=0.8838 | kd=2.0085 | recon=0.0449 | t=99s
+  Ep 006 | step 0600/3737 | loss=0.8172 | diff=0.6652 | kd=1.9874 | recon=0.0760 | t=108s
+  Ep 006 | step 0650/3737 | loss=0.8356 | diff=0.6655 | kd=2.0061 | recon=0.0850 | t=118s
+  Ep 006 | step 0700/3737 | loss=0.7753 | diff=0.6698 | kd=1.9947 | recon=0.0528 | t=127s
+  Ep 006 | step 0750/3737 | loss=0.7747 | diff=0.6671 | kd=1.9894 | recon=0.0538 | t=136s
+  Ep 006 | step 0800/3737 | loss=0.7594 | diff=0.6671 | kd=1.9915 | recon=0.0462 | t=145s
+  Ep 006 | step 0850/3737 | loss=0.7843 | diff=0.6907 | kd=1.9879 | recon=0.0468 | t=155s
+  Ep 006 | step 0900/3737 | loss=0.7399 | diff=0.6641 | kd=1.9766 | recon=0.0379 | t=164s
+  Ep 006 | step 0950/3737 | loss=0.7666 | diff=0.6703 | kd=2.0019 | recon=0.0482 | t=173s
+  Ep 006 | step 1000/3737 | loss=0.8288 | diff=0.6684 | kd=1.9867 | recon=0.0802 | t=183s
+  Ep 006 | step 1050/3737 | loss=0.7506 | diff=0.6650 | kd=1.9782 | recon=0.0428 | t=192s
+  Ep 006 | step 1100/3737 | loss=1.1277 | diff=0.6571 | kd=1.9949 | recon=0.2353 | t=201s
+  Ep 006 | step 1150/3737 | loss=0.9225 | diff=0.6658 | kd=1.9927 | recon=0.1283 | t=211s
+  Ep 006 | step 1200/3737 | loss=0.8011 | diff=0.6715 | kd=1.9825 | recon=0.0648 | t=220s
+  Ep 006 | step 1250/3737 | loss=0.7625 | diff=0.6868 | kd=1.9827 | recon=0.0379 | t=229s
+  Ep 006 | step 1300/3737 | loss=0.9347 | diff=0.6640 | kd=1.9872 | recon=0.1353 | t=239s
+  Ep 006 | step 1350/3737 | loss=0.7474 | diff=0.6603 | kd=1.9891 | recon=0.0435 | t=248s
+  Ep 006 | step 1400/3737 | loss=0.7669 | diff=0.6618 | kd=1.9994 | recon=0.0525 | t=257s
+  Ep 006 | step 1450/3737 | loss=0.9333 | diff=0.6621 | kd=1.9887 | recon=0.1356 | t=267s
+  Ep 006 | step 1500/3737 | loss=0.7457 | diff=0.6592 | kd=1.9975 | recon=0.0433 | t=276s
+  Ep 006 | step 1550/3737 | loss=0.7879 | diff=0.6634 | kd=1.9851 | recon=0.0622 | t=285s
+  Ep 006 | step 1600/3737 | loss=0.7476 | diff=0.6674 | kd=1.9907 | recon=0.0401 | t=295s
+  Ep 006 | step 1650/3737 | loss=0.7469 | diff=0.6679 | kd=1.9806 | recon=0.0395 | t=304s
+  Ep 006 | step 1700/3737 | loss=0.8553 | diff=0.6663 | kd=1.9898 | recon=0.0945 | t=313s
+  Ep 006 | step 1750/3737 | loss=0.7831 | diff=0.6670 | kd=2.0173 | recon=0.0581 | t=323s
+  Ep 006 | step 1800/3737 | loss=0.7283 | diff=0.6600 | kd=1.9866 | recon=0.0341 | t=332s
+  Ep 006 | step 1850/3737 | loss=0.8232 | diff=0.6609 | kd=1.9858 | recon=0.0812 | t=341s
+  Ep 006 | step 1900/3737 | loss=0.8151 | diff=0.6607 | kd=1.9841 | recon=0.0772 | t=351s
+  Ep 006 | step 1950/3737 | loss=0.7707 | diff=0.6697 | kd=1.9934 | recon=0.0505 | t=360s
+  Ep 006 | step 2000/3737 | loss=0.8040 | diff=0.6596 | kd=1.9975 | recon=0.0722 | t=369s
+  Ep 006 | step 2050/3737 | loss=0.7559 | diff=0.6702 | kd=2.0090 | recon=0.0429 | t=378s
+  Ep 006 | step 2100/3737 | loss=0.7914 | diff=0.6619 | kd=1.9835 | recon=0.0647 | t=388s
+  Ep 006 | step 2150/3737 | loss=0.7797 | diff=0.6574 | kd=1.9836 | recon=0.0612 | t=397s
+  Ep 006 | step 2200/3737 | loss=0.7581 | diff=0.6772 | kd=1.9879 | recon=0.0405 | t=406s
+  Ep 006 | step 2250/3737 | loss=0.8971 | diff=0.6618 | kd=1.9840 | recon=0.1176 | t=416s
+  Ep 006 | step 2300/3737 | loss=0.7543 | diff=0.6606 | kd=1.9793 | recon=0.0468 | t=425s
+  Ep 006 | step 2350/3737 | loss=0.8329 | diff=0.6664 | kd=2.0017 | recon=0.0833 | t=433s
+  Ep 006 | step 2400/3737 | loss=0.7532 | diff=0.6673 | kd=1.9871 | recon=0.0430 | t=441s
+  Ep 006 | step 2450/3737 | loss=0.7570 | diff=0.6727 | kd=1.9912 | recon=0.0421 | t=450s
+  Ep 006 | step 2500/3737 | loss=0.8679 | diff=0.6586 | kd=1.9774 | recon=0.1047 | t=459s
+  Ep 006 | step 2550/3737 | loss=0.8240 | diff=0.6629 | kd=1.9954 | recon=0.0805 | t=468s
+  Ep 006 | step 2600/3737 | loss=0.7366 | diff=0.6639 | kd=1.9898 | recon=0.0364 | t=477s
+  Ep 006 | step 2650/3737 | loss=0.7992 | diff=0.6572 | kd=1.9964 | recon=0.0710 | t=487s
+  Ep 006 | step 2700/3737 | loss=0.7605 | diff=0.6580 | kd=1.9896 | recon=0.0512 | t=496s
+  Ep 006 | step 2750/3737 | loss=0.8260 | diff=0.6645 | kd=1.9847 | recon=0.0808 | t=505s
+  Ep 006 | step 2800/3737 | loss=0.7635 | diff=0.6574 | kd=1.9996 | recon=0.0530 | t=514s
+  Ep 006 | step 2850/3737 | loss=0.7804 | diff=0.6582 | kd=1.9784 | recon=0.0611 | t=524s
+  Ep 006 | step 2900/3737 | loss=0.7881 | diff=0.6615 | kd=2.0016 | recon=0.0633 | t=533s
+  Ep 006 | step 2950/3737 | loss=0.7656 | diff=0.6616 | kd=1.9734 | recon=0.0520 | t=542s
+  Ep 006 | step 3000/3737 | loss=0.7530 | diff=0.6602 | kd=1.9720 | recon=0.0464 | t=551s
+  Ep 006 | step 3050/3737 | loss=0.7637 | diff=0.6636 | kd=1.9970 | recon=0.0501 | t=561s
+  Ep 006 | step 3100/3737 | loss=0.7962 | diff=0.7104 | kd=2.0055 | recon=0.0429 | t=570s
+  Ep 006 | step 3150/3737 | loss=0.7587 | diff=0.6759 | kd=1.9845 | recon=0.0414 | t=579s
+  Ep 006 | step 3200/3737 | loss=0.7436 | diff=0.6570 | kd=1.9826 | recon=0.0433 | t=588s
+  Ep 006 | step 3250/3737 | loss=0.7312 | diff=0.6606 | kd=1.9849 | recon=0.0353 | t=598s
+  Ep 006 | step 3300/3737 | loss=0.8101 | diff=0.6587 | kd=1.9906 | recon=0.0757 | t=607s
+  Ep 006 | step 3350/3737 | loss=0.7554 | diff=0.6625 | kd=1.9963 | recon=0.0464 | t=616s
+  Ep 006 | step 3400/3737 | loss=0.8040 | diff=0.6566 | kd=1.9908 | recon=0.0737 | t=626s
+  Ep 006 | step 3450/3737 | loss=0.7345 | diff=0.6570 | kd=1.9844 | recon=0.0387 | t=635s
+  Ep 006 | step 3500/3737 | loss=0.8195 | diff=0.6740 | kd=1.9902 | recon=0.0728 | t=644s
+  Ep 006 | step 3550/3737 | loss=0.7494 | diff=0.6568 | kd=2.0163 | recon=0.0463 | t=653s
+  Ep 006 | step 3600/3737 | loss=0.8413 | diff=0.6628 | kd=1.9868 | recon=0.0892 | t=663s
+  Ep 006 | step 3650/3737 | loss=0.7583 | diff=0.6593 | kd=1.9987 | recon=0.0495 | t=672s
+  Ep 006 | step 3700/3737 | loss=0.7509 | diff=0.6625 | kd=1.9863 | recon=0.0442 | t=681s
+
+  ── Epoch 006/15 (781s) ──────────────────────
+  Train  loss=0.7948  diff=0.6727  kd=1.9915  recon=0.0611
+  Val    loss=0.9104  RMSE=0.1250  MAE=0.0901  lr=6.58e-05
+
+  Ep 007 | step 0000/3737 | loss=0.7482 | diff=0.6695 | kd=1.9898 | recon=0.0393 | t=0s
+  Ep 007 | step 0050/3737 | loss=0.7546 | diff=0.6592 | kd=2.0039 | recon=0.0477 | t=9s
+  Ep 007 | step 0100/3737 | loss=0.7838 | diff=0.6614 | kd=1.9892 | recon=0.0612 | t=17s
+  Ep 007 | step 0150/3737 | loss=0.7940 | diff=0.7337 | kd=1.9923 | recon=0.0302 | t=25s
+  Ep 007 | step 0200/3737 | loss=0.7354 | diff=0.6572 | kd=1.9994 | recon=0.0391 | t=34s
+  Ep 007 | step 0250/3737 | loss=0.7509 | diff=0.6788 | kd=1.9814 | recon=0.0360 | t=43s
+  Ep 007 | step 0300/3737 | loss=0.7612 | diff=0.6592 | kd=1.9939 | recon=0.0510 | t=53s
+  Ep 007 | step 0350/3737 | loss=0.7876 | diff=0.6581 | kd=1.9885 | recon=0.0648 | t=62s
+  Ep 007 | step 0400/3737 | loss=0.8775 | diff=0.7633 | kd=2.0066 | recon=0.0571 | t=71s
+  Ep 007 | step 0450/3737 | loss=0.7349 | diff=0.6614 | kd=1.9892 | recon=0.0367 | t=80s
+  Ep 007 | step 0500/3737 | loss=0.7195 | diff=0.6489 | kd=1.9860 | recon=0.0353 | t=90s
+  Ep 007 | step 0550/3737 | loss=0.7273 | diff=0.6618 | kd=1.9782 | recon=0.0327 | t=99s
+  Ep 007 | step 0600/3737 | loss=0.7918 | diff=0.6570 | kd=1.9806 | recon=0.0674 | t=108s
+  Ep 007 | step 0650/3737 | loss=0.7847 | diff=0.6560 | kd=1.9944 | recon=0.0644 | t=118s
+  Ep 007 | step 0700/3737 | loss=0.7463 | diff=0.6576 | kd=1.9912 | recon=0.0444 | t=127s
+  Ep 007 | step 0750/3737 | loss=0.7710 | diff=0.6562 | kd=1.9736 | recon=0.0574 | t=136s
+  Ep 007 | step 0800/3737 | loss=0.7702 | diff=0.6568 | kd=1.9795 | recon=0.0567 | t=145s
+  Ep 007 | step 0850/3737 | loss=0.8869 | diff=0.6689 | kd=1.9921 | recon=0.1090 | t=155s
+  Ep 007 | step 0900/3737 | loss=0.7536 | diff=0.6579 | kd=1.9902 | recon=0.0478 | t=164s
+  Ep 007 | step 0950/3737 | loss=0.7594 | diff=0.6573 | kd=2.0047 | recon=0.0510 | t=173s
+  Ep 007 | step 1000/3737 | loss=0.7158 | diff=0.6490 | kd=1.9767 | recon=0.0334 | t=183s
+  Ep 007 | step 1050/3737 | loss=0.7435 | diff=0.6518 | kd=1.9954 | recon=0.0459 | t=192s
+  Ep 007 | step 1100/3737 | loss=0.7513 | diff=0.6537 | kd=2.0072 | recon=0.0488 | t=201s
+  Ep 007 | step 1150/3737 | loss=0.8198 | diff=0.6547 | kd=1.9913 | recon=0.0826 | t=210s
+  Ep 007 | step 1200/3737 | loss=0.7541 | diff=0.6607 | kd=2.0003 | recon=0.0467 | t=220s
+  Ep 007 | step 1250/3737 | loss=0.7394 | diff=0.6569 | kd=1.9885 | recon=0.0413 | t=229s
+  Ep 007 | step 1300/3737 | loss=0.7868 | diff=0.6623 | kd=1.9797 | recon=0.0622 | t=238s
+  Ep 007 | step 1350/3737 | loss=0.7956 | diff=0.6639 | kd=1.9904 | recon=0.0658 | t=248s
+  Ep 007 | step 1400/3737 | loss=0.7253 | diff=0.6593 | kd=1.9794 | recon=0.0330 | t=257s
+  Ep 007 | step 1450/3737 | loss=0.8135 | diff=0.6603 | kd=1.9841 | recon=0.0766 | t=266s
+  Ep 007 | step 1500/3737 | loss=0.7480 | diff=0.6576 | kd=1.9850 | recon=0.0452 | t=275s
+  Ep 007 | step 1550/3737 | loss=0.7349 | diff=0.6529 | kd=1.9931 | recon=0.0410 | t=285s
+  Ep 007 | step 1600/3737 | loss=0.7337 | diff=0.6531 | kd=1.9808 | recon=0.0403 | t=294s
+  Ep 007 | step 1650/3737 | loss=0.7654 | diff=0.6955 | kd=1.9862 | recon=0.0350 | t=303s
+  Ep 007 | step 1700/3737 | loss=0.7412 | diff=0.6670 | kd=1.9801 | recon=0.0371 | t=313s
+  Ep 007 | step 1750/3737 | loss=0.7492 | diff=0.6540 | kd=1.9978 | recon=0.0476 | t=322s
+  Ep 007 | step 1800/3737 | loss=0.7314 | diff=0.6538 | kd=1.9845 | recon=0.0388 | t=331s
+  Ep 007 | step 1850/3737 | loss=0.7661 | diff=0.6966 | kd=1.9831 | recon=0.0347 | t=340s
+  Ep 007 | step 1900/3737 | loss=0.7554 | diff=0.6573 | kd=1.9834 | recon=0.0490 | t=350s
+  Ep 007 | step 1950/3737 | loss=0.8868 | diff=0.6716 | kd=1.9956 | recon=0.1076 | t=359s
+  Ep 007 | step 2000/3737 | loss=0.7283 | diff=0.6578 | kd=1.9967 | recon=0.0353 | t=369s
+  Ep 007 | step 2050/3737 | loss=0.8196 | diff=0.6711 | kd=1.9767 | recon=0.0742 | t=376s
+  Ep 007 | step 2100/3737 | loss=0.7302 | diff=0.6531 | kd=1.9897 | recon=0.0386 | t=384s
+  Ep 007 | step 2150/3737 | loss=0.9150 | diff=0.8304 | kd=1.9888 | recon=0.0423 | t=393s
+  Ep 007 | step 2200/3737 | loss=0.7457 | diff=0.6590 | kd=2.0039 | recon=0.0433 | t=402s
+  Ep 007 | step 2250/3737 | loss=0.7580 | diff=0.6604 | kd=1.9797 | recon=0.0488 | t=411s
+  Ep 007 | step 2300/3737 | loss=0.7263 | diff=0.6486 | kd=1.9980 | recon=0.0389 | t=421s
+  Ep 007 | step 2350/3737 | loss=0.7230 | diff=0.6487 | kd=1.9915 | recon=0.0371 | t=430s
+  Ep 007 | step 2400/3737 | loss=0.7608 | diff=0.6493 | kd=1.9753 | recon=0.0557 | t=439s
+  Ep 007 | step 2450/3737 | loss=0.8268 | diff=0.6953 | kd=1.9946 | recon=0.0658 | t=449s
+  Ep 007 | step 2500/3737 | loss=0.7998 | diff=0.6567 | kd=2.0013 | recon=0.0716 | t=458s
+  Ep 007 | step 2550/3737 | loss=0.7643 | diff=0.6479 | kd=1.9977 | recon=0.0582 | t=467s
+  Ep 007 | step 2600/3737 | loss=0.7543 | diff=0.6606 | kd=1.9792 | recon=0.0468 | t=476s
+  Ep 007 | step 2650/3737 | loss=0.7673 | diff=0.6483 | kd=1.9826 | recon=0.0595 | t=486s
+  Ep 007 | step 2700/3737 | loss=0.9659 | diff=0.6506 | kd=1.9948 | recon=0.1577 | t=495s
+  Ep 007 | step 2750/3737 | loss=0.7531 | diff=0.6699 | kd=1.9827 | recon=0.0416 | t=504s
+  Ep 007 | step 2800/3737 | loss=0.7686 | diff=0.6568 | kd=1.9857 | recon=0.0559 | t=514s
+  Ep 007 | step 2850/3737 | loss=0.8589 | diff=0.7171 | kd=1.9775 | recon=0.0709 | t=523s
+  Ep 007 | step 2900/3737 | loss=0.7133 | diff=0.6499 | kd=1.9783 | recon=0.0317 | t=532s
+  Ep 007 | step 2950/3737 | loss=0.9960 | diff=0.6535 | kd=1.9961 | recon=0.1713 | t=541s
+  Ep 007 | step 3000/3737 | loss=0.8277 | diff=0.6523 | kd=1.9964 | recon=0.0877 | t=551s
+  Ep 007 | step 3050/3737 | loss=0.7874 | diff=0.7110 | kd=1.9972 | recon=0.0382 | t=560s
+  Ep 007 | step 3100/3737 | loss=0.7396 | diff=0.6499 | kd=1.9920 | recon=0.0449 | t=569s
+  Ep 007 | step 3150/3737 | loss=0.7577 | diff=0.6621 | kd=1.9996 | recon=0.0478 | t=579s
+  Ep 007 | step 3200/3737 | loss=0.7527 | diff=0.6676 | kd=1.9950 | recon=0.0425 | t=588s
+  Ep 007 | step 3250/3737 | loss=0.7712 | diff=0.6547 | kd=1.9861 | recon=0.0582 | t=597s
+  Ep 007 | step 3300/3737 | loss=0.7808 | diff=0.6605 | kd=1.9933 | recon=0.0601 | t=606s
+  Ep 007 | step 3350/3737 | loss=0.7039 | diff=0.6433 | kd=1.9866 | recon=0.0303 | t=616s
+  Ep 007 | step 3400/3737 | loss=0.9024 | diff=0.6558 | kd=2.0004 | recon=0.1233 | t=625s
+  Ep 007 | step 3450/3737 | loss=0.8995 | diff=0.6527 | kd=1.9967 | recon=0.1234 | t=634s
+  Ep 007 | step 3500/3737 | loss=0.7377 | diff=0.6535 | kd=1.9981 | recon=0.0421 | t=643s
+  Ep 007 | step 3550/3737 | loss=0.7138 | diff=0.6437 | kd=1.9925 | recon=0.0351 | t=653s
+  Ep 007 | step 3600/3737 | loss=0.7637 | diff=0.6762 | kd=2.0021 | recon=0.0438 | t=662s
+  Ep 007 | step 3650/3737 | loss=0.7291 | diff=0.6464 | kd=1.9918 | recon=0.0414 | t=671s
+  Ep 007 | step 3700/3737 | loss=0.7506 | diff=0.6552 | kd=1.9843 | recon=0.0477 | t=681s
+
+  ── Epoch 007/15 (774s) ──────────────────────
+  Train  loss=0.7794  diff=0.6647  kd=1.9916  recon=0.0573
+  Val    loss=0.8740  RMSE=0.1138  MAE=0.0845  lr=5.57e-05
+
+  Ep 008 | step 0000/3737 | loss=0.9828 | diff=0.6564 | kd=1.9807 | recon=0.1632 | t=0s
+  Ep 008 | step 0050/3737 | loss=0.7206 | diff=0.6544 | kd=1.9898 | recon=0.0331 | t=8s
+  Ep 008 | step 0100/3737 | loss=0.7834 | diff=0.6525 | kd=1.9893 | recon=0.0654 | t=16s
+  Ep 008 | step 0150/3737 | loss=0.7356 | diff=0.6476 | kd=1.9994 | recon=0.0440 | t=25s
+  Ep 008 | step 0200/3737 | loss=0.7660 | diff=0.6525 | kd=1.9811 | recon=0.0568 | t=33s
+  Ep 008 | step 0250/3737 | loss=0.7317 | diff=0.6501 | kd=1.9937 | recon=0.0408 | t=41s
+  Ep 008 | step 0300/3737 | loss=0.7227 | diff=0.6514 | kd=1.9763 | recon=0.0356 | t=49s
+  Ep 008 | step 0350/3737 | loss=0.7833 | diff=0.6501 | kd=2.0023 | recon=0.0666 | t=57s
+  Ep 008 | step 0400/3737 | loss=0.7242 | diff=0.6543 | kd=1.9910 | recon=0.0350 | t=65s
+  Ep 008 | step 0450/3737 | loss=0.8676 | diff=0.6527 | kd=1.9820 | recon=0.1075 | t=73s
+  Ep 008 | step 0500/3737 | loss=0.7563 | diff=0.6564 | kd=1.9779 | recon=0.0499 | t=81s
+  Ep 008 | step 0550/3737 | loss=0.7809 | diff=0.6485 | kd=1.9882 | recon=0.0662 | t=89s
+  Ep 008 | step 0600/3737 | loss=0.7174 | diff=0.6486 | kd=1.9932 | recon=0.0344 | t=97s
+  Ep 008 | step 0650/3737 | loss=0.7551 | diff=0.6520 | kd=1.9974 | recon=0.0516 | t=105s
+  Ep 008 | step 0700/3737 | loss=0.7486 | diff=0.6517 | kd=1.9786 | recon=0.0485 | t=113s
+  Ep 008 | step 0750/3737 | loss=0.7441 | diff=0.6498 | kd=2.0033 | recon=0.0471 | t=121s
+  Ep 008 | step 0800/3737 | loss=0.7595 | diff=0.6479 | kd=2.0021 | recon=0.0558 | t=129s
+  Ep 008 | step 0850/3737 | loss=0.7733 | diff=0.6476 | kd=1.9977 | recon=0.0629 | t=138s
+  Ep 008 | step 0900/3737 | loss=0.7248 | diff=0.6515 | kd=1.9878 | recon=0.0366 | t=146s
+  Ep 008 | step 0950/3737 | loss=0.7801 | diff=0.6485 | kd=2.0021 | recon=0.0658 | t=154s
+  Ep 008 | step 1000/3737 | loss=0.7159 | diff=0.6552 | kd=1.9794 | recon=0.0304 | t=162s
+  Ep 008 | step 1050/3737 | loss=0.7384 | diff=0.6543 | kd=1.9809 | recon=0.0420 | t=170s
+  Ep 008 | step 1100/3737 | loss=0.7663 | diff=0.6469 | kd=1.9812 | recon=0.0597 | t=178s
+  Ep 008 | step 1150/3737 | loss=0.7268 | diff=0.6565 | kd=1.9779 | recon=0.0352 | t=185s
+  Ep 008 | step 1200/3737 | loss=0.7611 | diff=0.6498 | kd=2.0011 | recon=0.0556 | t=193s
+  Ep 008 | step 1250/3737 | loss=0.7633 | diff=0.6429 | kd=1.9917 | recon=0.0602 | t=202s
+  Ep 008 | step 1300/3737 | loss=0.7613 | diff=0.6529 | kd=1.9963 | recon=0.0542 | t=210s
+  Ep 008 | step 1350/3737 | loss=0.7969 | diff=0.6588 | kd=1.9974 | recon=0.0690 | t=218s
+  Ep 008 | step 1400/3737 | loss=0.7996 | diff=0.6629 | kd=2.0045 | recon=0.0683 | t=226s
+  Ep 008 | step 1450/3737 | loss=0.7141 | diff=0.6513 | kd=1.9866 | recon=0.0314 | t=234s
+  Ep 008 | step 1500/3737 | loss=0.7248 | diff=0.6434 | kd=1.9862 | recon=0.0407 | t=242s
+  Ep 008 | step 1550/3737 | loss=0.8055 | diff=0.6882 | kd=1.9997 | recon=0.0586 | t=250s
+  Ep 008 | step 1600/3737 | loss=0.7613 | diff=0.6460 | kd=1.9886 | recon=0.0577 | t=258s
+  Ep 008 | step 1650/3737 | loss=0.7405 | diff=0.6474 | kd=2.0037 | recon=0.0465 | t=266s
+  Ep 008 | step 1700/3737 | loss=0.8011 | diff=0.6465 | kd=2.0123 | recon=0.0773 | t=274s
+  Ep 008 | step 1750/3737 | loss=0.7491 | diff=0.6444 | kd=1.9862 | recon=0.0523 | t=282s
+  Ep 008 | step 1800/3737 | loss=0.7508 | diff=0.6464 | kd=1.9832 | recon=0.0522 | t=290s
+  Ep 008 | step 1850/3737 | loss=0.7860 | diff=0.6499 | kd=1.9960 | recon=0.0681 | t=298s
+  Ep 008 | step 1900/3737 | loss=0.7249 | diff=0.6512 | kd=1.9917 | recon=0.0369 | t=306s
+  Ep 008 | step 1950/3737 | loss=0.7356 | diff=0.6474 | kd=1.9840 | recon=0.0441 | t=314s
+  Ep 008 | step 2000/3737 | loss=0.8500 | diff=0.6498 | kd=2.0109 | recon=0.1001 | t=322s
+  Ep 008 | step 2050/3737 | loss=0.7369 | diff=0.6517 | kd=2.0102 | recon=0.0426 | t=330s
+  Ep 008 | step 2100/3737 | loss=0.7174 | diff=0.6525 | kd=1.9879 | recon=0.0325 | t=338s
+  Ep 008 | step 2150/3737 | loss=0.7195 | diff=0.6513 | kd=1.9845 | recon=0.0341 | t=346s
+  Ep 008 | step 2200/3737 | loss=0.7064 | diff=0.6504 | kd=1.9845 | recon=0.0280 | t=354s
+  Ep 008 | step 2250/3737 | loss=0.7094 | diff=0.6489 | kd=1.9788 | recon=0.0302 | t=363s
+  Ep 008 | step 2300/3737 | loss=0.7692 | diff=0.6510 | kd=1.9899 | recon=0.0591 | t=370s
+  Ep 008 | step 2350/3737 | loss=0.7473 | diff=0.6504 | kd=1.9999 | recon=0.0485 | t=378s
+  Ep 008 | step 2400/3737 | loss=0.7611 | diff=0.6474 | kd=1.9966 | recon=0.0569 | t=386s
+  Ep 008 | step 2450/3737 | loss=0.8009 | diff=0.6595 | kd=1.9914 | recon=0.0707 | t=394s
+  Ep 008 | step 2500/3737 | loss=0.7769 | diff=0.6563 | kd=2.0100 | recon=0.0603 | t=402s
+  Ep 008 | step 2550/3737 | loss=0.7153 | diff=0.6432 | kd=1.9884 | recon=0.0360 | t=410s
+  Ep 008 | step 2600/3737 | loss=0.7215 | diff=0.6479 | kd=1.9919 | recon=0.0368 | t=418s
+  Ep 008 | step 2650/3737 | loss=0.7613 | diff=0.6570 | kd=1.9959 | recon=0.0522 | t=425s
+  Ep 008 | step 2700/3737 | loss=0.7665 | diff=0.6457 | kd=1.9939 | recon=0.0604 | t=433s
+  Ep 008 | step 2750/3737 | loss=0.7768 | diff=0.7024 | kd=1.9937 | recon=0.0372 | t=441s
+  Ep 008 | step 2800/3737 | loss=0.6957 | diff=0.6460 | kd=1.9875 | recon=0.0249 | t=449s
+  Ep 008 | step 2850/3737 | loss=0.7187 | diff=0.6534 | kd=1.9863 | recon=0.0327 | t=457s
+  Ep 008 | step 2900/3737 | loss=0.7384 | diff=0.6468 | kd=1.9984 | recon=0.0458 | t=464s
+  Ep 008 | step 2950/3737 | loss=0.7327 | diff=0.6448 | kd=2.0053 | recon=0.0439 | t=472s
+  Ep 008 | step 3000/3737 | loss=0.7255 | diff=0.6427 | kd=2.0100 | recon=0.0414 | t=480s
+  Ep 008 | step 3050/3737 | loss=0.7565 | diff=0.6437 | kd=2.0066 | recon=0.0564 | t=488s
+  Ep 008 | step 3100/3737 | loss=0.7193 | diff=0.6459 | kd=1.9887 | recon=0.0367 | t=496s
+  Ep 008 | step 3150/3737 | loss=0.7619 | diff=0.6530 | kd=1.9993 | recon=0.0545 | t=503s
+  Ep 008 | step 3200/3737 | loss=0.7181 | diff=0.6432 | kd=1.9856 | recon=0.0374 | t=511s
+  Ep 008 | step 3250/3737 | loss=0.7627 | diff=0.6490 | kd=1.9861 | recon=0.0568 | t=519s
+  Ep 008 | step 3300/3737 | loss=0.8253 | diff=0.6439 | kd=1.9817 | recon=0.0907 | t=527s
+  Ep 008 | step 3350/3737 | loss=0.7010 | diff=0.6443 | kd=1.9921 | recon=0.0284 | t=535s
+  Ep 008 | step 3400/3737 | loss=0.7226 | diff=0.6408 | kd=1.9971 | recon=0.0409 | t=542s
+  Ep 008 | step 3450/3737 | loss=0.7106 | diff=0.6422 | kd=1.9819 | recon=0.0342 | t=550s
+  Ep 008 | step 3500/3737 | loss=0.7240 | diff=0.6407 | kd=2.0009 | recon=0.0417 | t=558s
+  Ep 008 | step 3550/3737 | loss=0.8021 | diff=0.6425 | kd=1.9812 | recon=0.0798 | t=566s
+  Ep 008 | step 3600/3737 | loss=0.7210 | diff=0.6539 | kd=1.9839 | recon=0.0335 | t=574s
+  Ep 008 | step 3650/3737 | loss=0.7089 | diff=0.6515 | kd=1.9919 | recon=0.0287 | t=581s
+  Ep 008 | step 3700/3737 | loss=0.7308 | diff=0.6478 | kd=1.9994 | recon=0.0415 | t=589s
+
+  ── Epoch 008/15 (674s) ──────────────────────
+  Train  loss=0.7613  diff=0.6560  kd=1.9921  recon=0.0526
+  Val    loss=0.9070  RMSE=0.1210  MAE=0.0890  lr=4.53e-05
+
+  Ep 009 | step 0000/3737 | loss=0.8186 | diff=0.6451 | kd=1.9994 | recon=0.0867 | t=0s
+  Ep 009 | step 0050/3737 | loss=0.7340 | diff=0.6588 | kd=1.9940 | recon=0.0376 | t=8s
+  Ep 009 | step 0100/3737 | loss=0.7211 | diff=0.6405 | kd=1.9884 | recon=0.0403 | t=16s
+  Ep 009 | step 0150/3737 | loss=0.7915 | diff=0.6911 | kd=1.9929 | recon=0.0502 | t=24s
+  Ep 009 | step 0200/3737 | loss=0.7362 | diff=0.6445 | kd=1.9901 | recon=0.0459 | t=32s
+  Ep 009 | step 0250/3737 | loss=0.7301 | diff=0.6540 | kd=1.9888 | recon=0.0381 | t=39s
+  Ep 009 | step 0300/3737 | loss=0.7456 | diff=0.6385 | kd=1.9908 | recon=0.0536 | t=47s
+  Ep 009 | step 0350/3737 | loss=0.7109 | diff=0.6423 | kd=1.9865 | recon=0.0343 | t=55s
+  Ep 009 | step 0400/3737 | loss=0.7254 | diff=0.6481 | kd=2.0066 | recon=0.0387 | t=63s
+  Ep 009 | step 0450/3737 | loss=0.7608 | diff=0.6520 | kd=1.9890 | recon=0.0544 | t=70s
+  Ep 009 | step 0500/3737 | loss=0.7552 | diff=0.6457 | kd=1.9944 | recon=0.0547 | t=78s
+  Ep 009 | step 0550/3737 | loss=0.7336 | diff=0.6436 | kd=2.0030 | recon=0.0450 | t=86s
+  Ep 009 | step 0600/3737 | loss=0.7361 | diff=0.6496 | kd=2.0022 | recon=0.0432 | t=94s
+  Ep 009 | step 0650/3737 | loss=0.8359 | diff=0.6457 | kd=1.9949 | recon=0.0951 | t=101s
+  Ep 009 | step 0700/3737 | loss=0.7610 | diff=0.6436 | kd=2.0035 | recon=0.0587 | t=109s
+  Ep 009 | step 0750/3737 | loss=0.8318 | diff=0.6833 | kd=1.9896 | recon=0.0742 | t=117s
+  Ep 009 | step 0800/3737 | loss=0.7186 | diff=0.6395 | kd=1.9896 | recon=0.0396 | t=125s
+  Ep 009 | step 0850/3737 | loss=0.7774 | diff=0.7226 | kd=1.9845 | recon=0.0274 | t=133s
+  Ep 009 | step 0900/3737 | loss=0.7264 | diff=0.6450 | kd=1.9837 | recon=0.0407 | t=140s
+  Ep 009 | step 0950/3737 | loss=0.8358 | diff=0.6572 | kd=1.9916 | recon=0.0893 | t=148s
+  Ep 009 | step 1000/3737 | loss=0.6938 | diff=0.6422 | kd=1.9842 | recon=0.0258 | t=156s
+  Ep 009 | step 1050/3737 | loss=0.7431 | diff=0.6434 | kd=1.9872 | recon=0.0499 | t=164s
+  Ep 009 | step 1100/3737 | loss=0.7263 | diff=0.6442 | kd=1.9878 | recon=0.0410 | t=171s
+  Ep 009 | step 1150/3737 | loss=0.7566 | diff=0.6520 | kd=2.0060 | recon=0.0523 | t=179s
+  Ep 009 | step 1200/3737 | loss=0.8662 | diff=0.6551 | kd=1.9930 | recon=0.1056 | t=187s
+  Ep 009 | step 1250/3737 | loss=0.7398 | diff=0.6528 | kd=1.9931 | recon=0.0435 | t=195s
+  Ep 009 | step 1300/3737 | loss=0.7632 | diff=0.6821 | kd=1.9994 | recon=0.0405 | t=202s
+  Ep 009 | step 1350/3737 | loss=0.7205 | diff=0.6409 | kd=1.9871 | recon=0.0398 | t=210s
+  Ep 009 | step 1400/3737 | loss=0.7102 | diff=0.6434 | kd=1.9882 | recon=0.0334 | t=218s
+  Ep 009 | step 1450/3737 | loss=0.7038 | diff=0.6455 | kd=1.9764 | recon=0.0292 | t=226s
+  Ep 009 | step 1500/3737 | loss=0.7417 | diff=0.6484 | kd=2.0020 | recon=0.0466 | t=234s
+  Ep 009 | step 1550/3737 | loss=0.8325 | diff=0.6500 | kd=1.9991 | recon=0.0912 | t=241s
+  Ep 009 | step 1600/3737 | loss=0.7669 | diff=0.6464 | kd=1.9915 | recon=0.0602 | t=249s
+  Ep 009 | step 1650/3737 | loss=0.7318 | diff=0.6535 | kd=1.9963 | recon=0.0391 | t=257s
+  Ep 009 | step 1700/3737 | loss=0.8908 | diff=0.7734 | kd=1.9859 | recon=0.0587 | t=265s
+  Ep 009 | step 1750/3737 | loss=0.7792 | diff=0.6354 | kd=1.9979 | recon=0.0719 | t=272s
+  Ep 009 | step 1800/3737 | loss=0.7294 | diff=0.6436 | kd=1.9969 | recon=0.0429 | t=280s
+  Ep 009 | step 1850/3737 | loss=0.7109 | diff=0.6386 | kd=1.9921 | recon=0.0362 | t=288s
+  Ep 009 | step 1900/3737 | loss=0.7504 | diff=0.6449 | kd=1.9953 | recon=0.0528 | t=296s
+  Ep 009 | step 1950/3737 | loss=0.7725 | diff=0.6720 | kd=1.9836 | recon=0.0503 | t=304s
+  Ep 009 | step 2000/3737 | loss=0.7578 | diff=0.6373 | kd=2.0046 | recon=0.0602 | t=312s
+  Ep 009 | step 2050/3737 | loss=0.7017 | diff=0.6507 | kd=1.9890 | recon=0.0255 | t=319s
+  Ep 009 | step 2100/3737 | loss=0.7007 | diff=0.6377 | kd=1.9962 | recon=0.0315 | t=327s
+  Ep 009 | step 2150/3737 | loss=0.8453 | diff=0.6490 | kd=1.9981 | recon=0.0981 | t=335s
+  Ep 009 | step 2200/3737 | loss=0.7117 | diff=0.6383 | kd=2.0048 | recon=0.0367 | t=343s
+  Ep 009 | step 2250/3737 | loss=0.7094 | diff=0.6434 | kd=1.9858 | recon=0.0330 | t=350s
+  Ep 009 | step 2300/3737 | loss=0.8402 | diff=0.6421 | kd=1.9985 | recon=0.0991 | t=358s
+  Ep 009 | step 2350/3737 | loss=0.8326 | diff=0.7737 | kd=1.9898 | recon=0.0295 | t=366s
+  Ep 009 | step 2400/3737 | loss=0.7515 | diff=0.6789 | kd=1.9891 | recon=0.0363 | t=374s
+  Ep 009 | step 2450/3737 | loss=0.8437 | diff=0.6462 | kd=1.9836 | recon=0.0987 | t=382s
+  Ep 009 | step 2500/3737 | loss=0.7273 | diff=0.6594 | kd=1.9885 | recon=0.0339 | t=389s
+  Ep 009 | step 2550/3737 | loss=0.7331 | diff=0.6413 | kd=1.9923 | recon=0.0459 | t=397s
+  Ep 009 | step 2600/3737 | loss=0.8838 | diff=0.6443 | kd=2.0002 | recon=0.1198 | t=405s
+  Ep 009 | step 2650/3737 | loss=0.7247 | diff=0.6425 | kd=1.9838 | recon=0.0411 | t=413s
+  Ep 009 | step 2700/3737 | loss=0.7148 | diff=0.6417 | kd=2.0045 | recon=0.0365 | t=420s
+  Ep 009 | step 2750/3737 | loss=0.7011 | diff=0.6330 | kd=1.9906 | recon=0.0341 | t=428s
+  Ep 009 | step 2800/3737 | loss=0.7500 | diff=0.6379 | kd=1.9937 | recon=0.0561 | t=436s
+  Ep 009 | step 2850/3737 | loss=0.7700 | diff=0.6388 | kd=2.0015 | recon=0.0656 | t=444s
+  Ep 009 | step 2900/3737 | loss=0.6980 | diff=0.6391 | kd=1.9923 | recon=0.0295 | t=451s
+  Ep 009 | step 2950/3737 | loss=0.7201 | diff=0.6473 | kd=1.9808 | recon=0.0364 | t=459s
+  Ep 009 | step 3000/3737 | loss=0.7245 | diff=0.6461 | kd=1.9924 | recon=0.0392 | t=467s
+  Ep 009 | step 3050/3737 | loss=0.7078 | diff=0.6421 | kd=1.9791 | recon=0.0328 | t=475s
+  Ep 009 | step 3100/3737 | loss=0.7020 | diff=0.6436 | kd=1.9923 | recon=0.0292 | t=482s
+  Ep 009 | step 3150/3737 | loss=0.6915 | diff=0.6399 | kd=1.9905 | recon=0.0258 | t=490s
+  Ep 009 | step 3200/3737 | loss=0.7514 | diff=0.6464 | kd=1.9950 | recon=0.0525 | t=498s
+  Ep 009 | step 3250/3737 | loss=0.7512 | diff=0.6489 | kd=2.0001 | recon=0.0511 | t=506s
+  Ep 009 | step 3300/3737 | loss=0.7304 | diff=0.6451 | kd=1.9849 | recon=0.0426 | t=513s
+  Ep 009 | step 3350/3737 | loss=0.7279 | diff=0.6484 | kd=1.9861 | recon=0.0397 | t=521s
+  Ep 009 | step 3400/3737 | loss=0.7572 | diff=0.6445 | kd=2.0060 | recon=0.0564 | t=529s
+  Ep 009 | step 3450/3737 | loss=0.7313 | diff=0.6364 | kd=1.9961 | recon=0.0474 | t=537s
+  Ep 009 | step 3500/3737 | loss=0.7065 | diff=0.6339 | kd=1.9917 | recon=0.0363 | t=545s
+  Ep 009 | step 3550/3737 | loss=0.7157 | diff=0.6410 | kd=1.9951 | recon=0.0374 | t=552s
+  Ep 009 | step 3600/3737 | loss=0.7407 | diff=0.6449 | kd=1.9862 | recon=0.0479 | t=560s
+  Ep 009 | step 3650/3737 | loss=0.7784 | diff=0.6423 | kd=1.9856 | recon=0.0681 | t=568s
+  Ep 009 | step 3700/3737 | loss=0.7071 | diff=0.6400 | kd=1.9856 | recon=0.0335 | t=576s
+
+  ── Epoch 009/15 (661s) ──────────────────────
+  Train  loss=0.7496  diff=0.6500  kd=1.9934  recon=0.0498
+  Val    loss=0.9143  RMSE=0.1659  MAE=0.1246  lr=3.52e-05
+  Early stopping at epoch 9 (no improvement for 5 epochs)
+=======================================================
+  Training complete!
+  Best val loss : 0.1137
+  Checkpoint    : checkpoints/best_model.pth
+  Log           : results/train_log.json
+=======================================================

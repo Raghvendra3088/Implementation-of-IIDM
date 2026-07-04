@@ -1,0 +1,55 @@
+
+=======================================================
+  IIDM Evaluation
+=======================================================
+  Device      : cuda
+  Checkpoint  : checkpoints/best_model.pth
+  DDIM steps  : 50
+  Carbon range: [0.04, 207.97] Mg C/ha
+  [test] 1601 patches
+  Test patches: 1601
+  Loaded checkpoint from epoch 15
+
+  Running inference on 1601 patches ...
+  [200/1601]  RMSE=14.074  MAE=9.558  SSIM=0.879
+  [250/1601]  RMSE=26.218  MAE=14.436  SSIM=0.834
+  [450/1601]  RMSE=17.190  MAE=8.382  SSIM=0.786
+  [500/1601]  RMSE=19.776  MAE=16.860  SSIM=0.824
+  [600/1601]  RMSE=12.390  MAE=7.485  SSIM=0.830
+  [650/1601]  RMSE=18.582  MAE=10.600  SSIM=0.851
+  [700/1601]  RMSE=17.358  MAE=13.259  SSIM=0.886
+  [750/1601]  RMSE=9.543  MAE=6.477  SSIM=0.850
+  [800/1601]  RMSE=10.772  MAE=7.156  SSIM=0.842
+  [850/1601]  RMSE=23.922  MAE=19.856  SSIM=0.871
+  [900/1601]  RMSE=11.412  MAE=4.264  SSIM=0.735
+  [950/1601]  RMSE=16.924  MAE=10.338  SSIM=0.809
+  [1000/1601]  RMSE=14.920  MAE=7.510  SSIM=0.926
+  [1050/1601]  RMSE=10.610  MAE=6.686  SSIM=0.871
+  [1200/1601]  RMSE=18.311  MAE=11.838  SSIM=0.844
+  [1350/1601]  RMSE=10.631  MAE=5.151  SSIM=0.821
+  [1400/1601]  RMSE=25.479  MAE=12.370  SSIM=0.724
+  [1450/1601]  RMSE=22.260  MAE=15.746  SSIM=0.778
+  [1550/1601]  RMSE=12.106  MAE=8.608  SSIM=0.878
+  [1600/1601]  RMSE=17.839  MAE=13.458  SSIM=0.827
+
+─────────────────────────────────────────────
+  TEST RESULTS (1601 patches)
+─────────────────────────────────────────────
+  RMSE : 15.3122 ± 5.9478  Mg C/ha
+  MAE  : 9.7547 ± 4.9628  Mg C/ha
+  SSIM : 0.8367
+  R²   : -1526447478308.4685
+─────────────────────────────────────────────
+
+  Metrics saved → results/metrics.json
+
+  Generating visualizations ...
+  Saved → results/figures/sample_pred.png
+  Saved → results/figures/scatter_plot.png
+  Saved → results/figures/loss_curve.png
+  Saved → results/figures/carbon_pred.tif
+
+=======================================================
+  Evaluation complete!
+  Results → results/
+=======================================================

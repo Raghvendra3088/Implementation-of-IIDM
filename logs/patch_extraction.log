@@ -1,0 +1,11 @@
+nohup: ignoring input
+Stride=64, Patch=256x256
+Raster shape: 8670x5438
+Carbon range (Mg C/ha): 0.00 – 231.71
+Total valid patches: 10677
+  train: 7475 patches saved
+  val  : 1601 patches saved
+  test : 1601 patches saved
+
+carbon_stats.npy saved: vmin=0.00, vmax=231.71
+Done ✓

@@ -1,0 +1,80 @@
+/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py:166: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler  = GradScaler(enabled=use_amp)
+
+=======================================================
+  IIDM Training
+=======================================================
+  Device     : cuda
+  Epochs     : 200
+  Batch size : 8
+  LR         : 0.0001
+
+  Loading datasets ...
+  [train] 7475 patches
+  [val] 1601 patches
+  Train batches : 934
+  Val   batches : 201
+
+  Initializing IIDM model ...
+  Trainable params : 77.77M
+
+  Starting training from epoch 1 ...
+
+/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py:202: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=use_amp):
+  Ep 001 | step 0000/934 | loss=1.8621 | diff=1.1170 | kd=1.3005 | recon=0.6151 | t=2s
+Traceback (most recent call last):
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py", line 337, in <module>
+    train(args)
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py", line 203, in train
+    loss, comps = model(inp, tgt)
+                  ^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/models/iidm.py", line 113, in forward
+    carbon_pred = self.inr(student_feats, H=H, W=W)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/models/../../src/models/inr.py", line 140, in forward
+    x = block(x)                                   # (B,N,256)
+        ^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/models/../../src/models/inr.py", line 75, in forward
+    return self.act(x + self.block(x))
+                        ^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/normalization.py", line 228, in forward
+    return F.layer_norm(
+           ^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/functional.py", line 2939, in layer_norm
+    return torch.layer_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 512.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 493.88 MiB is free. Process 3211134 has 24.11 GiB memory in use. Process 3306691 has 764.00 MiB memory in use. Including non-PyTorch memory, this process has 14.14 GiB memory in use. Of the allocated memory 13.47 GiB is allocated by PyTorch, and 160.66 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

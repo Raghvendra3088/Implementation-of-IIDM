@@ -1,0 +1,25 @@
+nohup: ignoring input
+/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py:166: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler  = GradScaler(enabled=use_amp)
+
+=======================================================
+  IIDM Training
+=======================================================
+  Device     : cpu
+  Epochs     : 200
+  Batch size : 16
+  LR         : 0.0001
+
+  Loading datasets ...
+  [train] 7475 patches
+  [val] 1601 patches
+  Train batches : 467
+  Val   batches : 101
+
+  Initializing IIDM model ...
+  Trainable params : 77.42M
+
+  Starting training from epoch 1 ...
+
+/DATA/raghvendra3088/Implementation-of-IIDM/src/train.py:202: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=use_amp):

@@ -1,0 +1,308 @@
+nohup: ignoring input
+Blockwise KD training on 7812 images, 16 sequential stages
+
+==================================================
+Stage N=1/16
+==================================================
+  N=1 Epoch  1/15 | Loss: 0.745643
+  N=1 Epoch  2/15 | Loss: 0.671301
+  N=1 Epoch  3/15 | Loss: 0.636934
+  N=1 Epoch  4/15 | Loss: 0.632841
+  N=1 Epoch  5/15 | Loss: 0.626842
+  N=1 Epoch  6/15 | Loss: 0.607739
+  N=1 Epoch  7/15 | Loss: 0.591587
+  N=1 Epoch  8/15 | Loss: 0.596813
+  N=1 Epoch  9/15 | Loss: 0.597689
+  N=1 Epoch 10/15 | Loss: 0.591764
+  N=1 Epoch 11/15 | Loss: 0.586602
+  N=1 Epoch 12/15 | Loss: 0.585294
+  N=1 Epoch 13/15 | Loss: 0.582884
+  N=1 Epoch 14/15 | Loss: 0.587106
+  N=1 Epoch 15/15 | Loss: 0.575632
+
+==================================================
+Stage N=2/16
+==================================================
+  N=2 Epoch  1/15 | Loss: 0.293084
+  N=2 Epoch  2/15 | Loss: 0.220412
+  N=2 Epoch  3/15 | Loss: 0.200840
+  N=2 Epoch  4/15 | Loss: 0.189178
+  N=2 Epoch  5/15 | Loss: 0.180083
+  N=2 Epoch  6/15 | Loss: 0.171759
+  N=2 Epoch  7/15 | Loss: 0.164634
+  N=2 Epoch  8/15 | Loss: 0.157844
+  N=2 Epoch  9/15 | Loss: 0.153252
+  N=2 Epoch 10/15 | Loss: 0.149256
+  N=2 Epoch 11/15 | Loss: 0.143490
+  N=2 Epoch 12/15 | Loss: 0.140162
+  N=2 Epoch 13/15 | Loss: 0.136093
+  N=2 Epoch 14/15 | Loss: 0.132954
+  N=2 Epoch 15/15 | Loss: 0.130041
+
+==================================================
+Stage N=3/16
+==================================================
+  N=3 Epoch  1/15 | Loss: 2.104869
+  N=3 Epoch  2/15 | Loss: 1.740039
+  N=3 Epoch  3/15 | Loss: 1.649890
+  N=3 Epoch  4/15 | Loss: 1.584061
+  N=3 Epoch  5/15 | Loss: 1.541951
+  N=3 Epoch  6/15 | Loss: 1.505272
+  N=3 Epoch  7/15 | Loss: 1.481552
+  N=3 Epoch  8/15 | Loss: 1.454407
+  N=3 Epoch  9/15 | Loss: 1.436275
+  N=3 Epoch 10/15 | Loss: 1.416746
+  N=3 Epoch 11/15 | Loss: 1.394128
+  N=3 Epoch 12/15 | Loss: 1.402679
+  N=3 Epoch 13/15 | Loss: 1.363863
+  N=3 Epoch 14/15 | Loss: 1.358460
+  N=3 Epoch 15/15 | Loss: 1.350260
+
+==================================================
+Stage N=4/16
+==================================================
+  N=4 Epoch  1/15 | Loss: 1.439611
+  N=4 Epoch  2/15 | Loss: 1.291225
+  N=4 Epoch  3/15 | Loss: 1.227791
+  N=4 Epoch  4/15 | Loss: 1.179089
+  N=4 Epoch  5/15 | Loss: 1.138086
+  N=4 Epoch  6/15 | Loss: 1.101955
+  N=4 Epoch  7/15 | Loss: 1.070216
+  N=4 Epoch  8/15 | Loss: 1.039947
+  N=4 Epoch  9/15 | Loss: 1.011832
+  N=4 Epoch 10/15 | Loss: 0.987660
+  N=4 Epoch 11/15 | Loss: 0.963981
+  N=4 Epoch 12/15 | Loss: 0.943911
+  N=4 Epoch 13/15 | Loss: 0.922711
+  N=4 Epoch 14/15 | Loss: 0.904895
+  N=4 Epoch 15/15 | Loss: 0.888115
+
+==================================================
+Stage N=5/16
+==================================================
+  N=5 Epoch  1/15 | Loss: 6.731097
+  N=5 Epoch  2/15 | Loss: 5.975376
+  N=5 Epoch  3/15 | Loss: 5.762797
+  N=5 Epoch  4/15 | Loss: 5.639111
+  N=5 Epoch  5/15 | Loss: 5.543797
+  N=5 Epoch  6/15 | Loss: 5.465417
+  N=5 Epoch  7/15 | Loss: 5.377484
+  N=5 Epoch  8/15 | Loss: 5.308082
+  N=5 Epoch  9/15 | Loss: 5.267236
+  N=5 Epoch 10/15 | Loss: 5.211409
+  N=5 Epoch 11/15 | Loss: 5.150803
+  N=5 Epoch 12/15 | Loss: 5.100987
+  N=5 Epoch 13/15 | Loss: 5.057164
+  N=5 Epoch 14/15 | Loss: 5.034609
+  N=5 Epoch 15/15 | Loss: 4.999983
+
+==================================================
+Stage N=6/16
+==================================================
+  N=6 Epoch  1/15 | Loss: 9.138389
+  N=6 Epoch  2/15 | Loss: 8.215732
+  N=6 Epoch  3/15 | Loss: 7.884177
+  N=6 Epoch  4/15 | Loss: 7.647028
+  N=6 Epoch  5/15 | Loss: 7.449584
+  N=6 Epoch  6/15 | Loss: 7.295344
+  N=6 Epoch  7/15 | Loss: 7.136318
+  N=6 Epoch  8/15 | Loss: 6.999409
+  N=6 Epoch  9/15 | Loss: 6.897831
+  N=6 Epoch 10/15 | Loss: 6.812577
+  N=6 Epoch 11/15 | Loss: 6.720801
+  N=6 Epoch 12/15 | Loss: 6.640941
+  N=6 Epoch 13/15 | Loss: 6.570608
+  N=6 Epoch 14/15 | Loss: 6.530716
+  N=6 Epoch 15/15 | Loss: 6.477880
+
+==================================================
+Stage N=7/16
+==================================================
+  N=7 Epoch  1/15 | Loss: 12.816560
+  N=7 Epoch  2/15 | Loss: 11.759416
+  N=7 Epoch  3/15 | Loss: 11.415411
+  N=7 Epoch  4/15 | Loss: 11.089820
+  N=7 Epoch  5/15 | Loss: 10.862494
+  N=7 Epoch  6/15 | Loss: 10.658750
+  N=7 Epoch  7/15 | Loss: 10.472381
+  N=7 Epoch  8/15 | Loss: 10.305478
+  N=7 Epoch  9/15 | Loss: 10.177836
+  N=7 Epoch 10/15 | Loss: 10.060210
+  N=7 Epoch 11/15 | Loss: 9.961587
+  N=7 Epoch 12/15 | Loss: 9.855388
+  N=7 Epoch 13/15 | Loss: 9.794785
+  N=7 Epoch 14/15 | Loss: 9.695529
+  N=7 Epoch 15/15 | Loss: 9.648409
+
+==================================================
+Stage N=8/16
+==================================================
+  N=8 Epoch  1/15 | Loss: 5.087442
+  N=8 Epoch  2/15 | Loss: 4.841206
+  N=8 Epoch  3/15 | Loss: 4.727041
+  N=8 Epoch  4/15 | Loss: 4.631904
+  N=8 Epoch  5/15 | Loss: 4.549889
+  N=8 Epoch  6/15 | Loss: 4.469117
+  N=8 Epoch  7/15 | Loss: 4.395582
+  N=8 Epoch  8/15 | Loss: 4.330053
+  N=8 Epoch  9/15 | Loss: 4.263178
+  N=8 Epoch 10/15 | Loss: 4.200957
+  N=8 Epoch 11/15 | Loss: 4.144487
+  N=8 Epoch 12/15 | Loss: 4.087431
+  N=8 Epoch 13/15 | Loss: 4.035538
+  N=8 Epoch 14/15 | Loss: 3.986868
+  N=8 Epoch 15/15 | Loss: 3.939301
+
+==================================================
+Stage N=9/16
+==================================================
+  N=9 Epoch  1/15 | Loss: 12.814918
+  N=9 Epoch  2/15 | Loss: 12.074051
+  N=9 Epoch  3/15 | Loss: 11.880016
+  N=9 Epoch  4/15 | Loss: 11.758158
+  N=9 Epoch  5/15 | Loss: 11.610394
+  N=9 Epoch  6/15 | Loss: 11.502928
+  N=9 Epoch  7/15 | Loss: 11.437616
+  N=9 Epoch  8/15 | Loss: 11.348783
+  N=9 Epoch  9/15 | Loss: 11.297435
+  N=9 Epoch 10/15 | Loss: 11.233359
+  N=9 Epoch 11/15 | Loss: 11.166529
+  N=9 Epoch 12/15 | Loss: 11.139280
+  N=9 Epoch 13/15 | Loss: 11.082442
+  N=9 Epoch 14/15 | Loss: 11.022329
+  N=9 Epoch 15/15 | Loss: 10.966760
+
+==================================================
+Stage N=10/16
+==================================================
+  N=10 Epoch  1/15 | Loss: 9.489224
+  N=10 Epoch  2/15 | Loss: 8.723481
+  N=10 Epoch  3/15 | Loss: 8.403888
+  N=10 Epoch  4/15 | Loss: 8.195621
+  N=10 Epoch  5/15 | Loss: 8.026113
+  N=10 Epoch  6/15 | Loss: 7.880141
+  N=10 Epoch  7/15 | Loss: 7.756007
+  N=10 Epoch  8/15 | Loss: 7.637955
+  N=10 Epoch  9/15 | Loss: 7.558535
+  N=10 Epoch 10/15 | Loss: 7.496741
+  N=10 Epoch 11/15 | Loss: 7.412785
+  N=10 Epoch 12/15 | Loss: 7.375848
+  N=10 Epoch 13/15 | Loss: 7.298027
+  N=10 Epoch 14/15 | Loss: 7.247823
+  N=10 Epoch 15/15 | Loss: 7.236981
+
+==================================================
+Stage N=11/16
+==================================================
+  N=11 Epoch  1/15 | Loss: 6.771505
+  N=11 Epoch  2/15 | Loss: 6.166422
+  N=11 Epoch  3/15 | Loss: 5.913004
+  N=11 Epoch  4/15 | Loss: 5.695058
+  N=11 Epoch  5/15 | Loss: 5.550632
+  N=11 Epoch  6/15 | Loss: 5.423281
+  N=11 Epoch  7/15 | Loss: 5.322952
+  N=11 Epoch  8/15 | Loss: 5.218484
+  N=11 Epoch  9/15 | Loss: 5.139907
+  N=11 Epoch 10/15 | Loss: 5.077571
+  N=11 Epoch 11/15 | Loss: 5.034541
+  N=11 Epoch 12/15 | Loss: 4.984071
+  N=11 Epoch 13/15 | Loss: 4.948450
+  N=11 Epoch 14/15 | Loss: 4.915485
+  N=11 Epoch 15/15 | Loss: 4.899902
+
+==================================================
+Stage N=12/16
+==================================================
+  N=12 Epoch  1/15 | Loss: 0.731547
+  N=12 Epoch  2/15 | Loss: 0.686237
+  N=12 Epoch  3/15 | Loss: 0.670206
+  N=12 Epoch  4/15 | Loss: 0.657477
+  N=12 Epoch  5/15 | Loss: 0.646957
+  N=12 Epoch  6/15 | Loss: 0.637341
+  N=12 Epoch  7/15 | Loss: 0.629004
+  N=12 Epoch  8/15 | Loss: 0.621444
+  N=12 Epoch  9/15 | Loss: 0.613602
+  N=12 Epoch 10/15 | Loss: 0.607342
+  N=12 Epoch 11/15 | Loss: 0.601042
+  N=12 Epoch 12/15 | Loss: 0.595110
+  N=12 Epoch 13/15 | Loss: 0.589927
+  N=12 Epoch 14/15 | Loss: 0.584887
+  N=12 Epoch 15/15 | Loss: 0.579724
+
+==================================================
+Stage N=13/16
+==================================================
+  N=13 Epoch  1/15 | Loss: 3.183419
+  N=13 Epoch  2/15 | Loss: 3.060499
+  N=13 Epoch  3/15 | Loss: 3.022864
+  N=13 Epoch  4/15 | Loss: 3.002217
+  N=13 Epoch  5/15 | Loss: 2.971894
+  N=13 Epoch  6/15 | Loss: 2.963130
+  N=13 Epoch  7/15 | Loss: 2.943843
+  N=13 Epoch  8/15 | Loss: 2.931512
+  N=13 Epoch  9/15 | Loss: 2.928062
+  N=13 Epoch 10/15 | Loss: 2.909356
+  N=13 Epoch 11/15 | Loss: 2.895747
+  N=13 Epoch 12/15 | Loss: 2.881948
+  N=13 Epoch 13/15 | Loss: 2.871628
+  N=13 Epoch 14/15 | Loss: 2.870022
+  N=13 Epoch 15/15 | Loss: 2.858440
+
+==================================================
+Stage N=14/16
+==================================================
+  N=14 Epoch  1/15 | Loss: 2.944447
+  N=14 Epoch  2/15 | Loss: 2.599295
+  N=14 Epoch  3/15 | Loss: 2.470225
+  N=14 Epoch  4/15 | Loss: 2.380544
+  N=14 Epoch  5/15 | Loss: 2.308931
+  N=14 Epoch  6/15 | Loss: 2.255302
+  N=14 Epoch  7/15 | Loss: 2.221837
+  N=14 Epoch  8/15 | Loss: 2.179076
+  N=14 Epoch  9/15 | Loss: 2.150892
+  N=14 Epoch 10/15 | Loss: 2.132785
+  N=14 Epoch 11/15 | Loss: 2.110461
+  N=14 Epoch 12/15 | Loss: 2.088746
+  N=14 Epoch 13/15 | Loss: 2.079566
+  N=14 Epoch 14/15 | Loss: 2.066234
+  N=14 Epoch 15/15 | Loss: 2.059663
+
+==================================================
+Stage N=15/16
+==================================================
+  N=15 Epoch  1/15 | Loss: 2.489896
+  N=15 Epoch  2/15 | Loss: 2.121310
+  N=15 Epoch  3/15 | Loss: 2.035356
+  N=15 Epoch  4/15 | Loss: 1.958966
+  N=15 Epoch  5/15 | Loss: 1.889047
+  N=15 Epoch  6/15 | Loss: 1.855875
+  N=15 Epoch  7/15 | Loss: 1.805049
+  N=15 Epoch  8/15 | Loss: 1.770623
+  N=15 Epoch  9/15 | Loss: 1.752587
+  N=15 Epoch 10/15 | Loss: 1.726219
+  N=15 Epoch 11/15 | Loss: 1.703732
+  N=15 Epoch 12/15 | Loss: 1.697156
+  N=15 Epoch 13/15 | Loss: 1.691532
+  N=15 Epoch 14/15 | Loss: 1.676529
+  N=15 Epoch 15/15 | Loss: 1.667502
+
+==================================================
+Stage N=16/16
+==================================================
+  N=16 Epoch  1/15 | Loss: 0.064000
+  N=16 Epoch  2/15 | Loss: 0.059832
+  N=16 Epoch  3/15 | Loss: 0.058390
+  N=16 Epoch  4/15 | Loss: 0.057547
+  N=16 Epoch  5/15 | Loss: 0.056645
+  N=16 Epoch  6/15 | Loss: 0.056127
+  N=16 Epoch  7/15 | Loss: 0.055697
+  N=16 Epoch  8/15 | Loss: 0.055421
+  N=16 Epoch  9/15 | Loss: 0.055185
+  N=16 Epoch 10/15 | Loss: 0.054980
+  N=16 Epoch 11/15 | Loss: 0.054905
+  N=16 Epoch 12/15 | Loss: 0.054722
+  N=16 Epoch 13/15 | Loss: 0.054635
+  N=16 Epoch 14/15 | Loss: 0.054540
+  N=16 Epoch 15/15 | Loss: 0.054441
+
+Blockwise-distilled student saved: checkpoints/blockwise_kd.pth

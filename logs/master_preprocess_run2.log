@@ -1,0 +1,120 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 577, in <module>
+    main()
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 565, in main
+    step7_patches(aligned, mask_arr)
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 450, in step7_patches
+    input_stack = np.concatenate([norm_gf1, norm_dem, norm_canopy], axis=0)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: all the input array dimensions except for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 9118 and the array at index 1 has size 8946
+=======================================================
+  IIDM MASTER PREPROCESSING PIPELINE
+=======================================================
+
+=======================================================
+  STEP 1 — Sentinel-2 Band Stacking
+=======================================================
+  [OK] B02 → merged + reprojected
+  [OK] B03 → merged + reprojected
+  [OK] B04 → merged + reprojected
+  [OK] B08 → merged + reprojected
+  [SAVED] sentinel2_stacked.tif  shape=(4, 13871, 8700)
+
+=======================================================
+  STEP 2 — DEM Processing
+=======================================================
+  [SAVED] dem_processed.tif
+
+=======================================================
+  STEP 3 — ETH Canopy Height
+=======================================================
+  [SAVED] canopy_processed.tif
+
+=======================================================
+  STEP 4 — GEDI L4A: Extract Shots → Rasterize → Carbon
+=======================================================
+  GEDI L4A files: 58
+  Reading: GEDI04_A_2020015204510_O06193_03_T00334_02_002_02_V002.h5
+  Reading: GEDI04_A_2020019191005_O06254_03_T00487_02_002_02_V002.h5
+  Reading: GEDI04_A_2020023173502_O06315_03_T00793_02_002_02_V002.h5
+  Reading: GEDI04_A_2020027160141_O06376_03_T02369_02_002_02_V002.h5
+  Reading: GEDI04_A_2020035125448_O06498_03_T00793_02_002_02_V002.h5
+  Reading: GEDI04_A_2020039112117_O06559_03_T03639_02_002_02_V002.h5
+  Reading: GEDI04_A_2020043094745_O06620_03_T02369_02_002_02_V002.h5
+  Reading: GEDI04_A_2020051064034_O06742_03_T05368_02_002_02_V002.h5
+  Reading: GEDI04_A_2020055050654_O06803_03_T00946_02_002_02_V002.h5
+  Reading: GEDI04_A_2020059033311_O06864_03_T03792_02_002_02_V002.h5
+  Reading: GEDI04_A_2020063015927_O06925_03_T05368_02_002_02_V002.h5
+  Reading: GEDI04_A_2020067002540_O06986_03_T03945_02_002_02_V002.h5
+  Reading: GEDI04_A_2020070225151_O07047_03_T05521_02_002_02_V002.h5
+  Reading: GEDI04_A_2020074211759_O07108_03_T04098_02_002_02_V002.h5
+  Reading: GEDI04_A_2020086163828_O07291_03_T02675_02_002_02_V002.h5
+  Reading: GEDI04_A_2020090150545_O07352_03_T02522_02_002_02_V002.h5
+  Reading: GEDI04_A_2020094133316_O07413_03_T05062_02_002_02_V002.h5
+  Reading: GEDI04_A_2020102102934_O07535_03_T04756_02_002_02_V002.h5
+  Reading: GEDI04_A_2020122024326_O07840_03_T00334_02_002_02_V002.h5
+  Reading: GEDI04_A_2020126010911_O07901_03_T00487_02_002_02_V002.h5
+  Reading: GEDI04_A_2020129233455_O07962_03_T04909_02_002_02_V002.h5
+  Reading: GEDI04_A_2020133220037_O08023_03_T02216_02_002_02_V002.h5
+  Reading: GEDI04_A_2020137202616_O08084_03_T02369_02_002_02_V002.h5
+  Reading: GEDI04_A_2020141185155_O08145_03_T01099_02_002_02_V002.h5
+  Reading: GEDI04_A_2020145171732_O08206_03_T01252_02_002_02_V002.h5
+  Reading: GEDI04_A_2020169231909_O08582_02_T04567_02_002_02_V002.h5
+  Reading: GEDI04_A_2020173214432_O08643_02_T03450_02_002_02_V002.h5
+  Reading: GEDI04_A_2020177200952_O08704_02_T02180_02_002_02_V002.h5
+  Reading: GEDI04_A_2020181183511_O08765_02_T03603_02_002_02_V002.h5
+  Reading: GEDI04_A_2020211151708_O09228_03_T03333_02_002_02_V002.h5
+  Reading: GEDI04_A_2020219121012_O09350_03_T02063_02_002_02_V002.h5
+  Reading: GEDI04_A_2020223103638_O09411_03_T00640_02_002_02_V002.h5
+  Reading: GEDI04_A_2020227090305_O09472_03_T03333_02_002_02_V002.h5
+  Reading: GEDI04_A_2020231072930_O09533_03_T02063_02_002_02_V002.h5
+  Reading: GEDI04_A_2020235055553_O09594_03_T04909_02_002_02_V002.h5
+  Reading: GEDI04_A_2020239042213_O09655_03_T00640_02_002_02_V002.h5
+  Reading: GEDI04_A_2020243024832_O09716_03_T09178_02_002_02_V002.h5
+  Reading: GEDI04_A_2020247011448_O09777_03_T10754_02_002_02_V002.h5
+  Reading: GEDI04_A_2020250234102_O09838_03_T06485_02_002_02_V002.h5
+  Reading: GEDI04_A_2020254220717_O09899_03_T09331_02_003_02_V002.h5
+  Reading: GEDI04_A_2020258203430_O09960_03_T07908_02_002_02_V002.h5
+  Reading: GEDI04_A_2020262190142_O10021_03_T06332_02_002_02_V002.h5
+  Reading: GEDI04_A_2020266172853_O10082_03_T10601_02_002_02_V002.h5
+  Reading: GEDI04_A_2020270155640_O10143_03_T10448_02_002_02_V002.h5
+  Reading: GEDI04_A_2020298050248_O10570_03_T07602_02_002_02_V002.h5
+  Reading: GEDI04_A_2020302032835_O10631_03_T09025_02_002_02_V002.h5
+  Reading: GEDI04_A_2020306015418_O10692_03_T07755_02_002_02_V002.h5
+  Reading: GEDI04_A_2020310001957_O10753_03_T10907_02_002_02_V002.h5
+  Reading: GEDI04_A_2020313224532_O10814_03_T09484_02_002_02_V002.h5
+  Reading: GEDI04_A_2020317211105_O10875_03_T09637_02_002_02_V002.h5
+  Reading: GEDI04_A_2020325180452_O10997_03_T08214_02_002_02_V002.h5
+  Reading: GEDI04_A_2020329163146_O11058_03_T11060_02_002_02_V002.h5
+  Reading: GEDI04_A_2020333145830_O11119_03_T06638_02_002_02_V002.h5
+  Reading: GEDI04_A_2020337132504_O11180_03_T08061_02_002_02_V002.h5
+  Reading: GEDI04_A_2020341115132_O11241_03_T11213_02_002_02_V002.h5
+  Reading: GEDI04_A_2020345101757_O11302_03_T08367_02_002_02_V002.h5
+  Reading: GEDI04_A_2020349084418_O11363_03_T06944_02_002_02_V002.h5
+  Reading: GEDI04_A_2020353071038_O11424_03_T09790_02_002_02_V002.h5
+  Valid GEDI shots in Huize: 73545
+  Carbon range: [0.4, 469.6] Mg C/ha
+  Pixels with GEDI data: 71519 (0.06% of grid)
+  GEDI L4A mean carbon stock: 32.95 Mg C/ha
+  [SAVED] gedi_carbon.tif
+
+=======================================================
+  STEP 5 — Align All Rasters to Common Extent
+=======================================================
+  Common bbox (WGS84): 103.087,26.193 → 103.808,27.008
+  Clipped aligned_gf1.tif: (4, 9118, 7295)
+  Clipped aligned_dem.tif: (1, 8946, 7078)
+  Clipped aligned_canopy.tif: (1, 9118, 7295)
+  Clipped aligned_carbon.tif: (1, 9118, 7295)
+
+=======================================================
+  STEP 6 — Forest / Non-Forest Mask
+=======================================================
+  Forest coverage: 90.9%
+  [SAVED] forest_mask.tif
+
+=======================================================
+  STEP 7 — Normalize + Extract Patches
+=======================================================

@@ -1,0 +1,67 @@
+
+=======================================================
+  IIDM Evaluation
+=======================================================
+  Device      : cuda
+  Checkpoint  : checkpoints/best_model.pth
+  DDIM steps  : 50
+  Carbon range: [0.04, 207.97] Mg C/ha
+  [test] 1601 patches
+  Test patches: 1601
+  Loaded checkpoint from epoch 15
+
+  Running inference on 1601 patches ...
+  [50/1601]  RMSE=6.923  MAE=5.023  SSIM=0.888
+  [100/1601]  RMSE=6.865  MAE=4.364  SSIM=0.906
+  [150/1601]  RMSE=8.892  MAE=6.658  SSIM=0.877
+  [200/1601]  RMSE=7.192  MAE=5.269  SSIM=0.873
+  [250/1601]  RMSE=11.530  MAE=8.159  SSIM=0.833
+  [300/1601]  RMSE=6.782  MAE=4.619  SSIM=0.911
+  [350/1601]  RMSE=9.672  MAE=7.065  SSIM=0.866
+  [400/1601]  RMSE=6.326  MAE=4.673  SSIM=0.892
+  [450/1601]  RMSE=12.231  MAE=8.557  SSIM=0.789
+  [500/1601]  RMSE=9.988  MAE=7.517  SSIM=0.830
+  [550/1601]  RMSE=9.215  MAE=5.528  SSIM=0.836
+  [600/1601]  RMSE=8.776  MAE=6.436  SSIM=0.840
+  [650/1601]  RMSE=9.163  MAE=5.973  SSIM=0.850
+  [700/1601]  RMSE=8.484  MAE=6.002  SSIM=0.886
+  [750/1601]  RMSE=9.107  MAE=6.783  SSIM=0.854
+  [800/1601]  RMSE=9.755  MAE=7.000  SSIM=0.836
+  [850/1601]  RMSE=7.519  MAE=5.625  SSIM=0.878
+  [900/1601]  RMSE=9.256  MAE=6.746  SSIM=0.743
+  [950/1601]  RMSE=10.623  MAE=7.079  SSIM=0.813
+  [1000/1601]  RMSE=5.948  MAE=3.525  SSIM=0.927
+  [1050/1601]  RMSE=6.673  MAE=4.923  SSIM=0.875
+  [1100/1601]  RMSE=6.388  MAE=4.572  SSIM=0.907
+  [1150/1601]  RMSE=8.524  MAE=6.441  SSIM=0.833
+  [1200/1601]  RMSE=11.193  MAE=7.505  SSIM=0.847
+  [1250/1601]  RMSE=9.189  MAE=6.784  SSIM=0.854
+  [1300/1601]  RMSE=6.948  MAE=4.524  SSIM=0.902
+  [1350/1601]  RMSE=11.636  MAE=8.238  SSIM=0.820
+  [1400/1601]  RMSE=15.314  MAE=9.054  SSIM=0.726
+  [1450/1601]  RMSE=10.948  MAE=7.964  SSIM=0.795
+  [1500/1601]  RMSE=9.184  MAE=6.761  SSIM=0.837
+  [1550/1601]  RMSE=7.619  MAE=5.183  SSIM=0.880
+  [1600/1601]  RMSE=10.956  MAE=7.779  SSIM=0.812
+
+─────────────────────────────────────────────
+  TEST RESULTS (1601 patches)
+─────────────────────────────────────────────
+  RMSE : 8.9641 ± 2.4182  Mg C/ha
+  MAE  : 6.2079 ± 1.7819  Mg C/ha
+  SSIM : 0.8455
+  R²   : 0.9430
+─────────────────────────────────────────────
+
+  Metrics saved → results/metrics.json
+
+  Generating visualizations ...
+  Saved → results/figures/sample_pred.png
+  Saved → results/figures/scatter_plot.png
+  Saved → results/figures/loss_curve.png
+  Saved → results/figures/carbon_pred.tif
+
+=======================================================
+  Evaluation complete!
+  Results → results/
+=======================================================

@@ -1,0 +1,15 @@
+nohup: ignoring input
+Epoch=100, val_rmse=48.6078
+  0/405
+  50/405
+  100/405
+  150/405
+  200/405
+  250/405
+  300/405
+  350/405
+  400/405
+Test RMSE: 49.9856 Mg C/ha
+Test MAE : 39.3119 Mg C/ha
+Test R2  : 0.2114
+Paper    : RMSE=12.17  MAE=9.91

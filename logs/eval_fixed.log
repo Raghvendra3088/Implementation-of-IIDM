@@ -1,0 +1,55 @@
+
+=======================================================
+  IIDM Evaluation
+=======================================================
+  Device      : cuda
+  Checkpoint  : checkpoints/best_model.pth
+  DDIM steps  : 50
+  Carbon range: [0.04, 207.97] Mg C/ha
+  [test] 1601 patches
+  Test patches: 1601
+  Loaded checkpoint from epoch 4
+
+  Running inference on 1601 patches ...
+  [200/1601]  RMSE=33.422  MAE=28.707  SSIM=0.754
+  [250/1601]  RMSE=22.481  MAE=12.839  SSIM=0.869
+  [450/1601]  RMSE=30.085  MAE=23.792  SSIM=0.669
+  [500/1601]  RMSE=35.564  MAE=33.530  SSIM=0.649
+  [600/1601]  RMSE=29.420  MAE=23.508  SSIM=0.457
+  [650/1601]  RMSE=21.543  MAE=11.567  SSIM=0.811
+  [700/1601]  RMSE=28.456  MAE=27.126  SSIM=0.835
+  [750/1601]  RMSE=30.588  MAE=27.178  SSIM=0.555
+  [800/1601]  RMSE=30.477  MAE=28.013  SSIM=0.729
+  [850/1601]  RMSE=36.393  MAE=33.543  SSIM=0.717
+  [900/1601]  RMSE=8.122  MAE=3.084  SSIM=0.518
+  [950/1601]  RMSE=28.520  MAE=20.943  SSIM=0.646
+  [1000/1601]  RMSE=9.586  MAE=4.811  SSIM=0.933
+  [1050/1601]  RMSE=30.401  MAE=25.477  SSIM=0.681
+  [1200/1601]  RMSE=26.714  MAE=21.345  SSIM=0.792
+  [1350/1601]  RMSE=22.869  MAE=16.343  SSIM=0.663
+  [1400/1601]  RMSE=35.560  MAE=27.693  SSIM=0.545
+  [1450/1601]  RMSE=32.354  MAE=24.677  SSIM=0.564
+  [1550/1601]  RMSE=33.247  MAE=29.436  SSIM=0.785
+  [1600/1601]  RMSE=35.654  MAE=30.120  SSIM=0.682
+
+─────────────────────────────────────────────
+  TEST RESULTS (1601 patches)
+─────────────────────────────────────────────
+  RMSE : 24.2793 ± 9.9769  Mg C/ha
+  MAE  : 19.4165 ± 10.6779  Mg C/ha
+  SSIM : 0.7419
+  R²   : -853554569980.5007
+─────────────────────────────────────────────
+
+  Metrics saved → results/metrics.json
+
+  Generating visualizations ...
+  Saved → results/figures/sample_pred.png
+  Saved → results/figures/scatter_plot.png
+  Saved → results/figures/loss_curve.png
+  Saved → results/figures/carbon_pred.tif
+
+=======================================================
+  Evaluation complete!
+  Results → results/
+=======================================================

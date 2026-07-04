@@ -1,0 +1,118 @@
+nohup: ignoring input
+Device: cuda
+  train: 36153 patches
+  val: 4519 patches
+Train: 36153 | Val: 4519
+Epoch   1/100 | Loss: 2.6558 | RMSE: 10.3357 | MAE: 6.8728 | R2: 0.7078
+  ✓ Best saved (RMSE=10.3357)
+Epoch   2/100 | Loss: 1.7916 | RMSE: 9.2883 | MAE: 5.8035 | R2: 0.7640
+  ✓ Best saved (RMSE=9.2883)
+Epoch   3/100 | Loss: 1.6428 | RMSE: 9.1174 | MAE: 5.6525 | R2: 0.7726
+  ✓ Best saved (RMSE=9.1174)
+Epoch   4/100 | Loss: 1.5725 | RMSE: 9.2636 | MAE: 5.8403 | R2: 0.7653
+Epoch   5/100 | Loss: 1.5303 | RMSE: 9.5621 | MAE: 6.2942 | R2: 0.7499
+Epoch   6/100 | Loss: 1.5018 | RMSE: 9.1372 | MAE: 5.7055 | R2: 0.7717
+Epoch   7/100 | Loss: 1.4803 | RMSE: 9.1828 | MAE: 5.7353 | R2: 0.7694
+Epoch   8/100 | Loss: 1.4636 | RMSE: 9.0373 | MAE: 5.5220 | R2: 0.7766
+  ✓ Best saved (RMSE=9.0373)
+Epoch   9/100 | Loss: 1.4496 | RMSE: 8.9579 | MAE: 5.4752 | R2: 0.7805
+  ✓ Best saved (RMSE=8.9579)
+Epoch  10/100 | Loss: 1.4379 | RMSE: 8.8705 | MAE: 5.3921 | R2: 0.7848
+  ✓ Best saved (RMSE=8.8705)
+Epoch  11/100 | Loss: 1.4272 | RMSE: 8.8946 | MAE: 5.4185 | R2: 0.7836
+Epoch  12/100 | Loss: 1.4181 | RMSE: 8.9248 | MAE: 5.4280 | R2: 0.7822
+Epoch  13/100 | Loss: 1.4099 | RMSE: 8.8999 | MAE: 5.4129 | R2: 0.7834
+Epoch  14/100 | Loss: 1.4026 | RMSE: 8.8526 | MAE: 5.3674 | R2: 0.7857
+  ✓ Best saved (RMSE=8.8526)
+Epoch  15/100 | Loss: 1.3957 | RMSE: 8.8336 | MAE: 5.3248 | R2: 0.7866
+  ✓ Best saved (RMSE=8.8336)
+Epoch  16/100 | Loss: 1.3894 | RMSE: 8.8944 | MAE: 5.3810 | R2: 0.7836
+Epoch  17/100 | Loss: 1.3835 | RMSE: 8.9002 | MAE: 5.3904 | R2: 0.7833
+Epoch  18/100 | Loss: 1.3782 | RMSE: 8.8625 | MAE: 5.3262 | R2: 0.7852
+Epoch  19/100 | Loss: 1.3731 | RMSE: 8.8588 | MAE: 5.3315 | R2: 0.7854
+Epoch  20/100 | Loss: 1.3685 | RMSE: 8.8103 | MAE: 5.2892 | R2: 0.7877
+  ✓ Best saved (RMSE=8.8103)
+Epoch  21/100 | Loss: 1.3639 | RMSE: 8.8529 | MAE: 5.3275 | R2: 0.7856
+Epoch  22/100 | Loss: 1.3597 | RMSE: 8.8746 | MAE: 5.3275 | R2: 0.7846
+Epoch  23/100 | Loss: 1.3557 | RMSE: 8.8794 | MAE: 5.3275 | R2: 0.7844
+Epoch  24/100 | Loss: 1.3520 | RMSE: 8.9377 | MAE: 5.3677 | R2: 0.7815
+Epoch  25/100 | Loss: 1.3485 | RMSE: 8.9721 | MAE: 5.4371 | R2: 0.7798
+Epoch  26/100 | Loss: 1.3450 | RMSE: 8.9525 | MAE: 5.4047 | R2: 0.7808
+Epoch  27/100 | Loss: 1.3418 | RMSE: 8.9914 | MAE: 5.4086 | R2: 0.7789
+Epoch  28/100 | Loss: 1.3389 | RMSE: 8.9907 | MAE: 5.3739 | R2: 0.7789
+Epoch  29/100 | Loss: 1.3360 | RMSE: 8.9896 | MAE: 5.4098 | R2: 0.7790
+Epoch  30/100 | Loss: 1.3333 | RMSE: 9.0054 | MAE: 5.4054 | R2: 0.7782
+Epoch  31/100 | Loss: 1.3307 | RMSE: 9.0372 | MAE: 5.4383 | R2: 0.7766
+Epoch  32/100 | Loss: 1.3283 | RMSE: 9.0432 | MAE: 5.4399 | R2: 0.7763
+Epoch  33/100 | Loss: 1.3259 | RMSE: 9.0869 | MAE: 5.4840 | R2: 0.7742
+Epoch  34/100 | Loss: 1.3236 | RMSE: 9.1081 | MAE: 5.5360 | R2: 0.7731
+Epoch  35/100 | Loss: 1.3215 | RMSE: 9.1020 | MAE: 5.5015 | R2: 0.7734
+Epoch  36/100 | Loss: 1.3193 | RMSE: 9.2092 | MAE: 5.5956 | R2: 0.7680
+Epoch  37/100 | Loss: 1.3173 | RMSE: 9.1538 | MAE: 5.5411 | R2: 0.7708
+Epoch  38/100 | Loss: 1.3152 | RMSE: 9.1768 | MAE: 5.5529 | R2: 0.7697
+Epoch  39/100 | Loss: 1.3133 | RMSE: 9.2851 | MAE: 5.6970 | R2: 0.7642
+Epoch  40/100 | Loss: 1.3113 | RMSE: 9.1565 | MAE: 5.4890 | R2: 0.7707
+Epoch  41/100 | Loss: 1.3094 | RMSE: 9.2166 | MAE: 5.5406 | R2: 0.7677
+Epoch  42/100 | Loss: 1.3074 | RMSE: 9.1349 | MAE: 5.5423 | R2: 0.7718
+Epoch  43/100 | Loss: 1.3056 | RMSE: 9.1701 | MAE: 5.5444 | R2: 0.7700
+Epoch  44/100 | Loss: 1.3037 | RMSE: 9.1362 | MAE: 5.5650 | R2: 0.7717
+Epoch  45/100 | Loss: 1.3019 | RMSE: 9.1728 | MAE: 5.5969 | R2: 0.7699
+Epoch  46/100 | Loss: 1.3002 | RMSE: 9.1509 | MAE: 5.5256 | R2: 0.7710
+Epoch  47/100 | Loss: 1.2987 | RMSE: 9.1833 | MAE: 5.5934 | R2: 0.7693
+Epoch  48/100 | Loss: 1.2972 | RMSE: 9.2099 | MAE: 5.6479 | R2: 0.7680
+Epoch  49/100 | Loss: 1.2957 | RMSE: 9.1251 | MAE: 5.5319 | R2: 0.7723
+Epoch  50/100 | Loss: 1.2941 | RMSE: 9.3379 | MAE: 5.7084 | R2: 0.7615
+Epoch  51/100 | Loss: 1.2927 | RMSE: 9.1122 | MAE: 5.4935 | R2: 0.7729
+Epoch  52/100 | Loss: 1.2915 | RMSE: 9.1653 | MAE: 5.4938 | R2: 0.7703
+Epoch  53/100 | Loss: 1.2900 | RMSE: 9.2231 | MAE: 5.5911 | R2: 0.7673
+Epoch  54/100 | Loss: 1.2887 | RMSE: 9.1415 | MAE: 5.5763 | R2: 0.7714
+Epoch  55/100 | Loss: 1.2874 | RMSE: 9.1196 | MAE: 5.5005 | R2: 0.7725
+Epoch  56/100 | Loss: 1.2862 | RMSE: 9.2674 | MAE: 5.6377 | R2: 0.7651
+Epoch  57/100 | Loss: 1.2850 | RMSE: 9.2716 | MAE: 5.6422 | R2: 0.7649
+Epoch  58/100 | Loss: 1.2837 | RMSE: 9.1155 | MAE: 5.4911 | R2: 0.7727
+Epoch  59/100 | Loss: 1.2825 | RMSE: 9.0995 | MAE: 5.5049 | R2: 0.7735
+Epoch  60/100 | Loss: 1.2813 | RMSE: 9.2020 | MAE: 5.5744 | R2: 0.7684
+Epoch  61/100 | Loss: 1.2801 | RMSE: 9.2130 | MAE: 5.5592 | R2: 0.7679
+Epoch  62/100 | Loss: 1.2789 | RMSE: 9.1469 | MAE: 5.5706 | R2: 0.7712
+Epoch  63/100 | Loss: 1.2777 | RMSE: 9.0755 | MAE: 5.4437 | R2: 0.7747
+Epoch  64/100 | Loss: 1.2765 | RMSE: 9.0868 | MAE: 5.4483 | R2: 0.7742
+Epoch  65/100 | Loss: 1.2754 | RMSE: 9.1571 | MAE: 5.5643 | R2: 0.7707
+Epoch  66/100 | Loss: 1.2743 | RMSE: 9.1099 | MAE: 5.5065 | R2: 0.7730
+Epoch  67/100 | Loss: 1.2733 | RMSE: 9.1112 | MAE: 5.5276 | R2: 0.7730
+Epoch  68/100 | Loss: 1.2724 | RMSE: 9.1574 | MAE: 5.5815 | R2: 0.7706
+Epoch  69/100 | Loss: 1.2714 | RMSE: 9.2038 | MAE: 5.6030 | R2: 0.7683
+Epoch  70/100 | Loss: 1.2705 | RMSE: 9.2119 | MAE: 5.6192 | R2: 0.7679
+Epoch  71/100 | Loss: 1.2696 | RMSE: 9.3001 | MAE: 5.6574 | R2: 0.7634
+Epoch  72/100 | Loss: 1.2688 | RMSE: 9.3050 | MAE: 5.7139 | R2: 0.7632
+Epoch  73/100 | Loss: 1.2679 | RMSE: 9.1631 | MAE: 5.5218 | R2: 0.7704
+Epoch  74/100 | Loss: 1.2670 | RMSE: 9.2197 | MAE: 5.6114 | R2: 0.7675
+Epoch  75/100 | Loss: 1.2663 | RMSE: 9.2019 | MAE: 5.6368 | R2: 0.7684
+Epoch  76/100 | Loss: 1.2654 | RMSE: 9.2484 | MAE: 5.6947 | R2: 0.7661
+Epoch  77/100 | Loss: 1.2647 | RMSE: 9.1855 | MAE: 5.6871 | R2: 0.7692
+Epoch  78/100 | Loss: 1.2638 | RMSE: 9.2242 | MAE: 5.7119 | R2: 0.7673
+Epoch  79/100 | Loss: 1.2631 | RMSE: 9.2078 | MAE: 5.5943 | R2: 0.7681
+Epoch  80/100 | Loss: 1.2622 | RMSE: 9.0925 | MAE: 5.5121 | R2: 0.7739
+Epoch  81/100 | Loss: 1.2616 | RMSE: 9.2218 | MAE: 5.6086 | R2: 0.7674
+Epoch  82/100 | Loss: 1.2608 | RMSE: 9.1966 | MAE: 5.6447 | R2: 0.7687
+Epoch  83/100 | Loss: 1.2602 | RMSE: 9.2693 | MAE: 5.6444 | R2: 0.7650
+Epoch  84/100 | Loss: 1.2595 | RMSE: 9.2767 | MAE: 5.6738 | R2: 0.7646
+Epoch  85/100 | Loss: 1.2588 | RMSE: 9.2324 | MAE: 5.6048 | R2: 0.7669
+Epoch  86/100 | Loss: 1.2581 | RMSE: 9.1485 | MAE: 5.5512 | R2: 0.7711
+Epoch  87/100 | Loss: 1.2575 | RMSE: 9.1979 | MAE: 5.5851 | R2: 0.7686
+Epoch  88/100 | Loss: 1.2569 | RMSE: 9.0859 | MAE: 5.5180 | R2: 0.7742
+Epoch  89/100 | Loss: 1.2562 | RMSE: 9.2456 | MAE: 5.6326 | R2: 0.7662
+Epoch  90/100 | Loss: 1.2556 | RMSE: 9.2493 | MAE: 5.6927 | R2: 0.7660
+Epoch  91/100 | Loss: 1.2549 | RMSE: 9.3141 | MAE: 5.7061 | R2: 0.7627
+Epoch  92/100 | Loss: 1.2544 | RMSE: 9.3061 | MAE: 5.6681 | R2: 0.7631
+Epoch  93/100 | Loss: 1.2538 | RMSE: 9.3010 | MAE: 5.6459 | R2: 0.7634
+Epoch  94/100 | Loss: 1.2531 | RMSE: 9.2401 | MAE: 5.6180 | R2: 0.7665
+Epoch  95/100 | Loss: 1.2525 | RMSE: 9.1656 | MAE: 5.5979 | R2: 0.7702
+Epoch  96/100 | Loss: 1.2519 | RMSE: 9.1741 | MAE: 5.5721 | R2: 0.7698
+Epoch  97/100 | Loss: 1.2513 | RMSE: 9.1880 | MAE: 5.5668 | R2: 0.7691
+Epoch  98/100 | Loss: 1.2508 | RMSE: 9.3571 | MAE: 5.7220 | R2: 0.7605
+Epoch  99/100 | Loss: 1.2501 | RMSE: 9.3251 | MAE: 5.7536 | R2: 0.7622
+Epoch 100/100 | Loss: 1.2495 | RMSE: 9.2571 | MAE: 5.6609 | R2: 0.7656
+
+Base paper training done.
+Best Val RMSE : 8.8103 Mg C/ha
+Paper reports : 12.17 Mg C/ha

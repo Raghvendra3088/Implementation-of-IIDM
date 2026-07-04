@@ -1,0 +1,5 @@
+Best ckpt: epoch=31, val_rmse=26.2581
+Test RMSE : 26.2729 Mg C/ha
+Test MAE  : 19.8667 Mg C/ha
+Test R2   : 0.7821
+Paper RMSE: 12.17 | Paper MAE: 9.91

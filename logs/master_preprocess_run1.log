@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "rasterio/_io.pyx", line 1752, in rasterio._io.DatasetWriterBase.write
+  File "rasterio/_io.pyx", line 173, in rasterio._io.io_multi_band
+  File "rasterio/_io.pyx", line 179, in rasterio._io.io_multi_band
+  File "rasterio/_err.pyx", line 325, in rasterio._err.StackChecker.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: TIFFAppendToStrip:Maximum TIFF file size exceeded. Use BIGTIFF=YES creation option.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 572, in <module>
+    main()
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 553, in main
+    canopy_path = step3_canopy()
+                  ^^^^^^^^^^^^^^
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 239, in step3_canopy
+    reproject_clip(merged, dst)
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/preprocessing/master_preprocess.py", line 72, in reproject_clip
+    dst.write(data)
+  File "rasterio/_io.pyx", line 1754, in rasterio._io.DatasetWriterBase.write
+rasterio.errors.RasterioIOError: Write failed. See previous exception for details.
+=======================================================
+  IIDM MASTER PREPROCESSING PIPELINE
+=======================================================
+
+=======================================================
+  STEP 1 — Sentinel-2 Band Stacking
+=======================================================
+  [OK] B02 → merged + reprojected
+  [OK] B03 → merged + reprojected
+  [OK] B04 → merged + reprojected
+  [OK] B08 → merged + reprojected
+  [SAVED] sentinel2_stacked.tif  shape=(4, 13871, 8700)
+
+=======================================================
+  STEP 2 — DEM Processing
+=======================================================
+  [SAVED] dem_processed.tif
+
+=======================================================
+  STEP 3 — ETH Canopy Height
+=======================================================

@@ -1,0 +1,33 @@
+
+=======================================================
+  IIDM Evaluation
+=======================================================
+  Device      : cuda
+  Checkpoint  : checkpoints/BEST_RESULTS_FINAL/full_model_epoch300.pth
+  DDIM steps  : 50
+  Carbon range: [0.04, 207.97] Mg C/ha
+  [test] 1601 patches
+  Test patches: 1601
+Traceback (most recent call last):
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/evaluate.py", line 369, in <module>
+    evaluate(args)
+  File "/DATA/raghvendra3088/Implementation-of-IIDM/src/evaluate.py", line 114, in evaluate
+    model.inr.load_state_dict(ckpt["inr"])
+  File "/DATA/raghvendra3088/ml_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2638, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for SIRENINR:
+	Missing key(s) in state_dict: "sampler.projs.0.0.weight", "sampler.projs.0.1.weight", "sampler.projs.0.1.bias", "sampler.projs.1.0.weight", "sampler.projs.1.1.weight", "sampler.projs.1.1.bias", "sampler.projs.2.0.weight", "sampler.projs.2.1.weight", "sampler.projs.2.1.bias", "sampler.projs.3.0.weight", "sampler.projs.3.1.weight", "sampler.projs.3.1.bias", "blocks.0.norm.weight", "blocks.0.norm.bias", "blocks.1.norm.weight", "blocks.1.norm.bias", "blocks.2.norm.weight", "blocks.2.norm.bias", "blocks.3.norm.weight", "blocks.3.norm.bias", "blocks.4.norm.weight", "blocks.4.norm.bias", "blocks.4.fc1.weight", "blocks.4.fc1.bias", "blocks.4.fc2.weight", "blocks.4.fc2.bias", "blocks.5.norm.weight", "blocks.5.norm.bias", "blocks.5.fc1.weight", "blocks.5.fc1.bias", "blocks.5.fc2.weight", "blocks.5.fc2.bias". 
+	Unexpected key(s) in state_dict: "feat_pool.proj.0.weight", "feat_pool.proj.0.bias". 
+	size mismatch for input_proj.0.weight: copying a param with shape torch.Size([256, 520]) from checkpoint, the shape in current model is torch.Size([256, 296]).
+	size mismatch for blocks.0.fc1.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([512, 256]).
+	size mismatch for blocks.0.fc1.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for blocks.0.fc2.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([256, 512]).
+	size mismatch for blocks.1.fc1.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([512, 256]).
+	size mismatch for blocks.1.fc1.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for blocks.1.fc2.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([256, 512]).
+	size mismatch for blocks.2.fc1.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([512, 256]).
+	size mismatch for blocks.2.fc1.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for blocks.2.fc2.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([256, 512]).
+	size mismatch for blocks.3.fc1.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([512, 256]).
+	size mismatch for blocks.3.fc1.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for blocks.3.fc2.weight: copying a param with shape torch.Size([256, 256]) from checkpoint, the shape in current model is torch.Size([256, 512]).
