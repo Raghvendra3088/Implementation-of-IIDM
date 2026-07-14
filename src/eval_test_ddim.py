@@ -18,7 +18,7 @@ from src.train_base import PatchDataset, make_schedule, ddim_sample
 def main():
     import argparse
     p = argparse.ArgumentParser()
-    p.add_argument('--patch_dir',  default='data/processed/patches_v2')
+    p.add_argument('--patch_dir',  default='data/processed/patches')
     p.add_argument('--ckpt',       default='checkpoints/base_paper/base_best.pth')
     p.add_argument('--batch_size', type=int, default=4)
     p.add_argument('--T',          type=int, default=1000)
@@ -38,7 +38,7 @@ def main():
     from src.models.base_kd_unet import BaseKDUNet, UNET_CH
     import torch.nn.functional as F
 
-    student = KDVGGStudent16(in_channels=4).to(device)
+    student = KDVGGStudent16(in_channels=6).to(device)
     COND_CH = VGG19_STUDENT_CH_16[-1]
     unet = BaseKDUNet(in_ch=COND_CH + 1, cond_ch=COND_CH).to(device)
 
@@ -47,15 +47,16 @@ def main():
     student.load_state_dict(ckpt['student'])
     unet.load_state_dict(ckpt['unet'])
     print(f"Loaded checkpoint: epoch={ckpt.get('epoch')}, "
-          f"val_rmse={ckpt.get('rmse'):.4f}")
+          f"val_rmse={ckpt.get('rmse', ckpt.get('val_rmse', 'N/A'))}")
 
     student.eval(); unet.eval()
 
     betas, alpha_bar = make_schedule(args.T, device)
 
     # Same normalization constants as train_base.py
-    C_MEAN = 33.41
-    C_STD  = 38.21
+    C_MIN = 4.816495895385742
+    C_MAX = 129.18380737304688
+    
 
     all_gt, all_pred = [], []
     with torch.no_grad():
@@ -71,8 +72,8 @@ def main():
             y0_pred = ddim_sample(unet, f0_up, alpha_bar, args.T,
                                    device, n_steps=args.n_steps, seed=args.seed)
 
-            pred_mg = y0_pred.cpu().numpy() * C_STD + C_MEAN
-            gt_mg   = y0.cpu().numpy()      * C_STD + C_MEAN
+            pred_mg = (y0_pred.cpu().numpy() * 0.5 + 0.5) * (C_MAX - C_MIN) + C_MIN
+            gt_mg   = (y0.cpu().numpy() * 0.5 + 0.5) * (C_MAX - C_MIN) + C_MIN
             m_np    = mask.cpu().numpy().astype(bool)
 
             all_pred.append(pred_mg[m_np])

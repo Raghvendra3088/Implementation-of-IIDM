@@ -1,24 +1,7 @@
-# Data — never push
+checkpoints/*.pth
 data/
-*.h5
-*.nc
-*.npy
-
-# Large model checkpoints
-checkpoints/
-*.pth
-*.pt
-
-# Raw rasters
-*.tif
-*.tiff
-
-# Python
+results/*.tif
+results/*.png
 __pycache__/
 *.pyc
-.DS_Store
-venv/
-iidm_env/
-ml_env/
-.ipynb_checkpoints/
-wandb/
+*.zip

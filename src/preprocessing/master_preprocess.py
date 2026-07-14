@@ -122,15 +122,16 @@ def clip_raster_to_bbox(src_path, dst_path, bbox_wgs84):
     return data
 
 
-def normalize(arr, nodata=-9999.0):
+def normalize_carbon(arr, nodata=-9999.0):
+    """Normalize carbon directly to [-1, 1] for diffusion compatibility."""
     valid = arr[arr != nodata]
     if valid.size == 0:
         return arr, 0.0, 1.0
     vmin = float(np.percentile(valid, 2))
     vmax = float(np.percentile(valid, 98))
-    out  = np.full_like(arr, 0.0, dtype=np.float32)
+    out  = np.full_like(arr, -1.0, dtype=np.float32)
     mask = arr != nodata
-    out[mask] = np.clip((arr[mask] - vmin) / (vmax - vmin + 1e-8), 0, 1)
+    out[mask] = np.clip((arr[mask] - vmin) / (vmax - vmin + 1e-8) * 2.0 - 1.0, -1.0, 1.0)
     return out, vmin, vmax
 
 
@@ -451,7 +452,7 @@ def step7_patches(aligned, mask_arr):
     norm_stats["canopy"]    = {"min": vmin, "max": vmax}
     norm_canopy             = norm_canopy[np.newaxis]
 
-    norm_carbon, vmin, vmax = normalize(carbon_data[0])
+    norm_carbon, vmin, vmax = normalize_carbon(carbon_data[0])
     norm_stats["carbon"]    = {"min": vmin, "max": vmax}
     norm_carbon             = norm_carbon[np.newaxis]
 

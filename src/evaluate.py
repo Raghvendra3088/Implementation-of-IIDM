@@ -31,6 +31,7 @@ from skimage.metrics import structural_similarity as ssim_fn
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.models.iidm  import IIDM
+
 from src.train        import IIDMDataset
 
 
@@ -108,9 +109,10 @@ def evaluate(args):
             "Run src/train.py first."
         )
 
-    ckpt = torch.load(args.ckpt, map_location=device)
+    ckpt = torch.load(args.ckpt, map_location='cpu')
     model.student_vgg.load_state_dict(ckpt["student_vgg"])
     model.unet.load_state_dict(ckpt["unet"])
+
     model.inr.load_state_dict(ckpt["inr"])
     if "teacher_cond" in ckpt:
         model.teacher_cond.load_state_dict(ckpt["teacher_cond"])
@@ -171,6 +173,12 @@ def evaluate(args):
         "carbon_vmin": C_MIN,
         "carbon_vmax": C_MAX,
     }
+    
+   # NEW: RMSE% / MAE% relative to mean carbon density
+    carbon_mean = float(np.mean(np.concatenate(all_gts)))
+    metrics["carbon_mean"]   = carbon_mean
+    metrics["RMSE_percent"]  = (metrics["RMSE"] / carbon_mean) * 100
+    metrics["MAE_percent"]   = (metrics["MAE"]  / carbon_mean) * 100
 
     print(f"\n{'─'*45}")
     print(f"  TEST RESULTS ({len(test_ds)} patches)")
@@ -179,7 +187,10 @@ def evaluate(args):
     print(f"  MAE  : {metrics['MAE']:.4f} ± {metrics['MAE_std']:.4f}  Mg C/ha")
     print(f"  SSIM : {metrics['SSIM']:.4f}")
     print(f"  R²   : {metrics['R2']:.4f}")
+    print(f"  RMSE%: {metrics['RMSE_percent']:.2f}%  (Paper: 12.17%)")
+    print(f"  MAE% : {metrics['MAE_percent']:.2f}%")
     print(f"{'─'*45}")
+
 
     out_path = Path("results/metrics.json")
     with open(out_path, "w") as f:

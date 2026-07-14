@@ -37,7 +37,7 @@ def main():
     ld = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=4)
     print(f"Pretraining 16-layer eigenbasis on {len(ds)} images")
 
-    teacher = VGG19Teacher16(in_channels=4).to(device).eval()
+    teacher = VGG19Teacher16(in_channels=6).to(device).eval()
     eigenbasis = MultiLayerEigenbasis16(VGG19_TEACHER_CH_16, VGG19_STUDENT_CH_16).to(device)
 
     optimizer = torch.optim.Adam(eigenbasis.parameters(), lr=args.lr)

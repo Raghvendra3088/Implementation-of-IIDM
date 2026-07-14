@@ -65,7 +65,7 @@ def ddim_sample(unet, f0_up, alpha_bar, T, device, n_steps=20, seed=42):
         eps_pred = unet(unet_in, t_tensor, f0_up)
 
         y0_pred = (y_t - (1 - ab_t).sqrt() * eps_pred) / (ab_t.sqrt() + 1e-8)
-        y0_pred = y0_pred.clamp(-3, 3)
+        y0_pred = y0_pred.clamp(-1, 1)
 
         if t_next > 0:
             y_t = ab_tm1.sqrt() * y0_pred + (1 - ab_tm1).sqrt() * eps_pred
@@ -122,8 +122,9 @@ def main():
 
     # Carbon normalization from norm_stats.json
     # mean=36.20, std=39.78 Mg C/ha
-    C_MEAN = 33.41
-    C_STD  = 38.21
+    C_MIN = 4.816495895385742
+    C_MAX = 129.18380737304688
+
 
     best_rmse   = float('inf')
     start_epoch = 1
@@ -199,10 +200,10 @@ def main():
                 eps_p    = unet(unet_in, t_tensor, f0_up)
 
                 y0_pred = (y_t_v - (1 - ab_v).sqrt() * eps_p) / (ab_v.sqrt() + 1e-8)
-                y0_pred = y0_pred.clamp(-3, 3)
+                y0_pred = y0_pred.clamp(-1, 1)
 
-                pred_mg = y0_pred.cpu().numpy() * C_STD + C_MEAN
-                gt_mg   = y0.cpu().numpy()      * C_STD + C_MEAN
+                pred_mg = (y0_pred.cpu().numpy() * 0.5 + 0.5) * (C_MAX - C_MIN) + C_MIN
+                gt_mg   = (y0.cpu().numpy() * 0.5 + 0.5) * (C_MAX - C_MIN) + C_MIN
                 m_np    = mask.cpu().numpy().astype(bool)
 
                 all_pred.append(pred_mg[m_np])

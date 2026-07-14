@@ -43,8 +43,8 @@ def main():
     ld = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=4)
     print(f"Blockwise KD training on {len(ds)} images, 16 sequential stages")
 
-    teacher    = VGG19Teacher16(in_channels=4).to(device).eval()
-    student    = KDVGGStudent16(in_channels=4).to(device)
+    teacher    = VGG19Teacher16(in_channels=6).to(device).eval()
+    student    = KDVGGStudent16(in_channels=6).to(device)
     decoder    = VGGDecoder16(out_channels=4).to(device)
     eigenbasis = MultiLayerEigenbasis16([64,64,128,128,256,256,256,256,512,512,512,512,512,512,512,512],
                                         VGG19_STUDENT_CH_16).to(device)
