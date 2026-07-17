@@ -26,9 +26,9 @@ class PatchDataset(Dataset):
     def __len__(self): return len(self.files)
     def __getitem__(self, i):
         d = np.load(self.files[i])
-        x = torch.from_numpy(d['x']).float()   # (6, H, W)
-        y = torch.from_numpy(d['y']).float()   # (1, H, W)
-        m = torch.from_numpy(d['m']).float()   # (1, H, W) mask
+        x = torch.from_numpy(d['image']).float()            # (6, H, W)
+        y = torch.from_numpy(d['carbon']).float().unsqueeze(0)  # (1, H, W)
+        m = torch.from_numpy(d['mask']).float().unsqueeze(0)    # (1, H, W)
         return x, y, m
 
 # ── Simple carbon head (for student_only and student_kd_inr) ─────────────────
