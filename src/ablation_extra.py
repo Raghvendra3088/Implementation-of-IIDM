@@ -143,7 +143,7 @@ def main():
         student.eval()   # student frozen
         if use_diff: unet.train()
         if use_inr:  inr.train()
-        head.train() if use_head else None
+        if use_head and head is not None: head.train()
 
         train_loss = 0.0
         for x, y0, mask in train_ld:
