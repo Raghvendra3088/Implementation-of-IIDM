@@ -110,19 +110,27 @@ def main():
     if use_diff:
         unet = BaseKDUNet(in_ch=COND_CH + 1, cond_ch=COND_CH).to(device)
         betas, alpha_bar = make_schedule(args.T, device)
-        head = CarbonHead(COND_CH).to(device)   # final carbon from denoised
+        head = CarbonHead(COND_CH).to(device)
     elif use_inr:
         from src.models.inr import SIRENINR
-        inr  = SIRENINR().to(device)
-        head = CarbonHead(COND_CH).to(device)
+        # INR expects student_chs=[32,64,128,256] — project COND_CH=16 to 4 scales
+        inr_proj = nn.ModuleList([
+            nn.Conv2d(COND_CH, 32,  1).to(device),
+            nn.Conv2d(COND_CH, 64,  1).to(device),
+            nn.Conv2d(COND_CH, 128, 1).to(device),
+            nn.Conv2d(COND_CH, 256, 1).to(device),
+        ])
+        inr = SIRENINR(student_chs=[32, 64, 128, 256]).to(device)
+        head = None
     else:  # student_only
         head = CarbonHead(COND_CH).to(device)
+        inr_proj = None
 
     # Optimizer — student frozen after blockwise KD, only new components train
     if use_diff:
         params = list(unet.parameters()) + list(head.parameters())
     elif use_inr:
-        params = list(inr.parameters())  + list(head.parameters())
+        params = list(inr.parameters()) + sum([list(p.parameters()) for p in inr_proj], [])
     else:
         params = list(head.parameters())
 
@@ -154,7 +162,10 @@ def main():
                 loss = ((pred - y0).abs() * mask).sum() / (mask.sum() + 1e-8)
 
             elif args.mode == 'student_kd_inr':
-                pred = inr([s_feats[-1]], H=H, W=W)
+                # Project single feat to 4 scales for INR
+                f = s_feats[-1]
+                feats_4 = [p(f) for p in inr_proj]
+                pred = inr(feats_4, H=H, W=W)
                 loss = ((pred - y0).abs() * mask).sum() / (mask.sum() + 1e-8)
 
             elif args.mode == 'student_kd_diff':
