@@ -60,10 +60,6 @@ def compute_rmse(pred, gt, mask, C_MIN, C_MAX):
     g = ((gt.clamp(-1,1)   + 1)/2 * (C_MAX - C_MIN) + C_MIN)
     err = ((p - g)**2 * valid).sum() / n_valid
     return err.sqrt().item()
-    p = ((pred.clamp(-1,1) + 1) / 2) * (C_MAX - C_MIN) + C_MIN
-    g = ((gt.clamp(-1,1)   + 1) / 2) * (C_MAX - C_MIN) + C_MIN
-    err = ((p - g) ** 2 * valid).sum() / n_valid
-    return err.sqrt().item()
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
