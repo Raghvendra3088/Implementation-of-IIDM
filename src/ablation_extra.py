@@ -52,10 +52,19 @@ def make_schedule(T, device):
 
 # ── RMSE util ─────────────────────────────────────────────────────────────────
 def compute_rmse(pred, gt, mask, C_MIN, C_MAX):
+    valid = (mask > 0).float()
+    n_valid = valid.sum()
+    if n_valid < 1:
+        return 999.0
     p = ((pred.clamp(-1,1) + 1)/2 * (C_MAX - C_MIN) + C_MIN)
     g = ((gt.clamp(-1,1)   + 1)/2 * (C_MAX - C_MIN) + C_MIN)
-    err = ((p - g)**2 * mask).sum() / (mask.sum() + 1e-8)
+    err = ((p - g)**2 * valid).sum() / n_valid
     return err.sqrt().item()
+    p = ((pred.clamp(-1,1) + 1) / 2) * (C_MAX - C_MIN) + C_MIN
+    g = ((gt.clamp(-1,1)   + 1) / 2) * (C_MAX - C_MIN) + C_MIN
+    err = ((p - g) ** 2 * valid).sum() / n_valid
+    return err.sqrt().item()
+
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
@@ -84,10 +93,13 @@ def main():
     # Dataset
     train_ds = PatchDataset(args.patch_dir, 'train')
     val_ds   = PatchDataset(args.patch_dir, 'val')
-    train_ld = DataLoader(train_ds, batch_size=args.batch_size,
+    # INR mode memory-heavy: use smaller batch
+    eff_bs = max(1, args.batch_size // 2) if args.mode == 'student_kd_inr' else args.batch_size
+    train_ld = DataLoader(train_ds, batch_size=eff_bs,
                           shuffle=True,  num_workers=4, pin_memory=True)
-    val_ld   = DataLoader(val_ds,   batch_size=args.batch_size,
+    val_ld   = DataLoader(val_ds,   batch_size=eff_bs,
                           shuffle=False, num_workers=2, pin_memory=True)
+    print(f"  batch_size: {eff_bs} ({'halved for INR' if eff_bs < args.batch_size else 'normal'})")
     print(f"  Train: {len(train_ds)} | Val: {len(val_ds)}")
 
     # Models — always need student
