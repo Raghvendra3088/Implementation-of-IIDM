@@ -211,7 +211,8 @@ def main():
 
                 val_rmses.append(compute_rmse(pred, y0, mask, C_MIN, C_MAX))
 
-        val_rmse = float(np.mean(val_rmses))
+        valid_rmses = [r for r in val_rmses if r < 900]
+        val_rmse = float(np.mean(valid_rmses)) if valid_rmses else 999.0
         print(f"Epoch {epoch:3d}/{args.epochs} | Loss: {train_loss:.4f} | Val RMSE: {val_rmse:.4f}")
 
         if val_rmse < best_rmse:
