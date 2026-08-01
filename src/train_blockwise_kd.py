@@ -36,15 +36,15 @@ def main():
     p.add_argument('--save_path', default='checkpoints/blockwise_kd.pth')
     args = p.parse_args()
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
     os.makedirs(os.path.dirname(args.save_path), exist_ok=True)
 
     ds = ImageOnlyDataset(args.patch_dir)
     ld = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=4)
     print(f"Blockwise KD training on {len(ds)} images, 16 sequential stages")
 
-    teacher    = VGG19Teacher16(in_channels=6).to(device).eval()
-    student    = KDVGGStudent16(in_channels=6).to(device)
+    teacher    = VGG19Teacher16(in_channels=4).to(device).eval()
+    student    = KDVGGStudent16(in_channels=4).to(device)
     decoder    = VGGDecoder16(out_channels=4).to(device)
     eigenbasis = MultiLayerEigenbasis16([64,64,128,128,256,256,256,256,512,512,512,512,512,512,512,512],
                                         VGG19_STUDENT_CH_16).to(device)
@@ -86,7 +86,15 @@ def main():
                 proj_up = torch.einsum('ec,bes->bcs', WN, f_bar_e)  # W_N^T F_bar_e_N  (B, C_N, HW)
                 f_bar_teacher = t_feats[N-1].view(B, -1, H*W)
                 f_bar_teacher = f_bar_teacher - f_bar_teacher.mean(dim=2, keepdim=True)
-                loss_enc = F.mse_loss(proj_up, f_bar_teacher)
+                loss_var = F.mse_loss(proj_up, f_bar_teacher)
+                
+                # Match the global spatial means
+                f_mean_e = fN_e.view(B, C, H*W).mean(dim=2)  # (B, C_N_e)
+                t_mean   = t_feats[N-1].view(B, -1, H*W).mean(dim=2) # (B, C_N)
+                f_mean_proj = torch.einsum('ec,be->bc', WN, f_mean_e)
+                loss_mean = F.mse_loss(f_mean_proj, t_mean)
+                
+                loss_enc = loss_var + loss_mean
 
                 # Decoder: reconstruct from fN_e down to relu(N-1)_e / image
                 dec_out = decoder.forward_from(fN_e, N)

@@ -19,7 +19,7 @@ def main():
     import argparse
     p = argparse.ArgumentParser()
     p.add_argument('--patch_dir',  default='data/processed/patches')
-    p.add_argument('--ckpt',       default='checkpoints/base_paper/base_best.pth')
+    p.add_argument('--ckpt',       default='checkpoints/base_paper/base_epoch_100.pth')
     p.add_argument('--batch_size', type=int, default=4)
     p.add_argument('--T',          type=int, default=1000)
     p.add_argument('--n_steps',    type=int, default=20)
@@ -38,9 +38,8 @@ def main():
     from src.models.base_kd_unet import BaseKDUNet, UNET_CH
     import torch.nn.functional as F
 
-    student = KDVGGStudent16(in_channels=6).to(device)
-    COND_CH = VGG19_STUDENT_CH_16[-1]
-    unet = BaseKDUNet(in_ch=COND_CH + 1, cond_ch=COND_CH).to(device)
+    student = KDVGGStudent16(in_channels=4).to(device)
+    unet = BaseKDUNet(in_ch=5).to(device)
 
     assert os.path.exists(args.ckpt), f"Checkpoint not found: {args.ckpt}"
     ckpt = torch.load(args.ckpt, map_location=device)
@@ -65,11 +64,10 @@ def main():
             B, _, H, W = y0.shape
 
             s_feats = student(x)
-            f0      = s_feats[-1]
-            f0_up = F.interpolate(f0, size=(H, W), mode='bilinear',
-                                  align_corners=False)
+            f0 = s_feats[-1]
+            f0_up = F.interpolate(f0, size=(H, W), mode='bilinear', align_corners=False)
 
-            y0_pred = ddim_sample(unet, f0_up, alpha_bar, args.T,
+            y0_pred = ddim_sample(unet, x, f0_up, alpha_bar, args.T,
                                    device, n_steps=args.n_steps, seed=args.seed)
 
             pred_mg = (y0_pred.cpu().numpy() * 0.5 + 0.5) * (C_MAX - C_MIN) + C_MIN

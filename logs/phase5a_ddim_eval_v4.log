@@ -1,0 +1,16 @@
+Device: cuda
+  test: 1623 patches
+Test: 1623 patches
+Loaded checkpoint: epoch=100, val_rmse=N/A
+  batch 50/102
+  batch 100/102
+
+==================================================
+TEST SET RESULTS (DDIM, n_steps=20, paper Table A3)
+==================================================
+Test RMSE : 47.9352 Mg C/ha
+Test MAE  : 34.8040 Mg C/ha
+Test R2   : -0.6171
+--------------------------------------------------
+Paper RMSE: 12.17 | Paper MAE: 9.91
+==================================================

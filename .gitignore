@@ -1,7 +1,15 @@
-checkpoints/*.pth
-data/
-results/*.tif
-results/*.png
+# Data and specific large files
+alos_dem/
+eth_canopy/
+sentinel2/
+patches_final/
+patches_v2/
+tmp_processed/
+GEDI_L4A_AGB_Density_V2/
+SAR_Sentinel-1/
+*.tif
+*.npy
+*.npz
+*.pth
+*.pt
 __pycache__/
-*.pyc
-*.zip
