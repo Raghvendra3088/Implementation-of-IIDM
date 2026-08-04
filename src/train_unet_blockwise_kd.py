@@ -4,12 +4,14 @@ Matches Student UNet features to Teacher UNet features, stage by stage.
 """
 import os, sys, glob
 import torch
+torch.backends.cudnn.enabled = False
 import torch.nn.functional as F
+torch.backends.cudnn.enabled = False
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.models.vgg19_full import KDVGGStudent16
+from src.models.vgg19_full import KDVGGStudent16, VGG19_STUDENT_CH_16
 from src.models.base_kd_unet import TeacherUNet, BaseKDUNet
 from src.models.eigenbasis_unet import MultiLayerEigenbasisUNet
 

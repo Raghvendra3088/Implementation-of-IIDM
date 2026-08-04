@@ -104,13 +104,11 @@ class ImplicitMLPUp(nn.Module):
         return F.pixel_shuffle(out, self.scale)
 
 
-class DoubleConv(nn.Module):
+class SingleConv(nn.Module):
     def __init__(self, in_ch, out_ch):
         super().__init__()
         self.net = nn.Sequential(
             nn.Conv2d(in_ch, out_ch, 3, padding=1),
-            nn.BatchNorm2d(out_ch), nn.ReLU(),
-            nn.Conv2d(out_ch, out_ch, 3, padding=1),
             nn.BatchNorm2d(out_ch), nn.ReLU(),
         )
     def forward(self, x): return self.net(x)
@@ -140,28 +138,28 @@ class BaseKDUNet(nn.Module):
         self.pool = nn.MaxPool2d(2)
 
         # Encoder: in_ch -> 44 -> 88 -> 176 -> 352 -> 704
-        self.enc1 = DoubleConv(in_ch, ch[0])
-        self.enc2 = DoubleConv(ch[0], ch[1])
-        self.enc3 = DoubleConv(ch[1], ch[2])
-        self.enc4 = DoubleConv(ch[2], ch[3])
-        self.bot  = DoubleConv(ch[3], ch[4])
+        self.enc1 = SingleConv(in_ch, ch[0])
+        self.enc2 = SingleConv(ch[0], ch[1])
+        self.enc3 = SingleConv(ch[1], ch[2])
+        self.enc4 = SingleConv(ch[2], ch[3])
+        self.bot  = SingleConv(ch[3], ch[4])
 
         # Decoder — 4 levels
         # up4: bot(704)->352, cat e4(352) -> 704, dec4->352
         self.up4  = ImplicitMLPUp(ch[4], ch[3])
-        self.dec4 = DoubleConv(ch[3] + ch[3], ch[3])
+        self.dec4 = SingleConv(ch[3] + ch[3], ch[3])
 
         # up3: 352->176, cat e3(176) -> 352, dec3->176
         self.up3  = ImplicitMLPUp(ch[3], ch[2])
-        self.dec3 = DoubleConv(ch[2] + ch[2], ch[2])
+        self.dec3 = SingleConv(ch[2] + ch[2], ch[2])
 
         # up2: 176->88, cat e2(88) -> 176, dec2->88
         self.up2  = ImplicitMLPUp(ch[2], ch[1])
-        self.dec2 = DoubleConv(ch[1] + ch[1], ch[1])
+        self.dec2 = SingleConv(ch[1] + ch[1], ch[1])
 
         # up1: 88->44, cat e1(44) -> 88, dec1->44 [restores full H,W]
         self.up1  = ImplicitMLPUp(ch[1], ch[0])
-        self.dec1 = DoubleConv(ch[0] + ch[0], ch[0])
+        self.dec1 = SingleConv(ch[0] + ch[0], ch[0])
 
         self.out  = nn.Conv2d(ch[0], 1, 1)
 
@@ -251,28 +249,28 @@ class TeacherUNet(nn.Module):
         
         self.pool = nn.MaxPool2d(2)
 
-        self.enc1 = DoubleConv(in_ch, ch[0])
-        self.enc2 = DoubleConv(ch[0], ch[1])
-        self.enc3 = DoubleConv(ch[1], ch[2])
-        self.enc4 = DoubleConv(ch[2], ch[3])
+        self.enc1 = SingleConv(in_ch, ch[0])
+        self.enc2 = SingleConv(ch[0], ch[1])
+        self.enc3 = SingleConv(ch[1], ch[2])
+        self.enc4 = SingleConv(ch[2], ch[3])
 
         self.cross_attn = nn.ModuleList([
             CrossAttentionMLP(c, cond_ch) for c, cond_ch in zip(ch, cond_chs)
         ])
 
-        self.bot = DoubleConv(ch[3], ch[4])
+        self.bot = SingleConv(ch[3], ch[4])
 
         self.up4  = ImplicitMLPUp(ch[4], ch[3])
-        self.dec4 = DoubleConv(ch[3] + ch[3], ch[3])
+        self.dec4 = SingleConv(ch[3] + ch[3], ch[3])
 
         self.up3  = ImplicitMLPUp(ch[3], ch[2])
-        self.dec3 = DoubleConv(ch[2] + ch[2], ch[2])
+        self.dec3 = SingleConv(ch[2] + ch[2], ch[2])
 
         self.up2  = ImplicitMLPUp(ch[2], ch[1])
-        self.dec2 = DoubleConv(ch[1] + ch[1], ch[1])
+        self.dec2 = SingleConv(ch[1] + ch[1], ch[1])
 
         self.up1  = ImplicitMLPUp(ch[1], ch[0])
-        self.dec1 = DoubleConv(ch[0] + ch[0], ch[0])
+        self.dec1 = SingleConv(ch[0] + ch[0], ch[0])
 
         self.out  = nn.Conv2d(ch[0], 1, 1)   # (B, 1, H, W)
         

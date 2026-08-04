@@ -7,7 +7,9 @@ Final test eval: full DDIM 20 steps (paper Table A3).
 """
 import os, sys, json
 import torch
+torch.backends.cudnn.enabled = False
 import torch.nn.functional as F
+torch.backends.cudnn.enabled = False
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 
@@ -17,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 class PatchDataset(Dataset):
     def __init__(self, root, split):
         import glob
+        self.split = split
         split_dir = os.path.join(root, split)
         self.files = sorted(glob.glob(os.path.join(split_dir, '*.npz')))
         if len(self.files) == 0:
@@ -30,6 +33,22 @@ class PatchDataset(Dataset):
         x = torch.from_numpy(d['image'])
         y = torch.from_numpy(d['carbon']).unsqueeze(0)
         m = torch.from_numpy(d['mask']).unsqueeze(0)
+        
+        if self.split == 'train':
+            if torch.rand(1) > 0.5:
+                x = torch.flip(x, dims=[2])
+                y = torch.flip(y, dims=[2])
+                m = torch.flip(m, dims=[2])
+            if torch.rand(1) > 0.5:
+                x = torch.flip(x, dims=[1])
+                y = torch.flip(y, dims=[1])
+                m = torch.flip(m, dims=[1])
+            k = torch.randint(0, 4, (1,)).item()
+            if k > 0:
+                x = torch.rot90(x, k, dims=[1, 2])
+                y = torch.rot90(y, k, dims=[1, 2])
+                m = torch.rot90(m, k, dims=[1, 2])
+
         return x, y, m
 
 

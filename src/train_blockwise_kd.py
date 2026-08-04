@@ -37,6 +37,8 @@ def main():
     args = p.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
+    if torch.cuda.is_available():
+        torch.backends.cudnn.enabled = False # Bypass cuDNN error on this server
     os.makedirs(os.path.dirname(args.save_path), exist_ok=True)
 
     ds = ImageOnlyDataset(args.patch_dir)

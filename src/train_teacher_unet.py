@@ -45,6 +45,7 @@ def main():
     p.add_argument('--resume',     action='store_true')
     args = p.parse_args()
 
+    torch.backends.cudnn.enabled = False
     os.makedirs(args.save_dir, exist_ok=True)
     os.makedirs('logs', exist_ok=True)
 
