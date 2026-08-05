@@ -1,4 +1,5 @@
-import os
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import argparse
 import torch
 import torch.nn.functional as F
@@ -6,7 +7,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
 
-from src.dataset import PatchDataset
+from src.train_v2_ldm import PatchDataset
 from src.models.vae import CarbonVAE
 
 def main():

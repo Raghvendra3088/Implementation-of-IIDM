@@ -10,9 +10,9 @@ from pathlib import Path
 import glob, json
 from pyproj import Transformer
 
-BASE    = Path("/Users/raghvendra/iidm_project")
+BASE = Path(".")
 OUT_DIR = BASE / "patches_v2"
-OUT_DIR.mkdir(exist_ok=True)
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 (OUT_DIR / "train").mkdir(exist_ok=True)
 (OUT_DIR / "val").mkdir(exist_ok=True)
 (OUT_DIR / "test").mkdir(exist_ok=True)
@@ -55,9 +55,10 @@ for h5f in h5_files:
                     lon  = f[beam]['lon_lowestmode'][:]
                     agb  = f[beam]['agbd'][:]
                     qual = f[beam]['l4_quality_flag'][:]
+                    agb_se = f[beam]['agbd_se'][:]
                     mask = ((lat >= south) & (lat <= north) &
                             (lon >= west)  & (lon <= east)  &
-                            (qual == 1)    & (agb > 0))
+                            (qual == 1)    & (agb_se < 20.0) & (agb > 0))
                     if mask.sum() > 0:
                         all_lons.extend(lon[mask])
                         all_lats.extend(lat[mask])
