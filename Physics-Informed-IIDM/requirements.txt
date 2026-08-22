@@ -1,0 +1,10 @@
+torch>=2.0.0
+torchvision
+timm>=1.0.0
+numpy
+scipy
+matplotlib
+pandas
+scikit-learn
+tqdm
+rasterio

@@ -1,0 +1,8 @@
+checkpoints/*.pth
+data_base_readonly/
+logs/
+__pycache__/
+*.pyc
+*.zip
+.ipynb_checkpoints/
+data_base_readonly/
