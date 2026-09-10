@@ -1,0 +1,1 @@
+# Phase 2 Dataset\n- Scale: 0-130+ Mg C/ha (Extended Global Variance)\n- Optical: Sentinel-2\n- Physics: ETH Canopy Height Model\n

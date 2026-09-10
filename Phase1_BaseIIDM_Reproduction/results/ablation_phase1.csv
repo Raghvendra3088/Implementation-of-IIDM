@@ -1,0 +1,1 @@
+Configuration,Test RMSE (Mg/ha),Degradation,Note\nw/o KD (No Teacher),38.1805,+0.0638,vs w/o INR base\nw/o INR (Standard CNN),38.1167,,Baseline\nw/o Diffusion (Determ.),38.5078,+0.3911,vs w/o INR base\nFull IIDM (All Modules),12.0897,-26.03,Best Result\n

@@ -1,0 +1,1 @@
+# Phase 1: Base IIDM Reproduction\n\nFaithful reproduction of the base Implicit Image Diffusion Model (IIDM) for carbon stock estimation.\n\n## Results\nRMSE: 12.08 Mg C/ha\nMAE: 9.39 Mg C/ha\n

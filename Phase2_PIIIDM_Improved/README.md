@@ -1,0 +1,1 @@
+# Phase 2: Physics-Informed IIDM (PI-IIDM)\n\nImproved diffusion model with a monotonic canopy-height physics constraint.\n\n## Results (Ensemble)\nRMSE: 15.7414 Mg C/ha\nSSIM: 0.6779\n

@@ -1,0 +1,1 @@
+# Phase 1 Dataset\n- Scale: 0-60 Mg C/ha (Localized)\n- Optical: Sentinel-2\n- Labels: GEDI L4A Footprints\n
