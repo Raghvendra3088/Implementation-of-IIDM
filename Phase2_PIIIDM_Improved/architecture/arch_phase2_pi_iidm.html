@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: white; }
+    .header { position: sticky; top: 0; background: white; padding: 10px 0; border-bottom: 2px solid #ddd; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+    .title { margin: 0; color: #003366; font-size: 24px; }
+    .subtitle { margin: 5px 0 0; color: #666; font-size: 14px; }
+    button { padding: 8px 16px; background: #003366; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    svg { margin-top: 20px; width: 100%; height: auto; border: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1 class="title">PI-IIDM Architecture — Phase 2 Physics-Informed Implementation</h1>
+      <p class="subtitle">Fixed Gradient Flow | Physics Loss | KD Regularization | IIT Patna ML Lab<br>
+      <i>Figure 2: Complete Phase 2 architecture. Changes from Phase 1 are marked ▲ CHANGED or ★ NEW. Phase 2 Ensemble Result: RMSE 15.74 Mg C/ha | SSIM 0.6779 ✓</i></p>
+    </div>
+    <button onclick="window.print()">Print to PDF</button>
+  </div>
+  <svg viewBox="0 0 2000 1300" xmlns="http://www.w3.org/2000/svg">
+    
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+      </marker>
+      <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#00838F" />
+      </marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#BF360C" />
+      </marker>
+    </defs>
+    <rect x="0" y="0" width="2000" height="30" fill="#F0F4F8" />
+<text x="20" y="20" font-size="14" font-weight="bold" fill="#003366" letter-spacing="3">SWIM LANE A — INPUT CONDITIONING & FEATURE EXTRACTION</text>
+<line x1="0" y1="30" x2="2000" y2="30" stroke="#003366" stroke-width="1" />
+<rect x="0" y="280" width="2000" height="30" fill="#F0F4F8" />
+<text x="20" y="300" font-size="14" font-weight="bold" fill="#003366" letter-spacing="3">SWIM LANE B — FORWARD DIFFUSION & DENOISING PROCESS</text>
+<line x1="0" y1="310" x2="2000" y2="310" stroke="#003366" stroke-width="1" />
+<rect x="0" y="530" width="2000" height="30" fill="#F0F4F8" />
+<text x="20" y="550" font-size="14" font-weight="bold" fill="#003366" letter-spacing="3">SWIM LANE C — CONTINUOUS SPATIAL DECODING</text>
+<line x1="0" y1="560" x2="2000" y2="560" stroke="#003366" stroke-width="1" />
+<rect x="0" y="830" width="2000" height="30" fill="#F0F4F8" />
+<text x="20" y="850" font-size="14" font-weight="bold" fill="#003366" letter-spacing="3">SWIM LANE D ★ NEW — PHYSICS CONSTRAINT PATHWAY</text>
+<line x1="0" y1="860" x2="2000" y2="860" stroke="#003366" stroke-width="1" />
+<rect x="50" y="50" width="220" height="160" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"  rx="8" />
+<rect x="40" y="40" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="100" y="54" font-size="10" font-weight="bold" fill="white" text-anchor="middle">▲ MODIFIED</text>
+<text x="60" y="70" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Multi-Sensor Input Stack</text>
+<text x="60" y="85" font-size="11" font-style="italic" fill="#555555">8-channel remote sensing conditioning</text>
+<text x="60" y="105" font-size="11" fill="#333333">• Sentinel-2 B02, B03, B04, B08</text>
+<text x="60" y="120" font-size="11" fill="#333333">• Sentinel-1 SAR HH, HV</text>
+<text x="60" y="135" font-size="11" fill="#333333">• ALOS DEM Elevation</text>
+<text x="60" y="150" font-size="11" fill="#333333">• ETH CHM (Canopy Height H)</text>
+<text x="60" y="165" font-size="11" fill="#333333">(Code truth: in_channels=8)</text>
+<text x="60" y="200" font-size="10" fill="#666666" font-style="italic">Tensor: x_cond [B, 8, 256, 256]</text>
+<rect x="20" y="220" width="280" height="50" fill="#FFF3E0" stroke="#FF6F00" rx="4" />
+<text x="30" y="235" font-size="11" fill="#FF6F00" font-weight="bold">H = ETH CHM Canopy Height</text>
+<text x="30" y="250" font-size="11" fill="#333">In Phase 2: H.requires_grad_(True) for physics</text>
+<rect x="320" y="50" width="250" height="150" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"  rx="8" />
+<rect x="310" y="40" width="120" height="20" fill="#FF6F00" rx="4" />
+<text x="370" y="54" font-size="10" font-weight="bold" fill="white" text-anchor="middle">▲ CHANGED</text>
+<text x="330" y="70" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">VGG19_Adapter (Encoder)</text>
+<text x="330" y="85" font-size="11" font-style="italic" fill="#555555">Projects 8ch -> 3ch -> VGG19 features</text>
+<text x="330" y="105" font-size="11" fill="#333333">proj_in: Conv2d(8 → 3)</text>
+<text x="330" y="120" font-size="11" fill="#333333">VGG19 Backbone: 4 hierarchical stages</text>
+<text x="330" y="135" font-size="11" fill="#333333">Outputs 4 feature maps: F1..F4</text>
+<text x="330" y="150" font-size="11" fill="#333333">proj_out: 1x1 convs to target channels</text>
+<text x="330" y="165" font-size="11" fill="#333333">No KD Loss — acts as powerful encoder</text>
+<text x="330" y="190" font-size="10" fill="#666666" font-style="italic">Tensor: x_cond → f_enc {F1..F4}</text>
+<line x1="270" y1="130" x2="320" y2="130" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="295.0" y="125.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">x_cond</text>
+<rect x="620" y="50" width="200" height="100" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"  rx="8" />
+<rect x="610" y="40" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="670" y="54" font-size="10" font-weight="bold" fill="white" text-anchor="middle">★ NEW</text>
+<text x="630" y="70" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">TeacherCondenser</text>
+<text x="630" y="85" font-size="11" font-style="italic" fill="#555555">Pools features to match latent</text>
+<text x="630" y="105" font-size="11" fill="#333333">Conv2d(64) + GroupNorm + SiLU</text>
+<text x="630" y="120" font-size="11" fill="#333333">AdaptiveAvgPool2d + Concat</text>
+<text x="630" y="140" font-size="10" fill="#666666" font-style="italic">Tensor: f_enc → cond [B, 256, 32, 32]</text>
+<line x1="570" y1="100" x2="620" y2="100" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="595.0" y="95.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">f_proj</text>
+<rect x="870" y="50" width="220" height="120" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"  rx="8" />
+<rect x="860" y="40" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="920" y="54" font-size="10" font-weight="bold" fill="white" text-anchor="middle">★ NEW</text>
+<text x="880" y="70" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">CarbonVAE Encoder</text>
+<text x="880" y="85" font-size="11" font-style="italic" fill="#555555">Encodes ground truth target y_target</text>
+<text x="880" y="105" font-size="11" fill="#333333">downsamples 3 times (256→32)</text>
+<text x="880" y="120" font-size="11" fill="#333333">latent_channels = 4</text>
+<text x="880" y="135" font-size="11" fill="#333333">Outputs mean and logvar</text>
+<text x="880" y="150" font-size="11" fill="#333333">z_0 = reparameterize(mean, logvar)</text>
+<text x="880" y="160" font-size="10" fill="#666666" font-style="italic">Tensor: y_target [B,1,256²] → z_0 [B,4,32²]</text>
+<text x="870" y="30" font-size="12" font-weight="bold" fill="#C62828">y_target (Training Only)</text>
+<rect x="50" y="310" width="180" height="80" fill="#FFF8E1" stroke="#E65100" stroke-width="1" stroke-dasharray="4,4" rx="8" />
+<text x="60" y="330" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Forward Diffusion</text>
+<text x="60" y="345" font-size="11" font-style="italic" fill="#555555">(Same as Phase 1, on z_0)</text>
+<text x="60" y="365" font-size="11" fill="#333333">z_t = q_sample(z_0, t)</text>
+<text x="60" y="380" font-size="10" fill="#666666" font-style="italic">z_t [B, 4, 32, 32]</text>
+<line x1="980" y1="170" x2="140" y2="310" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="560.0" y="235.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">z_0</text>
+<rect x="280" y="310" width="250" height="180" fill="#FFF8E1" stroke="#E65100" stroke-width="2"  rx="8" />
+<rect x="270" y="300" width="120" height="20" fill="#FF6F00" rx="4" />
+<text x="330" y="314" font-size="10" font-weight="bold" fill="white" text-anchor="middle">▲ CHANGED</text>
+<text x="290" y="330" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">KDUNet (Phase 2 version)</text>
+<text x="290" y="345" font-size="11" font-style="italic" fill="#555555">Predicts noise from 4ch z_t + 256ch cond</text>
+<text x="290" y="365" font-size="11" fill="#333333">Input: concat[z_t, cond] = 260ch</text>
+<text x="290" y="380" font-size="11" fill="#333333">down: 4 blocks (128→256→512→1024)</text>
+<text x="290" y="395" font-size="11" fill="#333333">bot: 2x DoubleConv(1024)</text>
+<text x="290" y="410" font-size="11" fill="#333333">up: 4 blocks (512→256→128→128)</text>
+<text x="290" y="425" font-size="11" fill="#333333">final_conv: Conv2d(128 → 4)</text>
+<text x="290" y="480" font-size="10" fill="#666666" font-style="italic">Tensor: z_t, t, cond → ε_pred [B, 4, 32, 32]</text>
+<line x1="230" y1="350" x2="280" y2="350" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="255.0" y="345.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">z_t</text>
+<line x1="720" y1="150" x2="400" y2="310" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="560.0" y="225.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">cond [B, 256, 32, 32]</text>
+<rect x="580" y="400" width="180" height="80" fill="#FFF8E1" stroke="#E65100" stroke-width="1" stroke-dasharray="4,4" rx="8" />
+<text x="590" y="420" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">DDIM Sampler</text>
+<text x="590" y="435" font-size="11" font-style="italic" fill="#555555">(Same as Phase 1)</text>
+<text x="590" y="455" font-size="11" fill="#333333">Generates z_0_pred at inference</text>
+<text x="590" y="470" font-size="10" fill="#666666" font-style="italic">z_0_pred [B, 4, 32, 32]</text>
+<line x1="530" y1="450" x2="580" y2="450" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="555.0" y="445.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">ε_pred</text>
+<rect x="50" y="560" width="180" height="80" fill="#E3F2FD" stroke="#1565C0" stroke-width="1" stroke-dasharray="4,4" rx="8" />
+<text x="60" y="580" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Coordinate Grid</text>
+<text x="60" y="595" font-size="11" font-style="italic" fill="#555555">(Same as Phase 1)</text>
+<text x="60" y="615" font-size="11" fill="#333333">grid_coords</text>
+<text x="60" y="630" font-size="10" fill="#666666" font-style="italic">coords [B, N, 2]</text>
+<rect x="280" y="560" width="180" height="80" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1" stroke-dasharray="4,4" rx="8" />
+<text x="290" y="580" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Positional Encoding</text>
+<text x="290" y="595" font-size="11" font-style="italic" fill="#555555">(Same as Phase 1)</text>
+<text x="290" y="615" font-size="11" fill="#333333">L=10 freq octaves</text>
+<text x="290" y="630" font-size="10" fill="#666666" font-style="italic">γ [B, N, 40]</text>
+<line x1="230" y1="600" x2="280" y2="600" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="255.0" y="595.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">coords</text>
+<rect x="280" y="660" width="280" height="140" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2"  rx="8" />
+<rect x="270" y="650" width="120" height="20" fill="#FF6F00" rx="4" />
+<text x="330" y="664" font-size="10" font-weight="bold" fill="white" text-anchor="middle">▲ CHANGED</text>
+<text x="290" y="680" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">SpatialFeatureSampler</text>
+<text x="290" y="695" font-size="11" font-style="italic" fill="#555555">Queries features safely for Autograd</text>
+<text x="290" y="715" font-size="11" fill="#333333">Input: {F1..F4} + z_0_pred</text>
+<text x="290" y="730" font-size="11" fill="#333333">F.interpolate(mode='nearest')</text>
+<text x="290" y="745" font-size="11" fill="#333333">✓ Bypasses PyTorch grid_sample bug</text>
+<text x="290" y="760" font-size="11" fill="#333333">✓ Full double-backward support</text>
+<text x="290" y="775" font-size="11" fill="#333333">Output: 5 feats x 64 = 320 channels</text>
+<text x="290" y="790" font-size="10" fill="#666666" font-style="italic">Tensor: coords + feats → [B, N, 320]</text>
+<line x1="140" y1="640" x2="280" y2="700" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="210.0" y="665.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">coords</text>
+<line x1="440" y1="200" x2="440" y2="660" stroke="#00838F" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="440.0" y="425.0" font-size="10" fill="#00838F" text-anchor="middle" background-color="white">{F1..F4}</text>
+<line x1="670" y1="480" x2="500" y2="660" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="585.0" y="565.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">z_0_pred</text>
+<rect x="610" y="560" width="260" height="180" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2"  rx="8" />
+<rect x="600" y="550" width="120" height="20" fill="#FF6F00" rx="4" />
+<text x="660" y="564" font-size="10" font-weight="bold" fill="white" text-anchor="middle">▲ CHANGED</text>
+<text x="620" y="580" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">SIRENINR Head</text>
+<text x="620" y="595" font-size="11" font-style="italic" fill="#555555">Maps coords+features → biomass</text>
+<text x="620" y="615" font-size="11" fill="#333333">Concat: [SP(320), γ(40)] = 360</text>
+<text x="620" y="630" font-size="11" fill="#333333">input_proj: Linear(360 → 256) + GELU</text>
+<text x="620" y="645" font-size="11" fill="#333333">blocks: 6 x ResMLPBlock(256)</text>
+<text x="620" y="660" font-size="11" fill="#333333">out: Linear(64) → Linear(1) → Tanh</text>
+<text x="620" y="730" font-size="10" fill="#666666" font-style="italic">Tensor: [B, N, 360] → Y [B, N, 1]</text>
+<line x1="460" y1="600" x2="610" y2="600" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="535.0" y="595.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">γ [B, N, 40]</text>
+<line x1="560" y1="730" x2="610" y2="730" stroke="#333333" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="585.0" y="725.0" font-size="10" fill="#333333" text-anchor="middle" background-color="white">sampled [B, N, 320]</text>
+<rect x="50" y="880" width="320" height="200" fill="#FFF3E0" stroke="#BF360C" stroke-width="2"  rx="8" />
+<rect x="40" y="870" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="100" y="884" font-size="10" font-weight="bold" fill="white" text-anchor="middle">★ NEW</text>
+<text x="60" y="900" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Physics Gradient Engine</text>
+<text x="60" y="915" font-size="11" font-style="italic" fill="#555555">Computes ∂Y/∂H via autograd</text>
+<text x="60" y="935" font-size="11" fill="#333333"># Step 1: Make CHM differentiable</text>
+<text x="60" y="950" font-size="11" fill="#333333">H = x_cond[:, CHM_channel]</text>
+<text x="60" y="965" font-size="11" fill="#333333">H.requires_grad_(True)</text>
+<text x="60" y="980" font-size="11" fill="#333333"># Step 2: Forward pass</text>
+<text x="60" y="995" font-size="11" fill="#333333">Y = model.decode(x_cond)</text>
+<text x="60" y="1010" font-size="11" fill="#333333"># Step 3: Autograd through full model</text>
+<text x="60" y="1025" font-size="11" fill="#333333">grad = torch.autograd.grad(</text>
+<text x="60" y="1040" font-size="11" fill="#333333">    outputs=Y.sum(), inputs=H,</text>
+<text x="60" y="1055" font-size="11" fill="#333333">    create_graph=True)[0]</text>
+<text x="60" y="1070" font-size="10" fill="#666666" font-style="italic">Tensor: H + Y → ∂Y/∂H [B, 1, 256, 256]</text>
+<line x1="150" y1="210" x2="150" y2="880" stroke="#BF360C" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#arrow-red)" />
+<text x="150.0" y="540.0" font-size="10" fill="#BF360C" text-anchor="middle" background-color="white">H (requires_grad)</text>
+<line x1="740" y1="740" x2="370" y2="950" stroke="#BF360C" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="555.0" y="840.0" font-size="10" fill="#BF360C" text-anchor="middle" background-color="white">Y(x,y) [N, 1]</text>
+<rect x="420" y="880" width="280" height="150" fill="#FFEBEE" stroke="#C62828" stroke-width="2"  rx="8" />
+<rect x="410" y="870" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="470" y="884" font-size="10" font-weight="bold" fill="white" text-anchor="middle">★ NEW</text>
+<text x="430" y="900" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Physics Loss L_phys</text>
+<text x="430" y="915" font-size="11" font-style="italic" fill="#555555">Enforces Monotonicity</text>
+<text x="430" y="935" font-size="11" fill="#333333">L_phys = mean( ReLU( −∂Y/∂H ) )</text>
+<text x="430" y="950" font-size="11" fill="#333333"></text>
+<text x="430" y="965" font-size="11" fill="#333333">• ∂Y/∂H > 0: biomass ↑ as H ↑ (CORRECT)</text>
+<text x="430" y="980" font-size="11" fill="#333333">  ReLU(−pos) = 0 → NO PENALTY</text>
+<text x="430" y="995" font-size="11" fill="#333333">• ∂Y/∂H < 0: biomass ↓ as H ↑ (VIOLATION)</text>
+<text x="430" y="1010" font-size="11" fill="#333333">  ReLU(−neg) > 0 → PENALIZED</text>
+<text x="430" y="1020" font-size="10" fill="#666666" font-style="italic">Tensor: ∂Y/∂H → scalar loss</text>
+<line x1="370" y1="950" x2="420" y2="950" stroke="#BF360C" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="395.0" y="945.0" font-size="10" fill="#BF360C" text-anchor="middle" background-color="white">∂Y/∂H</text>
+<rect x="750" y="880" width="350" height="160" fill="white" stroke="#ccc" />
+<text x="760" y="900" font-size="12" font-weight="bold" fill="#333">L_phys Convergence over 250 Epochs</text>
+<line x1="780" y1="1006" x2="1080" y2="1006" stroke="#eee" />
+<text x="755" y="1010" font-size="10" fill="#999">0.1</text>
+<line x1="780" y1="982" x2="1080" y2="982" stroke="#eee" />
+<text x="755" y="986" font-size="10" fill="#999">0.2</text>
+<line x1="780" y1="958" x2="1080" y2="958" stroke="#eee" />
+<text x="755" y="962" font-size="10" fill="#999">0.3</text>
+<line x1="780" y1="934" x2="1080" y2="934" stroke="#eee" />
+<text x="755" y="938" font-size="10" fill="#999">0.4</text>
+<line x1="780" y1="910" x2="1080" y2="910" stroke="#eee" />
+<text x="755" y="914" font-size="10" fill="#999">0.5</text>
+<line x1="780" y1="1030" x2="1080" y2="1030" stroke="#333" />
+<line x1="780" y1="910" x2="780" y2="1030" stroke="#333" />
+<text x="780" y="1040" font-size="10" fill="#999" text-anchor="middle">0</text>
+<text x="840" y="1040" font-size="10" fill="#999" text-anchor="middle">50</text>
+<text x="900" y="1040" font-size="10" fill="#999" text-anchor="middle">102</text>
+<text x="960" y="1040" font-size="10" fill="#999" text-anchor="middle">150</text>
+<text x="1020" y="1040" font-size="10" fill="#999" text-anchor="middle">200</text>
+<text x="1080" y="1040" font-size="10" fill="#999" text-anchor="middle">250</text>
+<path d="M 780 922 C 810 929.2, 870 918, 902 918 S 960 970, 960 970 L 1020 1010.8 L 1080 1029.9" fill="none" stroke="#C62828" stroke-width="2" />
+<circle cx="902" cy="918" r="4" fill="#C62828" />
+<text x="910" y="915" font-size="10" fill="#C62828">0.4667</text>
+<circle cx="1080" cy="1029.9" r="4" fill="#C62828" />
+<text x="1030" y="1025" font-size="10" fill="#C62828">0.0003 ✓</text>
+<path d="M 560 1030 L 560 1100 L 20 1100 L 20 130 L 50 130" fill="none" stroke="#BF360C" stroke-width="1.8" stroke-dasharray="8,4" marker-end="url(#arrow-red)" />
+<text x="560.0" y="1060.0" font-size="10" fill="#BF360C" text-anchor="middle">∂L_phys/∂H — Physics Backpropagation Path through entire model</text>
+<rect x="1200" y="850" width="260" height="120" fill="#FFEBEE" stroke="#C62828" stroke-width="2"  rx="8" />
+<text x="1210" y="870" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">L_total (Loss Aggregation)</text>
+<text x="1210" y="885" font-size="11" font-style="italic" fill="#555555"></text>
+<text x="1210" y="905" font-size="11" fill="#333333">L_diff = F.l1_loss(noise_pred, noise_true)</text>
+<text x="1210" y="920" font-size="11" fill="#333333">L_recon = F.l1_loss(y_pred, y_target)</text>
+<text x="1210" y="935" font-size="11" fill="#333333">L_phys = compute_physics_loss()</text>
+<text x="1210" y="950" font-size="11" fill="#333333">L_total = L_diff + L_recon + λ_phys·L_phys</text>
+<text x="1210" y="965" font-size="11" fill="#333333">(Note: No KD loss in Phase 2 PI-LDM)</text>
+<text x="1210" y="960" font-size="10" fill="#666666" font-style="italic"></text>
+<line x1="700" y1="950" x2="1200" y2="950" stroke="#BF360C" stroke-width="1.8"  marker-end="url(#arrow)" />
+<text x="950.0" y="945.0" font-size="10" fill="#BF360C" text-anchor="middle" background-color="white">L_phys (λ=0.5)</text>
+<rect x="1200" y="50" width="320" height="220" fill="#F0F4F8" stroke="#999999" stroke-width="2"  rx="8" />
+<rect x="1190" y="40" width="120" height="20" fill="#2E7D32" rx="4" />
+<text x="1250" y="54" font-size="10" font-weight="bold" fill="white" text-anchor="middle">★ NEW</text>
+<text x="1210" y="70" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Memory Engineering & Fixes</text>
+<text x="1210" y="85" font-size="11" font-style="italic" fill="#555555">Stable training on A100-40GB</text>
+<text x="1210" y="105" font-size="11" fill="#333333">1. torch.utils.checkpoint ✗ REMOVED</text>
+<text x="1210" y="120" font-size="11" fill="#333333">   (Caused Dynamo memory leak OOM)</text>
+<text x="1210" y="135" font-size="11" fill="#333333">2. DataParallel / Manual Grad Accum ★ NEW</text>
+<text x="1210" y="150" font-size="11" fill="#333333">   micro_batch_size = 8, accum_steps = 2</text>
+<text x="1210" y="165" font-size="11" fill="#333333">   effective_batch = 16</text>
+<text x="1210" y="180" font-size="11" fill="#333333">3. Evaluation Pipeline Bug FIXED</text>
+<text x="1210" y="195" font-size="11" fill="#333333">   All 3 checkpoints (unet, encoder, inr)</text>
+<text x="1210" y="210" font-size="11" fill="#333333">   now load properly before inference.</text>
+<text x="1210" y="225" font-size="11" fill="#333333">4. Monte Carlo Ensemble Inference</text>
+<text x="1210" y="240" font-size="11" fill="#333333">   N=10 runs averaged (variance red. by ~√10)</text>
+<text x="1210" y="260" font-size="10" fill="#666666" font-style="italic"></text>
+<rect x="1200" y="300" width="450" height="220" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"  rx="8" />
+<text x="1210" y="320" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Phase 2 Results (IIDM_Combined_Report.html)</text>
+<text x="1210" y="335" font-size="11" font-style="italic" fill="#555555">Authoritative ensemble results</text>
+<text x="1210" y="355" font-size="11" fill="#333333">Configuration             | RMSE   | SSIM</text>
+<text x="1210" y="370" font-size="11" fill="#333333">--------------------------------------------</text>
+<text x="1210" y="385" font-size="11" fill="#333333">Base IIDM Paper (SOTA)    | 12.17  | 0.7186</text>
+<text x="1210" y="400" font-size="11" fill="#333333">Phase 1 (Reproduced)      | 12.08  | —</text>
+<text x="1210" y="415" font-size="11" fill="#333333">Phase 2 (Single-Shot)     | 18.69  | 0.4253</text>
+<text x="1210" y="430" font-size="11" fill="#333333">Phase 2 (Ensemble) ★      | 15.74  | 0.6779</text>
+<line x1="1210" y1="435" x2="1640" y2="435" stroke="#cccccc" />
+<text x="1210" y="445" font-size="11" fill="#333333">Phase 2 internal improvement:</text>
+<text x="1210" y="460" font-size="11" fill="#333333">Buggy prior RMSE: 40.38 → Fixed: 15.74</text>
+<text x="1210" y="475" font-size="11" fill="#333333">Reduction: 61% ✓ (architectural fixes worked)</text>
+<text x="1210" y="510" font-size="10" fill="#666666" font-style="italic"></text>
+<rect x="1200" y="550" width="450" height="280" fill="#FFF3E0" stroke="#FF6F00" stroke-width="2"  rx="8" />
+<text x="1210" y="570" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Phase 1 → Phase 2: Architectural Change Summary</text>
+<text x="1210" y="585" font-size="11" font-style="italic" fill="#555555"></text>
+<text x="1210" y="605" font-size="11" fill="#333333">Dimension             | Phase 1        | Phase 2 ★</text>
+<text x="1210" y="620" font-size="11" fill="#333333">----------------------------------------------------------</text>
+<text x="1210" y="635" font-size="11" fill="#333333">Physics Loss          | None           | mean(ReLU(−∂Y/∂H))</text>
+<text x="1210" y="650" font-size="11" fill="#333333">SpatialFeatureSampler | grid_sample    | interpolate(nearest)</text>
+<text x="1210" y="665" font-size="11" fill="#333333">Double-backward       | ✗ Not supp.    | ✓ Fully supported</text>
+<text x="1210" y="680" font-size="11" fill="#333333">Encoder Architecture  | Light Student  | VGG19_Adapter (8ch)</text>
+<text x="1210" y="695" font-size="11" fill="#333333">Target Encoding       | None           | CarbonVAE (4ch latent)</text>
+<text x="1210" y="710" font-size="11" fill="#333333">UNet Architecture     | Tiny latent    | KDUNet (256ch concat)</text>
+<text x="1210" y="725" font-size="11" fill="#333333">KD Loss (L_KD)        | Yes            | No (VGG adapter used)</text>
+<text x="1210" y="740" font-size="11" fill="#333333">Inference strategy    | Single DDIM    | MC Ensemble (10x50)</text>
+<text x="1210" y="820" font-size="10" fill="#666666" font-style="italic"></text>
+
+  </svg>
+</body>
+</html>
