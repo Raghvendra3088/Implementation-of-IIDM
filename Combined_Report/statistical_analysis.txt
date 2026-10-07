@@ -1,0 +1,50 @@
+
+[CNN]
+MAE: 17.1303
+RMSE: 19.7115
+R2: -34.4793
+SSIM: 0.6355
+PVR: 0.1357
+MND: 2.7867
+
+[IIDM]
+MAE: 59.6055
+RMSE: 74.0099
+R2: -387.0112
+SSIM: -0.0047
+PVR: 3.9992
+MND: 13.8166
+
+[PI_IIDM]
+MAE: 12.0185
+RMSE: 15.2720
+R2: -5.4371
+SSIM: 0.6699
+PVR: 0.4144
+MND: 4.5278
+
+--- STATISTICAL SIGNIFICANCE (PI-IIDM vs IIDM) ---
+
+Metric: MAE
+Mean Difference (PI-IIDM - IIDM): -47.5870
+95% CI: [-48.0635, -47.1104]
+p-value: 0.0000e+00
+Effect Size (Cohen's d): -10.4320
+
+Metric: RMSE
+Mean Difference (PI-IIDM - IIDM): -58.7379
+95% CI: [-59.3303, -58.1454]
+p-value: 0.0000e+00
+Effect Size (Cohen's d): -10.3578
+
+Metric: R2
+Mean Difference (PI-IIDM - IIDM): nan
+95% CI: [nan, nan]
+p-value: nan
+Effect Size (Cohen's d): 0.0000
+
+Metric: SSIM
+Mean Difference (PI-IIDM - IIDM): 0.6746
+95% CI: [0.6612, 0.6879]
+p-value: 1.4667e-258
+Effect Size (Cohen's d): 5.2775
