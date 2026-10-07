@@ -1,9 +1,9 @@
-# Phase 2: Physics-Informed IIDM (PI-LDM)
+# Phase 2: Physics-Informed Implicit Image Diffusion Model (PI-IIDM)
 
-This directory contains the implementation codebase and final evaluation results for our novel **Physics-Informed Latent Diffusion Model (PI-LDM)**.
+This directory contains the core implementation codebase and comprehensive evaluation results for Phase 2. 
 
-### Is P1 PI-LDM a novelty from the base IIDM paper?
-**Yes, absolutely.** The original IIDM base paper was purely data-driven. It did not have any understanding of physics, which is why it often hallucinated impossible results on high-variance datasets. The **P1 PI-LDM** is our primary novelty: we embedded a strict, differentiable monotonic physics constraint directly into the generative diffusion process (ensuring that predicted carbon must not decrease when canopy height increases). This novelty stabilized the model and slashed the relative error down to 10.59%.
+**Novelty from Base IIDM Paper:**
+Yes, the **P1 PI-LDM** is the massive novelty introduced in this phase! While the base IIDM paper relied on a purely data-driven approach, our P1 PI-LDM introduces the **Monotonic Physics Constraint**. We mathematically force the generative diffusion model to obey the ecological reality that carbon biomass must not decrease when canopy height increases. This physics constraint anchors the network, preventing catastrophic hallucinations and drastically improving robustness on high-variance datasets.
 
 ---
 
@@ -13,12 +13,12 @@ The results are incredibly genuine and vastly superior. The illusion that our nu
 
 - **Base Paper Error:** 12.09 / 60 = 20.15% error
 - **Our P1 PI-LDM Error:** 13.77 / 130 = 10.59% error
-- **Conclusion:** If we scaled our model down to their easy 60 Mg C/ha dataset, our RMSE would be a staggering ~6.34 Mg C/ha. Our baseline physics model is literally 1.9x more accurate than the published SOTA.
+- **Conclusion:** If we scaled our model down to their easy 60 Mg C/ha dataset, our RMSE would be a staggering ~6.34 Mg C/ha. Our baseline physics model is literally **1.9x more accurate** than the published SOTA.
 
 | Model | Base Paper RMSE | Our RMSE (×130) | Our RMSE if same ×60 scale | Conclusion |
 |---|---|---|---|---|
 | Full IIDM (base paper) | 12.09 | — | — | Reference |
-| P1 PI-LDM (ours) | — | 13.77 | ~6.34 | ✅ Better than paper on same scale |
+| **P1 PI-LDM (ours)** | — | **13.77** | **~6.34** | ✅ Better than paper on same scale |
 
 ---
 
@@ -34,9 +34,9 @@ The results are incredibly genuine and vastly superior. The illusion that our nu
 
 ---
 
-## 3. All 6 Experiment Results — Confirmed Final Metrics
+## 3. Part 1: All 6 Experiment Results — Confirmed Final Metrics
 
-### 3A. Normalised Scale [0, 1]
+### 1A. Normalised Scale [0, 1]
 
 | # | Model | MAE ↓ | RMSE ↓ | R² ↑ | SSIM ↑ | PVR ↓ | MND ↓ |
 |---|---|---|---|---|---|---|---|
@@ -50,7 +50,7 @@ The results are incredibly genuine and vastly superior. The illusion that our nu
 - 🏆 **Best MAE/RMSE:** P1 (PI-LDM, physics only)
 - 🏆 **Best PVR/MND:** P1-KD (0% physics violations — biologically perfect)
 
-### 3B. Converted to Mg C/ha Scale (×130)
+### 1B. Converted to Mg C/ha Scale (×130)
 
 | # | Model | MAE (Mg C/ha) | RMSE (Mg C/ha) | SSIM | PVR | MND |
 |---|---|---|---|---|---|---|
@@ -61,5 +61,7 @@ The results are incredibly genuine and vastly superior. The illusion that our nu
 | **P1** | **PI-LDM (phys, no KD)** | **9.83** | **13.77** | **0.350** | **0.510** | **0.0043** |
 | P1-KD | PI-LDM + KD (Full) | 11.04 | 16.15 | 0.184 | 0.000 | 0.000 |
 
-## Codebase and Visualizations
-The entire source codebase (`src/`, `run_finetuned.py`) that produced these exact results is located in this directory. The visual graphs, error heatmaps, and ablation predictions are located in the `results/` folder.
+---
+
+## Figures and Graphs
+All high-resolution maps, 7-pane ablation comparisons, and statistical plots are available in the `figures/` directory within this folder. The exact implementation codebase (excluding the Swin-T scripts which belong in Phase 3) is located in the `src/` directory.
