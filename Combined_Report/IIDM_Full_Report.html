@@ -254,7 +254,7 @@
     <p><strong>b) SRTM Digital Elevation Model (DEM):</strong> The Shuttle Radar Topography Mission (SRTM) provides a near-global DEM, capturing the Earth's topographic elevation. We utilized the 30-meter resolution SRTM DEM, resampled to 10 meters to match the Sentinel-2 grid. Elevation, slope, and aspect are profound physical covariates that directly influence micro-climates, soil moisture accumulation, and consequently, the distribution capacity of forest biomass.</p>
     <p><strong>c) ETH Global Canopy Height Model (CHM):</strong> Developed by Lang et al. (2023), the ETH Global Canopy Height map is a 10-meter resolution dataset derived from Sentinel-2 imagery probabilistically fused with GEDI LiDAR data. Canopy height is arguably the strongest single predictor of above-ground biomass. In our architecture, the CHM acts not only as a conditioning feature but also as the absolute physical reference variable (\(H\)) required to compute and enforce the monotonic physics loss gradient during Phase 2.</p>
     <p><strong>d) GEDI L4A Biomass Footprints:</strong> The GEDI L4A product provides discrete, footprint-level (25-meter diameter) estimates of Above-Ground Biomass (AGB) derived from waveform LiDAR. Because continuous, pixel-perfect ground truth maps of carbon stock do not exist, these sparse footprints were spatially intersected with our input raster grids to serve as the highly accurate, geolocated training labels (Ground Truth) necessary for supervised optimization.</p>
-    <p><strong>e) GEDI L4B Gridded Biomass Product:</strong> The GEDI L4B product aggregates L4A footprint estimates into a continuous 1-kilometer gridded map of mean AGB. While its coarse resolution makes it unsuitable for training our high-resolution 10-meter model, the L4B grid provides an invaluable regional-scale baseline. It is used as a spatial validation reference to ensure that the fine-scale estimations aggregated over large areas remain consistent with globally accepted carbon stock benchmarks.</p>
+    <p><strong>e) GEDI L4B Gridded Biomass Product:</strong> Removed as per project implementation scope.</p>
 
     <h3 id="data-3">4.3 Data Preprocessing Pipeline</h3>
     <p>The multi-modal datasets were harmonized through a rigorous preprocessing pipeline to ensure spatial and numerical consistency:</p>
@@ -315,7 +315,6 @@
                 <td>~15,000 footprints</td>
             </tr>
             <tr>
-                <td>GEDI L4B</td>
                 <td>NASA</td>
                 <td>1km</td>
                 <td>Mean AGB</td>

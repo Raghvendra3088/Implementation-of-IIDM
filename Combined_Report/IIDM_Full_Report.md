@@ -97,8 +97,8 @@ Developed by Lang et al. (2023), the ETH Global Canopy Height map is a 10-meter 
 **d) GEDI L4A Biomass Footprints**
 The GEDI L4A product provides discrete, footprint-level (25-meter diameter) estimates of Above-Ground Biomass (AGB) derived from waveform LiDAR. Because continuous, pixel-perfect ground truth maps of carbon stock do not exist, these sparse footprints were spatially intersected with our input raster grids to serve as the highly accurate, geolocated training labels (Ground Truth) necessary for supervised optimization.
 
-**e) GEDI L4B Gridded Biomass Product**
-The GEDI L4B product aggregates L4A footprint estimates into a continuous 1-kilometer gridded map of mean AGB. While its coarse resolution makes it unsuitable for training our high-resolution 10-meter model, the L4B grid provides an invaluable regional-scale baseline. It is used as a spatial validation reference to ensure that the fine-scale estimations aggregated over large areas remain consistent with globally accepted carbon stock benchmarks.
+**d) GEDI L4B Gridded Biomass Product**
+*Removed as per project implementation scope.*
 
 ### 4.3 Data Preprocessing Pipeline
 The multi-modal datasets were harmonized through a rigorous preprocessing pipeline to ensure spatial and numerical consistency:
@@ -119,7 +119,6 @@ The multi-modal datasets were harmonized through a rigorous preprocessing pipeli
 | SRTM DEM      | NASA      | 30m→10m    | 1 band          | Terrain covariate | same              |
 | ETH CHM       | Lang 2023 | 10m        | 1 band (H)      | Physics variable  | same              |
 | GEDI L4A      | NASA      | 25m footpr.| AGB (Mg C/ha)   | Training labels  | ~15,000 footprints|
-| GEDI L4B      | NASA      | 1km        | Mean AGB        | Validation ref.   | spatial grid      |
 
 ---
 

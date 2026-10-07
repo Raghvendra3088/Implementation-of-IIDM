@@ -1,4 +1,4 @@
-# GEDI L4B Gridded Biomass Dataset
+# GEDI Dataset
 The raw biomass data files exceed GitHub's 100MB file limit.
 
 **Download Instructions:**
