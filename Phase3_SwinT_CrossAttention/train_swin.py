@@ -201,10 +201,24 @@ class SwinPILDM(nn.Module):
             z_0, _ = self.vae.encode(y_target)
         z_t, noise_true = self.scheduler.q_sample(z_0, t, noise)
         noise_pred = self.unet(z_t, t, swin_feats)
-        loss_diff = F.l1_loss(noise_pred, noise_true)
+        loss_diff = F.mse_loss(noise_pred, noise_true)
+        
+        # 1. Mixed Curriculum (Covariate Shift Fix)
+        if self.training and torch.rand(1).item() < 0.5:
+            alpha_prod_t = self.scheduler.alpha_bar.to(z_t.device)[t].view(-1, 1, 1, 1)
+            pred_z0 = (z_t - (1 - alpha_prod_t) ** 0.5 * noise_pred) / alpha_prod_t ** 0.5
+            inr_z = torch.clamp(pred_z0, min=-5.0, max=5.0).detach()
+        else:
+            inr_z = z_0
+
         # Direct x_cond injection preserves gradient tracking
-        y_pred = self.inr(swin_feats + [x_cond], z_0)
-        loss_recon = F.mse_loss(y_pred, y_target)
+        y_pred = self.inr(swin_feats + [x_cond], inr_z)
+        
+        # 2. Support-Aware Supervision (Footprint-Integrated Loss)
+        # GEDI is ~25m footprint. Average pool 10m prediction over 3x3 window (30m)
+        y_pred_footprint = F.avg_pool2d(y_pred, kernel_size=3, stride=1, padding=1)
+        loss_recon = F.mse_loss(y_pred_footprint, y_target)
+        
         return loss_diff, loss_recon, projected_feats, y_pred
 
     def decode(self, x_cond, num_steps=50):
@@ -223,12 +237,28 @@ class SwinPILDM(nn.Module):
 
 from src.models.diffusion import DiffusionScheduler
 
-def patch_physics_loss(x_batch, pred_batch):
-    chm  = x_batch[:, 7].mean(dim=[1, 2])
-    carb = pred_batch[:, 0].mean(dim=[1, 2])
-    dchm  = chm.unsqueeze(1)  - chm.unsqueeze(0)
-    dcarb = carb.unsqueeze(1) - carb.unsqueeze(0)
-    return F.relu(-dcarb * dchm.sign()).mean()
+def stochastic_point_physics_loss(x_batch, pred_batch, num_points=250):
+    """
+    Computes strict point-wise physical loss L_mono = mean(ReLU(-dY/dH))
+    Evaluates on a random spatial subset of pixels to prevent OOM crashes.
+    """
+    B, _, H, W = x_batch.shape
+    batch_idx = torch.randint(0, B, (num_points,), device=x_batch.device)
+    y_idx = torch.randint(0, H, (num_points,), device=x_batch.device)
+    x_idx = torch.randint(0, W, (num_points,), device=x_batch.device)
+    
+    selected_y = pred_batch[batch_idx, 0, y_idx, x_idx]
+    
+    dY_dX = torch.autograd.grad(
+        outputs=selected_y.sum(),
+        inputs=x_batch,
+        create_graph=True,
+        retain_graph=True,
+        only_inputs=True
+    )[0]
+    
+    dY_dH = dY_dX[batch_idx, 7, y_idx, x_idx]
+    return F.relu(-dY_dH).mean()
 
 def run_swin_training(epochs=100, bs=4, lr=1e-4, grad_accum=4):
     device = torch.device("cuda")
@@ -320,6 +350,8 @@ def run_swin_training(epochs=100, bs=4, lr=1e-4, grad_accum=4):
 
         for step, (x, y) in enumerate(tr_loader):
             x, y = x.to(device), y.to(device)
+            if lam_phys > 0:
+                x.requires_grad_(True)
             t_rand = torch.randint(0, 1000, (x.shape[0],), device=device)
 
             with torch.amp.autocast("cuda", dtype=torch.bfloat16):
@@ -331,7 +363,7 @@ def run_swin_training(epochs=100, bs=4, lr=1e-4, grad_accum=4):
             ep_recon += loss_recon.mean().item()
 
             if lam_phys > 0:
-                l_phys = patch_physics_loss(x.float(), y_pred.float())
+                l_phys = stochastic_point_physics_loss(x.float(), y_pred.float())
                 loss = loss + lam_phys * l_phys
                 ep_phys += l_phys.item()
                 del l_phys

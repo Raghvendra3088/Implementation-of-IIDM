@@ -75,11 +75,22 @@ class PILDM(nn.Module):
         
         # Denoising
         noise_pred = self.unet(z_t, t, cond)
-        loss_diff = F.l1_loss(noise_pred, noise_true)
+        loss_diff = F.mse_loss(noise_pred, noise_true)
         
-        # INR Reconstruction Loss (using un-noised z_0 as the target representation)
-        y_pred = self.inr(f_enc, z_0)
-        loss_recon = F.mse_loss(y_pred, y_target)
+        # Mixed curriculum: randomly use predicted z_0 instead of true z_0 to fix covariate shift
+        if self.training and torch.rand(1).item() < 0.5:
+            alpha_prod_t = self.scheduler.alpha_bar.to(z_t.device)[t].view(-1, 1, 1, 1)
+            pred_z0 = (z_t - (1 - alpha_prod_t) ** 0.5 * noise_pred) / alpha_prod_t ** 0.5
+            inr_z = torch.clamp(pred_z0, min=-5.0, max=5.0).detach()
+        else:
+            inr_z = z_0
+
+        # INR Reconstruction Loss
+        y_pred = self.inr(f_enc, inr_z)
+        
+        # Support-Aware Supervision: 3x3 Avg Pool simulates 30m footprint integration for the 25m GEDI
+        y_pred_footprint = F.avg_pool2d(y_pred, kernel_size=3, stride=1, padding=1)
+        loss_recon = F.mse_loss(y_pred_footprint, y_target)
         
         return loss_diff, loss_recon, f_proj, y_pred
         
