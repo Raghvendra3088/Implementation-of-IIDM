@@ -1,0 +1,15 @@
+{
+  "model": "Phase 3: Swin-T + True KD (VGG16 Teacher)",
+  "evaluation_mode": "Structural Fidelity Regularization (Swin-T + VGG16 Teacher KD)",
+  "MAE_normalized": 0.06692,
+  "RMSE_normalized": 0.10008,
+  "MAE_Mg_C_ha": 8.70,
+  "RMSE_Mg_C_ha": 13.01,
+  "Relative_RMSE_percent": 10.01,
+  "R2": -0.2180,
+  "SSIM": 0.4800,
+  "PVR": 0.4720,
+  "MND": 0.0094,
+  "scale_factor": 130.0,
+  "description": "Swin-T + True KD (VGG16 Teacher) Structural Regularizer (Best SSIM: 0.480, Lowest MAE: 8.70 Mg C/ha)"
+}

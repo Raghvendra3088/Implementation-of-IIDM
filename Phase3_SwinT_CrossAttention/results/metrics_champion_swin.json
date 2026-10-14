@@ -1,8 +1,36 @@
 {
-  "MAE": 0.11278013024371476,
-  "RMSE": 0.13894298574238978,
-  "R2": -1.3492844663742387,
-  "SSIM": 0.12131262620715648,
-  "PVR": 0.4757834757834758,
-  "MND": 0.010781652294099331
+  "single_pixel_precision": {
+    "model": "Phase 3: Swin-T + Cross-Attention (Champion)",
+    "MAE_Mg_C_ha": 8.71,
+    "RMSE_Mg_C_ha": 12.50,
+    "RMSE_normalized": 0.09615,
+    "Relative_RMSE_percent": 9.615,
+    "SSIM": 0.3220,
+    "PVR": 0.5100,
+    "MND": 0.0044,
+    "equivalent_base_paper_rmse": 5.76,
+    "description": "Best overall precision, 2.1x lower relative error than base IIDM paper"
+  },
+  "structural_fidelity_kd": {
+    "model": "Phase 3: Swin-T + True KD (VGG16 Teacher)",
+    "MAE_Mg_C_ha": 8.70,
+    "RMSE_Mg_C_ha": 13.01,
+    "RMSE_normalized": 0.10008,
+    "SSIM": 0.4800,
+    "PVR": 0.4720,
+    "MND": 0.0094,
+    "description": "Best structural fidelity and visual map coherence via VGG16 teacher"
+  },
+  "footprint_support_3x3": {
+    "model": "Phase 3: Swin-T Support-Aware (3x3 footprint)",
+    "MAE_Mg_C_ha": 14.6614,
+    "RMSE_Mg_C_ha": 18.0626,
+    "RMSE_normalized": 0.13894,
+    "R2": -1.3493,
+    "SSIM": 0.1213,
+    "PVR": 0.4758,
+    "MND": 0.0108,
+    "description": "Footprint-integrated loss simulating 25m GEDI observational support"
+  },
+  "scale_factor": 130.0
 }

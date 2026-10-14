@@ -1,31 +1,66 @@
+"""
+Biophysical Monotonicity Loss for Physics-Informed Latent Diffusion (PI-IIDM).
+
+Scientific Principle:
+Forest Aboveground Biomass Density (AGBD) is biophysically constrained by canopy
+structure: for a given stand, aboveground carbon must monotonically correlate with
+canopy height (dY/dH >= 0). We penalize violations via:
+    L_mono = mean(ReLU(-dY/dH))
+
+This formulation avoids uncalibrated, rigid empirical allometric power-law constants
+(e.g., a=0.112, b=2.59), which vary widely across biomes and species compositions.
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class PhysicsInformedLoss(nn.Module):
-    def __init__(self, lambda_phys=0.1, c_scale=1e-3):
+
+def stochastic_point_physics_loss(x_batch, pred_batch, num_points=250, chm_idx=7):
+    """
+    Computes strict point-wise physical loss L_mono = mean(ReLU(-dY/dH))
+    Evaluates on a random spatial subset of valid pixels to prevent OOM crashes.
+    """
+    B, _, H, W = x_batch.shape
+    if num_points > H * W:
+        num_points = H * W
+
+    batch_idx = torch.randint(0, B, (num_points,), device=x_batch.device)
+    y_idx = torch.randint(0, H, (num_points,), device=x_batch.device)
+    x_idx = torch.randint(0, W, (num_points,), device=x_batch.device)
+
+    selected_y = pred_batch[batch_idx, 0, y_idx, x_idx]
+
+    dY_dX = torch.autograd.grad(
+        outputs=selected_y.sum(),
+        inputs=x_batch,
+        create_graph=True,
+        retain_graph=True,
+        only_inputs=True
+    )[0]
+
+    dY_dH = dY_dX[batch_idx, chm_idx, y_idx, x_idx]
+    return F.relu(-dY_dH).mean()
+
+
+class MonotonicityPhysicsLoss(nn.Module):
+    """
+    Monotonicity constraint module enforcing non-negative carbon-canopy height gradient.
+    """
+    def __init__(self, lambda_phys=0.1, chm_idx=7, num_points=250):
         super().__init__()
         self.lambda_phys = lambda_phys
-        self.c_scale = c_scale
-        self.a, self.b = 0.112, 2.59
+        self.chm_idx = chm_idx
+        self.num_points = num_points
 
-    def allometric_residual(self, carbon_pred, canopy_h, C_MIN=0.04, C_MAX=207.97):
-        carbon_real = (carbon_pred + 1)/2 * (C_MAX - C_MIN) + C_MIN
-        canopy_real = canopy_h * 24.4
-        agb_expected = self.a * (canopy_real.clamp(min=0.1) ** self.b)
-        return F.mse_loss(carbon_real, agb_expected.clamp(0, C_MAX))
+    def forward(self, x_cond, y_pred):
+        if self.lambda_phys <= 0:
+            return torch.tensor(0.0, device=y_pred.device)
+        l_mono = stochastic_point_physics_loss(
+            x_cond, y_pred, num_points=self.num_points, chm_idx=self.chm_idx
+        )
+        return self.lambda_phys * l_mono
 
-    def smoothness_residual(self, carbon_pred):
-        gx = (carbon_pred[:,:,:,1:] - carbon_pred[:,:,:,:-1]).abs()
-        gy = (carbon_pred[:,:,1:,:] - carbon_pred[:,:,:-1,:]).abs()
-        return gx.mean() + gy.mean()
 
-    def forward(self, carbon_pred, canopy_h, sigma_t=1.0):
-        R1 = self.allometric_residual(carbon_pred, canopy_h)
-        R3 = self.smoothness_residual(carbon_pred)
-        R_total = R1 + 0.1*R3
-        # Clamp sigma_bar to avoid near-zero division (physics loss explosion)
-        sigma_bar = float(sigma_t) / self.c_scale
-        sigma_bar = max(0.1, min(10.0, sigma_bar))   # clamp as float
-        phys_weight = min(1.0, self.lambda_phys / (2*sigma_bar + 1e-8))
-        return phys_weight * R_total
+# Backward-compatible alias for existing imports
+PhysicsInformedLoss = MonotonicityPhysicsLoss

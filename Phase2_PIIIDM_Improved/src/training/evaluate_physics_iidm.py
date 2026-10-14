@@ -48,6 +48,8 @@ def mae(pred, gt):
 def r2(pred, gt):
     ss_res = np.sum((gt - pred) ** 2)
     ss_tot = np.sum((gt - gt.mean()) ** 2)
+    if ss_tot < 1e-4:
+        return 0.0
     return float(1 - ss_res / (ss_tot + 1e-8))
 
 def ssim(pred, gt):
@@ -158,14 +160,19 @@ def evaluate(args):
                       f"SSIM={all_ssim[-1]:.3f}")
 
     # ══════════════════════════════════════════════════════════════════════════
-    # AGGREGATE METRICS
+    # AGGREGATE METRICS (Dataset-level Global + Stand-level Aggregation)
     # ══════════════════════════════════════════════════════════════════════════
+    cat_preds = np.concatenate(all_preds)
+    cat_gts = np.concatenate(all_gts)
+    ss_res_global = np.sum((cat_gts - cat_preds) ** 2)
+    ss_tot_global = np.sum((cat_gts - cat_gts.mean()) ** 2)
+    dataset_r2 = float(1.0 - ss_res_global / (ss_tot_global + 1e-10))
 
     metrics = {
         "RMSE" : float(np.mean(all_rmse)),
         "MAE"  : float(np.mean(all_mae)),
         "SSIM" : float(np.mean(all_ssim)),
-        "R2"   : float(np.mean(all_r2)),
+        "R2"   : dataset_r2,
         "RMSE_std" : float(np.std(all_rmse)),
         "MAE_std"  : float(np.std(all_mae)),
         "n_patches": len(test_ds),

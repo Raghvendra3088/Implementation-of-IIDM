@@ -1,0 +1,15 @@
+{
+  "model": "Phase 3: Swin-T + Cross-Attention (Footprint-Integrated)",
+  "evaluation_mode": "Footprint-Integrated Support (3x3 Kernel ~25m GEDI Support Integration)",
+  "MAE_normalized": 0.11278013024371476,
+  "RMSE_normalized": 0.13894298574238978,
+  "MAE_Mg_C_ha": 14.6614,
+  "RMSE_Mg_C_ha": 18.0626,
+  "Relative_RMSE_percent": 13.894,
+  "R2": -1.3492844663742387,
+  "SSIM": 0.12131262620715648,
+  "PVR": 0.4757834757834758,
+  "MND": 0.010781652294099331,
+  "scale_factor": 130.0,
+  "description": "Swin-T evaluated under 3x3 footprint average pooling simulating 25m GEDI footprint observation support"
+}

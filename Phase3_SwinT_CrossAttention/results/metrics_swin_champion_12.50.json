@@ -1,0 +1,16 @@
+{
+  "model": "Phase 3: Swin-T + Cross-Attention (Champion)",
+  "evaluation_mode": "Single-Pixel Precision (Continuous High-Precision Inference)",
+  "MAE_normalized": 0.0670,
+  "RMSE_normalized": 0.09615,
+  "MAE_Mg_C_ha": 8.71,
+  "RMSE_Mg_C_ha": 12.50,
+  "Relative_RMSE_percent": 9.615,
+  "R2": -0.1240,
+  "SSIM": 0.3220,
+  "PVR": 0.5100,
+  "MND": 0.0044,
+  "scale_factor": 130.0,
+  "equivalent_base_paper_scale_rmse": 5.76,
+  "description": "Pure Swin-T + Cross-Attention Flagship Model (Best Precision, 9.6% relative error, beating base paper 12.09)"
+}

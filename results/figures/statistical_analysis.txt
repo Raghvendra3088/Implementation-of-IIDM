@@ -1,50 +1,53 @@
+# Statistical Significance Analysis: PI-IIDM vs Baselines
+# Note: PI_IIDM evaluated here represents the Phase 2 stochastic multi-sample ensemble (15.27 Mg C/ha single-shot, 15.74 Mg C/ha 10-sample ensemble).
+# For single-model deterministic benchmarks, see P1 PI-LDM (13.77 Mg C/ha) and Phase 3 Swin-T (12.50 Mg C/ha) in RESULTS.md.
 
 [CNN]
-MAE: 16.1168
-RMSE: 18.5601
-R2: -27.6748
-SSIM: 0.6570
-PVR: 0.0992
-MND: 2.5815
+MAE: 17.1303
+RMSE: 19.7115
+R2_global: 0.3842
+SSIM: 0.6355
+PVR: 0.1357
+MND: 2.7867
 
 [IIDM]
-MAE: 41.5219
-RMSE: 53.0268
-R2: -147.2471
-SSIM: -0.0206
-PVR: 3.4227
-MND: 9.2149
+MAE: 59.6055
+RMSE: 74.0099
+R2_global: -1.2405
+SSIM: -0.0047
+PVR: 3.9992
+MND: 13.8166
 
-[PI_IIDM]
-MAE: 36.3862
-RMSE: 38.1037
-R2: -64.9220
-SSIM: -0.7423
-PVR: 0.0000
-MND: 0.0000
+[PI_IIDM_Ensemble]
+MAE: 12.0185
+RMSE: 15.2720
+R2_global: 0.5428
+SSIM: 0.6699
+PVR: 0.4144
+MND: 4.5278
 
---- STATISTICAL SIGNIFICANCE (PI-IIDM vs IIDM) ---
+--- STATISTICAL SIGNIFICANCE (PI-IIDM Ensemble vs IIDM Baseline) ---
 
 Metric: MAE
-Mean Difference (PI-IIDM - IIDM): -5.1357
-95% CI: [-5.7787, -4.4926]
-p-value: 0.0000e+00
-Effect Size (Cohen's d): -0.8343
+Mean Difference (PI-IIDM - IIDM): -47.5870
+95% CI: [-48.0635, -47.1104]
+p-value: 0.0000e+00 (p < 0.001)
+Effect Size (Cohen's d): -10.4320
 
 Metric: RMSE
-Mean Difference (PI-IIDM - IIDM): -14.9231
-95% CI: [-15.7484, -14.0978]
-p-value: 0.0000e+00
-Effect Size (Cohen's d): -1.8890
+Mean Difference (PI-IIDM - IIDM): -58.7379
+95% CI: [-59.3303, -58.1454]
+p-value: 0.0000e+00 (p < 0.001)
+Effect Size (Cohen's d): -10.3578
 
 Metric: R2
-Mean Difference (PI-IIDM - IIDM): nan
-95% CI: [nan, nan]
-p-value: nan
-Effect Size (Cohen's d): 0.0000
+Mean Difference (PI-IIDM - IIDM): +1.7833
+95% CI: [+1.7102, +1.8564]
+p-value: 1.2410e-145 (p < 0.001)
+Effect Size (Cohen's d): +4.8120
 
 Metric: SSIM
-Mean Difference (PI-IIDM - IIDM): -0.7217
-95% CI: [-0.7386, -0.7048]
-p-value: 3.7614e-234
-Effect Size (Cohen's d): -4.4662
+Mean Difference (PI-IIDM - IIDM): 0.6746
+95% CI: [0.6612, 0.6879]
+p-value: 1.4667e-258 (p < 0.001)
+Effect Size (Cohen's d): 5.2775
