@@ -1,9 +1,9 @@
 """
-Physics-Informed IIDM — Feature Extractor
-SwinV2-Base + MoE (4 experts, top-2) for carbon estimation.
-SwinV2 has cross-attention via shifted-window mechanism.
-Input: (B, 6, 256, 256) — S2 4-band + DEM + Canopy
-Output: (B, 256, 8, 8) — rich multi-scale features
+Exploratory Architecture: SwinV2-Base + Mixture-of-Experts (4 experts, top-2 routing).
+Designed for global continental-scale capacity scaling beyond Swin-Tiny.
+
+Note: The primary verified Phase 3 architecture reported in the paper uses the
+hierarchical Swin-Tiny backbone with cross-attention defined in src/models/swin_encoder.py.
 """
 import torch
 import torch.nn as nn

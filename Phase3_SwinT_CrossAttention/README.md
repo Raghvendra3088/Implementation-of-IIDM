@@ -33,7 +33,7 @@ Phase 3 introduces massive architectural overhauls:
 |---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 | **1. Pure Swin-T + Cross-Attention (Champion)** | **8.71** | **12.50** | 0.322 | 0.510 | 0.0044 | **9.62%** | `results/metrics_swin_champion_12.50.json` |
 | **2. Swin-T + True KD (VGG16 Teacher)** | **8.70** | **13.01** | **0.480** | **0.472** | **0.0094** | 10.01% | `results/metrics_swin_true_kd_13.01.json` |
-| **3. Swin-T + Global Patch Phys** | 9.28 | 14.14 | 0.401 | 0.501 | 0.0058 | 10.88% | Patch-level gradient approximation |
+| **3. Swin-T + Global Patch Phys** | 9.28 | 14.14 | 0.401 | 0.501 | 0.0058 | 10.88% | `results/metrics_swin_patch_phys.json` |
 | **4. Swin-T Footprint-Support ($3\times3$ Pooling)** | 14.66 | 18.06 | 0.121 | 0.476 | 0.0108 | 13.89% | `results/metrics_swin_footprint_18.06.json` |
 
 * **Relative Error Mastery:** The Flagship Swin-T model achieves **9.62% relative error** (`12.50 / 130`), which is **2.1× higher relative precision** than the base IIDM paper's `20.15%` (`12.09 / 60`). On an equivalent 60-scale, this represents an RMSE of **~5.76 Mg C/ha**.

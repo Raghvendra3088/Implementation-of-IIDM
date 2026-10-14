@@ -48,8 +48,6 @@ def mae(pred, gt):
 def r2(pred, gt):
     ss_res = np.sum((gt - pred) ** 2)
     ss_tot = np.sum((gt - gt.mean()) ** 2)
-    if ss_tot < 1e-4:
-        return 0.0
     return float(1 - ss_res / (ss_tot + 1e-8))
 
 def ssim(pred, gt):

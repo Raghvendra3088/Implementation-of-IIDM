@@ -1,0 +1,15 @@
+{
+  "model": "Phase 3: Swin-T + Global Patch Phys",
+  "evaluation_mode": "Global Patch Physics (Patch-level gradient approximation)",
+  "MAE_normalized": 0.07138,
+  "RMSE_normalized": 0.10877,
+  "MAE_Mg_C_ha": 9.28,
+  "RMSE_Mg_C_ha": 14.14,
+  "Relative_RMSE_percent": 10.88,
+  "R2": -0.4210,
+  "SSIM": 0.4010,
+  "PVR": 0.5010,
+  "MND": 0.0058,
+  "scale_factor": 130.0,
+  "description": "Swin-T with whole-patch mean gradient approximation shortcut"
+}
